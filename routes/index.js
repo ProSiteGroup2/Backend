@@ -27,6 +27,10 @@ const storage = multer.diskStorage({
   });
   
   //http requests get,post,update,delete
+
+  router.get('/',(req,res)=>{
+    res.send('hello World');
+  });
   
   //add a new Consumer
   router.post('/addConsumer', consumerMethods.addNewConsumer);
