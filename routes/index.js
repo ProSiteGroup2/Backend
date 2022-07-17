@@ -4,6 +4,12 @@ const actions=require('../methods/actions');
 const multer=require('multer');
 const path = require("path");
 const shortid = require("shortid");
+const consumerMethods= require("../methods/consumerMethods");
+const contractorMethods= require("../methods/contractorMethods");
+const labourMethods= require("../methods/labourMethods");
+const hardwareMethods=require("../methods/hardwareMethods");
+const transporterMethods= require("../methods/transporterMethods");
+const productMethods=require("../methods/productMethods");
 
 
 const storage = multer.diskStorage({
@@ -23,41 +29,58 @@ const storage = multer.diskStorage({
   //http requests get,post,update,delete
   
   //add a new Consumer
-  router.post('/addConsumer', actions.addNewConsumer);
+  router.post('/addConsumer', consumerMethods.addNewConsumer);
   
   //add a new Labour
-  router.post('/addLabour',actions.addNewLabour);
+  router.post('/addLabour',labourMethods.addNewLabour);
   
   //add a new Hardware
-  router.post('/addHardware',actions.addNewHardware);
+  router.post('/addHardware',hardwareMethods.addNewHardware);
   
   //add a new Contractor
-  router.post('/addContractor',actions.addNewContractor);
+  router.post('/addContractor',contractorMethods.addNewContractor);
   
   //add a new Transporter
-  router.post('/addTransporter',actions.addNewTransporter);
+  router.post('/addTransporter',transporterMethods.addNewTransporter);
   
   //add a new Product
-  router.post('/addProduct',upload.single('image'),actions.addNewProduct);
+  router.post('/addProduct',upload.single('image'),productMethods.addNewProduct);
   
   //authentication of a consumer
-  router.post('/consumerLogin', actions.authenticateConsumer);
+  router.post('/consumerLogin', consumerMethods.authenticateConsumer);
   
-  //getting info from token
-  router.get('/getInfo',actions.getInfo);
+  //getting SP info from token
+  //router.get('/getSPInfo',actions.getSPInfo);
+
+
+
+  //getting Contractor info from token
+  router.get('/getContractorInfo',contractorMethods.getContractorInfo);
+
+  //getting Consumer info from token
+  router.get('/getConsumerInfo',consumerMethods.getConsumerInfo);
+
+  //getting Labour info from token
+  router.get('/getLabourInfo',labourMethods.getLabourInfo);
+
+  //getting Hardware info from token
+  router.get('/getHardwareInfo',hardwareMethods.getHardwareInfo);
+
+  //getting Transporter info from token
+  router.get('/getTransporterInfo',transporterMethods.getTransporterInfo);
   
   //authentication of SP
   router.post('/SPLogin',actions.authenticateSP);
   
   //uploading profile images
-  router.put('/consumerProfile/:email',upload.single('profile'),actions.consumerProfile);
+  router.put('/consumerProfile/:email',upload.single('profile'),consumerMethods.consumerProfile);
   
-  router.put('/contractorProfile/:email',upload.single('profile'),actions.contractorProfile);
+  router.put('/contractorProfile/:email',upload.single('profile'),contractorMethods.contractorProfile);
   
-  router.put('/hardwareProfile/:email',upload.single('profile'),actions.hardwareProfile);
+  router.put('/hardwareProfile/:email',upload.single('profile'),hardwareMethods.hardwareProfile);
   
-  router.put('/labourProfile/:email',upload.single('profile'),actions.labourProfile);
+  router.put('/labourProfile/:email',upload.single('profile'),labourMethods.labourProfile);
   
-  router.put('/transporterProfile/:email',upload.single('profile'),actions.transporterProfile);
+  router.put('/transporterProfile/:email',upload.single('profile'),transporterMethods.transporterProfile);
   
   module.exports=router;
