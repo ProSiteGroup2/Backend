@@ -88,32 +88,32 @@ var functions={
        });
     },
 
-    getSPInfo: async (req,res)=>{
-        if(req.headers.authorization && req.headers.authorization.split(' ')[0]==='Bearer'){
-            var token=req.headers.authorization.split(' ')[1];
-            var decodedtoken=jwt.decode(token,config.secret);
-            //console.log(decodedtoken);
+    // getSPInfo: async (req,res)=>{
+    //     if(req.headers.authorization && req.headers.authorization.split(' ')[0]==='Bearer'){
+    //         var token=req.headers.authorization.split(' ')[1];
+    //         var decodedtoken=jwt.decode(token,config.secret);
+    //         //console.log(decodedtoken);
 
-            //req.user=await Labour.findById(decodedtoken._id);
+    //         //req.user=await Labour.findById(decodedtoken._id);
 
-            req.user=await (function(){
-                if(isLabour){
-                    return Labour.findById(decodedtoken._id);
-                }else if(isContractor){
-                    return Contractor.findById(decodedtoken._id);
-                }else if(isHardware){
-                    return Hardware.findById(decodedtoken._id);
-                }else{
-                    return Transporter.findById(decodedtoken._id);
-                }
-            });
-            console.log(req.user);
-            return res.send({success:true, msg: 'Hello '+decodedtoken.username});
-        }
-        else{
-            return res.send({success:true, msg:'No Headers'});
-        }
-    },
+    //         req.user=await (function(){
+    //             if(isLabour){
+    //                 return Labour.findById(decodedtoken._id);
+    //             }else if(isContractor){
+    //                 return Contractor.findById(decodedtoken._id);
+    //             }else if(isHardware){
+    //                 return Hardware.findById(decodedtoken._id);
+    //             }else{
+    //                 return Transporter.findById(decodedtoken._id);
+    //             }
+    //         });
+    //         console.log(req.user);
+    //         return res.send({success:true, msg: 'Hello '+decodedtoken.username});
+    //     }
+    //     else{
+    //         return res.send({success:true, msg:'No Headers'});
+    //     }
+    // },
 
 }
 
