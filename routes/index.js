@@ -1,7 +1,7 @@
-const express=require('express');
-const router= express.Router();
-const actions=require('../methods/actions');
-const multer=require('multer');
+const express = require("express");
+const router = express.Router();
+const actions = require("../methods/actions");
+const multer = require("multer");
 const path = require("path");
 const shortid = require("shortid");
 const consumerMethods= require("../methods/consumerMethods");
@@ -10,7 +10,6 @@ const labourMethods= require("../methods/labourMethods");
 const hardwareMethods=require("../methods/hardwareMethods");
 const transporterMethods= require("../methods/transporterMethods");
 const productMethods=require("../methods/productMethods");
-
 
 const storage = multer.diskStorage({
     // destination: function (req, file, cb) {
