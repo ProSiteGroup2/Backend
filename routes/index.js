@@ -28,7 +28,7 @@ const upload = multer({
 //http requests get,post,update,delete
 
 router.get("/", (req, res) => {
-	res.send("hello heroku");
+	res.send("hello world");
 });
 
 //add a new Consumer
