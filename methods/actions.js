@@ -10,12 +10,6 @@ const mongoose=require('mongoose');
 const {uploadToCloudinary}=require('../middleware/cloudinaryImage');
 
 
-var isConsumer=false;
-var isLabour=false;
-var isContractor=false;
-var isHardware=false;
-var isTransporter=false;
-
 
 var functions={
     
@@ -35,11 +29,10 @@ var functions={
                                 if(!transporter){
                                     res.status(403).send({success:false,msg:'Authentication Failed, Service Provider not found'});
                                 }else{
-                                    isTransporter=true;
                                     transporter.comparePassword(req.body.password, function(err,isMatch){
                                         if(isMatch && !err){
                                             var token=jwt.encode(transporter,config.secret);
-                                            res.send({success:true, token:token});
+                                            res.send({success:true, token:token, role:"transporter"});
                                         }
                                         else{
                                             return res.status(403).send({success:false,msg:"Authentication failed, wrong password"});
@@ -48,11 +41,11 @@ var functions={
                                 }
                             });
                         }else{
-                            isHardware=true;
+                            
                             hardware.comparePassword(req.body.password, function(err,isMatch){
                                 if(isMatch && !err){
                                     var token=jwt.encode(hardware,config.secret);
-                                    res.send({success:true, token:token});
+                                    res.send({success:true, token:token,role:"hardware"});
                                 }
                                 else{
                                     return res.status(403).send({success:false,msg:"Authentication failed, wrong password"});
@@ -61,11 +54,11 @@ var functions={
                         }
                     });
                 }else{
-                    isContractor=true;
+                    
                     contractor.comparePassword(req.body.password, function(err,isMatch){
                         if(isMatch && !err){
                             var token=jwt.encode(contractor,config.secret);
-                            res.send({success:true, token:token});
+                            res.send({success:true, token:token, role:"contractor"});
                         }
                         else{
                             return res.status(403).send({success:false,msg:"Authentication failed, wrong password"});
@@ -74,11 +67,11 @@ var functions={
                 }
             });
         }else{
-            isLabour=true;
+            
             labour.comparePassword(req.body.password, function(err,isMatch){
                 if(isMatch && !err){
                     var token=jwt.encode(labour,config.secret);
-                    res.send({success:true, token:token});
+                    res.send({success:true, token:token, role:"labour"});
                 }
                 else{
                     return res.status(403).send({success:false,msg:"Authentication failed, wrong password"});
