@@ -86,7 +86,7 @@ var functions={
             return res.send({success:true, msg: 'Hello '+decodedtoken.hardwarename});
         }
         else{
-            return res.send({success:true, msg:'No Headers'});
+            return res.send({success:false, msg:'No Headers'});
         }
     },
 
