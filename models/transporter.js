@@ -33,8 +33,8 @@ const transporterSchema=new Schema({
         
     },
     work_out:{
-        type:Boolean,
-        default:false
+        type:String,
+        
        
     },
     password:{
