@@ -83,7 +83,7 @@ var functions={
             req.user=await Labour.findById(decodedtoken._id);
 
             console.log(req.user);
-            return res.send({success:true, msg: 'Hello '+decodedtoken.username});
+            return res.send({success:true, msg: 'Hello '+decodedtoken.username, sp: req.user});
         }
         else{
             return res.send({success:false, msg:'No Headers'});
