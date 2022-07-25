@@ -71,6 +71,9 @@ const storage = multer.diskStorage({
 
   //getting Transporter info from token
   router.get('/getTransporterInfo',transporterMethods.getTransporterInfo);
+
+  //finding a service provider
+  router.get('/findSP',actions.findSP);
   
   //authentication of SP
   router.post('/SPLogin',actions.authenticateSP);
