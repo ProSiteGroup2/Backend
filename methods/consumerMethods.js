@@ -126,6 +126,18 @@ var functions={
             
         });
     },
+
+    findConsumer:function(req,res){
+        Consumer.findOne({email:req.body.email}, function(err,consumer){
+            if(err) throw err;
+            if(!consumer){
+                res.status(403).send({success:false,msg:'Sorry!! , Consumer not found'});
+            }
+            else{
+                res.send({success:true,msg:"found the consumer "+consumer.username, consumer:consumer});
+            }
+        });
+    }
 };
 
 module.exports=functions;
