@@ -47,7 +47,7 @@ const storage = multer.diskStorage({
   router.post('/addTransporter',transporterMethods.addNewTransporter);
   
   //add a new Product
-  router.post('/addProduct',upload.single('image'),productMethods.addNewProduct);
+  router.post('/addProduct',productMethods.addNewProduct);
   
   //authentication of a consumer
   router.post('/consumerLogin', consumerMethods.authenticateConsumer);
@@ -91,5 +91,8 @@ const storage = multer.diskStorage({
   router.put('/labourProfile/:email',upload.single('profile'),labourMethods.labourProfile);
   
   router.put('/transporterProfile/:email',upload.single('profile'),transporterMethods.transporterProfile);
+
+  // uploading product image
+  router.put('/productImage/:id',upload.single('image'),productMethods.productImage);
   
   module.exports=router;
