@@ -91,5 +91,8 @@ const storage = multer.diskStorage({
   router.put('/labourProfile/:email',upload.single('profile'),labourMethods.labourProfile);
   
   router.put('/transporterProfile/:email',upload.single('profile'),transporterMethods.transporterProfile);
+
+  // uploading product image
+  router.put('/productImage/:id',upload.single('image'),productMethods.productImage);
   
   module.exports=router;
