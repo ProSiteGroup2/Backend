@@ -4,7 +4,7 @@ const Hardware=require('./hardware');
 
 const productSchema=new Schema({
     productname:{
-        type:String
+        type:Number
     },
     price:{type:Number},
     stock:{type:Number},
