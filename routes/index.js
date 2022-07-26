@@ -47,7 +47,7 @@ const storage = multer.diskStorage({
   router.post('/addTransporter',transporterMethods.addNewTransporter);
   
   //add a new Product
-  router.post('/addProduct',upload.single('image'),productMethods.addNewProduct);
+  router.post('/addProduct',productMethods.addNewProduct);
   
   //authentication of a consumer
   router.post('/consumerLogin', consumerMethods.authenticateConsumer);
