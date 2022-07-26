@@ -13,7 +13,7 @@ const productSchema=new Schema({
     description:{type:String},
     seller:{
         type: [Schema.Types.ObjectId],
-        ref: 'Hardware'
+        ref: 'hardware'
    },
    publicId: {
         type: String,
