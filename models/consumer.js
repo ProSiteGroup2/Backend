@@ -5,13 +5,12 @@ const bcrypt=require('bcrypt');
 // creating consumer model
 const consumerSchema=new Schema({
     username: {
-        type:String,
-       
+        type:String,   
     },
+
     email: {
         type: String,
-        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Enter a valid email address'],
-        
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Enter a valid email address'],  
     },
 
     contactNo:{
@@ -27,13 +26,11 @@ const consumerSchema=new Schema({
     },
 
     district:{
-        type:String,
-        
+        type:String,  
     },
 
     password:{
         type:String,
-       
     },
 
     publicId: {
