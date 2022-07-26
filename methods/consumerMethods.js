@@ -102,10 +102,10 @@ var functions={
             req.user=await Consumer.findById(decodedtoken._id);
 
             console.log(req.user);
-            return res.send({success:true, msg: 'Hello '+decodedtoken.username});
+            return res.send({success:true, msg: 'Hello '+decodedtoken.username,consumer:req.user});
         }
         else{
-            return res.send({success:true, msg:'No Headers'});
+            return res.send({success:false, msg:'No Headers'});
         }
     },
 
@@ -126,6 +126,18 @@ var functions={
             
         });
     },
+
+    findConsumer:function(req,res){
+        Consumer.findOne({email:req.body.email}, function(err,consumer){
+            if(err) throw err;
+            if(!consumer){
+                res.status(403).send({success:false,msg:'Sorry!! , Consumer not found'});
+            }
+            else{
+                res.send({success:true,msg:"found the consumer "+consumer.username, consumer:consumer});
+            }
+        });
+    }
 };
 
 module.exports=functions;

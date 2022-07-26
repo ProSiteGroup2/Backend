@@ -83,10 +83,10 @@ var functions={
             req.user=await Contractor.findById(decodedtoken._id);
 
             console.log(req.user);
-            return res.send({success:true, msg: 'Hello '+decodedtoken.contractorname});
+            return res.send({success:true, msg: 'Hello '+decodedtoken.contractorname, sp:req.user});
         }
         else{
-            return res.send({success:true, msg:'No Headers'});
+            return res.send({success:false, msg:'No Headers'});
         }
     },
 
