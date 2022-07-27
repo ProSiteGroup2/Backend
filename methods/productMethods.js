@@ -51,10 +51,10 @@ var functions={
         Product.findByIdAndUpdate({_id:req.params.id},req.body,function(){
             Product.findById({_id:req.params.id},function(err,product){
                 if(err) throw err;
-            if(!product){
-                res.send({success:false,msg:"Coudn't find product"});
-            }else{
-                res.send({success:true,product:product});
+                if(!product){
+                    res.send({success:false,msg:"Coudn't find product"});
+                }else{
+                    res.send({success:true,product:product});
             }
             });
             
