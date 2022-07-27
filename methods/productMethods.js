@@ -9,7 +9,7 @@ const {uploadToCloudinary}=require('../middleware/cloudinaryImage');
 var functions={
     // add a new product
     addNewProduct:function(req,res){
-        if(!productname|| !price || !category || !seller || !stock ||!description ){
+        if(!req.body.productname|| !req.body.price || !req.body.category || !req.body.seller || !req.body.stock ||!req.body.description ){
             res.send({success:false,msg: 'Enter required fields'});
         }
         else{
