@@ -49,7 +49,7 @@ var functions={
         req.body.imageUrl = data.url;
         req.body.publicId = data.public_id;
         Product.findByIdAndUpdate({_id:req.params.id},req.body,function(){
-            Hardware.findById({_id:req.params.id},function(err,product){
+            Product.findById({_id:req.params.id},function(err,product){
                 if(err) throw err;
             if(!product){
                 res.send({success:false,msg:"Coudn't find product"});
