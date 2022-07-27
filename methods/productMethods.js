@@ -56,7 +56,7 @@ var functions={
                 }else{
                     res.send({success:true,product:product});
             }
-            });
+            }).populate("seller");
             
         });
     },
