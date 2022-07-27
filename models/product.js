@@ -12,9 +12,9 @@ const productSchema=new Schema({
     category:{type:String},
     description:{type:String},
     seller:{
-        type: [Schema.Types.ObjectId],
-        ref: 'hardware'
-   },
+        type: String,
+        match:[/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Enter a valid email address']
+    },
    publicId: {
         type: String,
     },
