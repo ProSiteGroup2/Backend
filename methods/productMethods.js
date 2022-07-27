@@ -34,11 +34,21 @@ var functions={
         }
     },
 
+    getProductInfo:function(req,res){
+        Product.findById({_id:req.params.id},function(err,product){
+            if(err) throw err;
+            if(product){
+                res.send({msg:'success',product:product});
+            }
+        }).populate("seller");
+    },
+
+    
     productImage:async (req,res)=>{
         const data=await uploadToCloudinary(req.file.path,"images");
         req.body.imageUrl = data.url;
         req.body.publicId = data.public_id;
-        Product.findByIdAndUpdate({id:req.params.id},req.body,function(){
+        Product.findByIdAndUpdate({_id:req.params.id},req.body,function(){
             Hardware.findById({id:req.params.id},function(err,product){
                 if(err) throw err;
             if(!product){
