@@ -9,7 +9,7 @@ const {uploadToCloudinary}=require('../middleware/cloudinaryImage');
 var functions={
     // add a new product
     addNewProduct:function(req,res){
-        if(!productname|| !price || !category || !seller || !stock ||!description ){
+        if(!req.body.productname|| !req.body.price || !req.body.category || !req.body.seller || !req.body.stock ||!req.body.description ){
             res.send({success:false,msg: 'Enter required fields'});
         }
         else{
@@ -28,25 +28,35 @@ var functions={
                     res.send({success:false,msg:'Failed to save'});
                 }
                 else{
-                    res.send({success:true,msg:'Successfully Saved'});
+                    res.send({success:true,msg:'Successfully Saved',product:newProduct});
                 }
             });
         }
     },
 
+    getProductInfo:function(req,res){
+        Product.findById({_id:req.params.id},function(err,product){
+            if(err) throw err;
+            if(product){
+                res.send({msg:'success',product:product});
+            }
+        }).populate("seller");
+    },
+
+    
     productImage:async (req,res)=>{
         const data=await uploadToCloudinary(req.file.path,"images");
         req.body.imageUrl = data.url;
         req.body.publicId = data.public_id;
-        Product.findByIdAndUpdate({id:req.params.id},req.body,function(){
-            Hardware.findById({id:req.params.id},function(err,product){
+        Product.findByIdAndUpdate({_id:req.params.id},req.body,function(){
+            Product.findById({_id:req.params.id},function(err,product){
                 if(err) throw err;
-            if(!product){
-                res.send({success:false,msg:"Coudn't find product"});
-            }else{
-                res.send({success:true,product:product});
+                if(!product){
+                    res.send({success:false,msg:"Coudn't find product"});
+                }else{
+                    res.send({success:true,product:product});
             }
-            });
+            }).populate("seller");
             
         });
     },
