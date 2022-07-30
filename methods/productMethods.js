@@ -21,6 +21,7 @@ var functions={
                 size:req.body.size,
                 category:req.body.category,
                 description:req.body.description,
+                brand:req.body.brand,
                 seller:req.body.seller,
             });
             newProduct.save(function(err,newProduct){
@@ -38,7 +39,9 @@ var functions={
         Product.findById({_id:req.params.id},function(err,product){
             if(err) throw err;
             if(product){
-                res.send({msg:'success',product:product});
+                res.send({success:true,product:product});
+            }else{
+                res.send({sucess:false,msg:"Coudn't find the product info"});
             }
         }).populate("seller");
     },

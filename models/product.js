@@ -11,6 +11,7 @@ const productSchema=new Schema({
     size:{type:String},
     category:{type:String},
     description:{type:String},
+    brand:{type:String},
     seller:{
         type: Schema.Types.ObjectId,
         ref: 'hardware'
