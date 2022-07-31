@@ -57,7 +57,7 @@ var functions={
                 if(!product){
                     res.send({success:false,msg:"Coudn't find product"});
                 }else{
-                    res.send({success:true,product:product});
+                    res.send({success:true,msg:"image uploaded successfully",product:product});
             }
             }).populate("seller");
             
