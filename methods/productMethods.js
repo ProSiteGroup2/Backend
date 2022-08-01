@@ -76,7 +76,7 @@ var functions={
             }else{
                 res.send({success:true, msg:"cement products found successfully",products:products});
             }
-        });
+        }).populate("seller");
     },
 
     //find the products wich have the category 'Bricks'
@@ -88,7 +88,7 @@ var functions={
             }else{
                 res.send({success:true, msg:"bricks products found successfully",products:products});
             }
-        });
+        }).populate("seller");
     },
 
     //find the products wich have the category 'Sand'
@@ -100,7 +100,7 @@ var functions={
             }else{
                 res.send({success:true, msg:"sand products found successfully",products:products});
             }
-        });
+        }).populate("seller");
     },
 
     //find the products wich have the category 'Steel'
@@ -112,7 +112,7 @@ var functions={
             }else{
                 res.send({success:true, msg:"steel products found successfully",products:products});
             }
-        });
+        }).populate("seller");
     },
 
 
