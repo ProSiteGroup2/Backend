@@ -34,7 +34,8 @@ var functions={
             });
         }
     },
-
+    
+    //get product info
     getProductInfo:function(req,res){
         Product.findById({_id:req.params.id},function(err,product){
             if(err) throw err;
@@ -46,7 +47,7 @@ var functions={
         }).populate("seller");
     },
 
-    
+    // upload product image
     productImage:async (req,res)=>{
         const data=await uploadToCloudinary(req.file.path,"images");
         req.body.imageUrl = data.url;
@@ -63,6 +64,70 @@ var functions={
             
         });
     },
+
+    //find products by Category
+
+    //find the products wich have the category 'Cement'
+    getCementProduct:function (req,res){
+        Product.find({category:'Cement'},function(err,products){
+            if(err) throw err;
+            if(!products){
+                res.send({success:false,msg:"coudn't find cement products"});
+            }else{
+                res.send({success:true, msg:"cement products found successfully",products:products});
+            }
+        });
+    },
+
+    //find the products wich have the category 'Bricks'
+    getBricksProduct:function (req,res){
+        Product.find({category:'Bricks'},function(err,products){
+            if(err) throw err;
+            if(!products){
+                res.send({success:false,msg:"coudn't find bricks products"});
+            }else{
+                res.send({success:true, msg:"bricks products found successfully",products:products});
+            }
+        });
+    },
+
+    //find the products wich have the category 'Sand'
+    getSandProduct:function (req,res){
+        Product.find({category:'Sand'},function(err,products){
+            if(err) throw err;
+            if(!products){
+                res.send({success:false,msg:"coudn't find sand products"});
+            }else{
+                res.send({success:true, msg:"sand products found successfully",products:products});
+            }
+        });
+    },
+
+    //find the products wich have the category 'Steel'
+    getSteelProduct:function (req,res){
+        Product.find({category:'Steel'},function(err,products){
+            if(err) throw err;
+            if(!products){
+                res.send({success:false,msg:"coudn't find steel products"});
+            }else{
+                res.send({success:true, msg:"steel products found successfully",products:products});
+            }
+        });
+    },
+
+
+    //find the hardware products
+    getHardwareProduct:function(req,res){
+        Product.find({seller:req.params.seller_id},function(err,products){
+            if(err) throw err;
+            if(!products){
+                res.send({success:false,msg:"coudn't find hardware products"});
+            }else{
+                res.send({success:true, msg:"hardware products found successfully",products:products});
+            }
+        });
+    },
+    
 }
 
 module.exports=functions;
