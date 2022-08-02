@@ -83,6 +83,7 @@ var functions={
             req.user=await Contractor.findById(decodedtoken._id);
 
             console.log(req.user);
+            
             return res.send({success:true, msg: 'Hello '+decodedtoken.contractorname, sp:req.user});
         }
         else{

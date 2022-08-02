@@ -4,8 +4,8 @@ const Consumer=require('./consumer');
 
 const feedbackSchema=new Schema({
     consumer:{
-        type: [Schema.Types.ObjectId],
-        ref: 'Consumer'
+        type: Schema.Types.ObjectId,
+        ref: 'consumer'
     },
 
     service_provider:{

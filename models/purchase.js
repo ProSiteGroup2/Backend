@@ -10,8 +10,8 @@ const purchaseSchema=new Schema({
     },
 
     product:{
-        type: [Schema.Types.ObjectId],
-        ref: 'Product'
+        type: Schema.Types.ObjectId,
+        ref: 'product'
     },
 
     date:{
