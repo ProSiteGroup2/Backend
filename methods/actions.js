@@ -114,10 +114,10 @@ var functions={
            });
     },
 
-    //save picked date and time for the appointment
-    saveappointment:function(req,res){
-            
-    }
+    // //save picked date and time for the appointment
+    // saveappointment:function(req,res){
+
+    // }
 
 }
 

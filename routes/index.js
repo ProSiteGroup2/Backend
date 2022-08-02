@@ -10,6 +10,7 @@ const labourMethods = require("../methods/labourMethods");
 const hardwareMethods = require("../methods/hardwareMethods");
 const transporterMethods = require("../methods/transporterMethods");
 const productMethods = require("../methods/productMethods");
+const appointmentMethods = require("../methods/appointmentMethods");
 
 const storage = multer.diskStorage({
     // destination: function (req, file, cb) {
@@ -51,6 +52,10 @@ const storage = multer.diskStorage({
   
   //add a new Product
   router.post('/addProduct',productMethods.addNewProduct);
+
+  //add a new Appointment
+  router.post('/addAppointment',appointmentMethods.addNewAppointment);
+
 
   //Authentication
   // =====================================================================================================================================================
