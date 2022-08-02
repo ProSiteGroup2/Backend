@@ -30,6 +30,9 @@ const storage = multer.diskStorage({
   router.get('/',(req,res)=>{
     res.send('hello World');
   });
+
+  // Add Product and Users
+  // ============================================================================================================================================================
   
   //add a new Consumer
   router.post('/addConsumer', consumerMethods.addNewConsumer);
@@ -48,14 +51,21 @@ const storage = multer.diskStorage({
   
   //add a new Product
   router.post('/addProduct',productMethods.addNewProduct);
+
+  //Authentication
+  // =====================================================================================================================================================
   
   //authentication of a consumer
   router.post('/consumerLogin', consumerMethods.authenticateConsumer);
+
+  //authentication of SP
+  router.post('/SPLogin',actions.authenticateSP);
+
+  //Get Info
+  // ==============================================================================================================================================
   
   //getting SP info from token
   //router.get('/getSPInfo',actions.getSPInfo);
-
-
 
   //getting Contractor info from token
   router.get('/getContractorInfo',contractorMethods.getContractorInfo);
@@ -75,6 +85,10 @@ const storage = multer.diskStorage({
   //get product info
   router.get('/getProductInfo/:id',productMethods.getProductInfo);
 
+
+  //Find Users
+  // ====================================================================================================================================================
+
   //finding a service provider and returning the whole object
   router.get('/findSP',actions.findSP);
 
@@ -82,8 +96,10 @@ const storage = multer.diskStorage({
   router.get('/findConsumer',consumerMethods.findConsumer);
 
   
-  //authentication of SP
-  router.post('/SPLogin',actions.authenticateSP);
+  
+
+  //uploading images
+  // ============================================================================================================================================
   
   //uploading profile images
   router.put('/consumerProfile/:email',upload.single('profile'),consumerMethods.consumerProfile);
@@ -98,5 +114,28 @@ const storage = multer.diskStorage({
 
   // uploading product image
   router.put('/productImage/:id',upload.single('image'),productMethods.productImage);
+
+
+
+
+  // Getting products by Category
+  // ==============================================================================================================================================================
+
+  // get cement products
+  router.get('/getCementProduct',productMethods.getCementProduct);
+
+  // get bricks products
+  router.get('/getBricksProduct',productMethods.getBricksProduct);
+
+  // get steel products
+  router.get('/getSteelProduct',productMethods.getSteelProduct);
+
+  // get sand products
+  router.get('/getSandProduct',productMethods.getSandProduct);
+
+  //Get hardware products
+  // ============================================================================================================================================================
+  router.get('/getHardwareProduct/:seller_id',productMethods.getHardwareProduct);
+
   
   module.exports=router;
