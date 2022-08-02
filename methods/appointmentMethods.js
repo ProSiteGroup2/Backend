@@ -16,6 +16,7 @@ var functions = {
 
         newAppointment.save(function(err,newAppointment){
             if(err){
+                console.log(err);
                 res.send({success:false,msg:'Failed to save'});
             }
             else{
