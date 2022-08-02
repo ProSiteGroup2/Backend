@@ -112,6 +112,11 @@ var functions={
                 res.send({success:true,msg:"found the labour "+labour.username,sp:labour});
             }
            });
+    },
+
+    //save picked date and time for the appointment
+    saveappointment:function(req,res){
+            
     }
 
 }
