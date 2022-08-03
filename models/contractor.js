@@ -33,7 +33,7 @@ const contractorSchema=new Schema({
         
     },
     no_of_workers:{
-        type:Number,
+        type:String,
        
     },
     password:{

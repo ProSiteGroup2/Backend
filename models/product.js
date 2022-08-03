@@ -4,17 +4,17 @@ const Hardware=require('./hardware');
 
 const productSchema=new Schema({
     productname:{
-        type:String,
-        required:true
+        type:String
     },
-    price:Number,
-    stock:Number,
-    size:Number,
-    category:String,
-    description:String,
+    price:{type:Number},
+    stock:{type:Number},
+    size:{type:String},
+    category:{type:String},
+    description:{type:String},
+    brand:{type:String},
     seller:{
-        type: [Schema.Types.ObjectId],
-        ref: 'Hardware'
+        type: Schema.Types.ObjectId,
+        ref: 'hardware'
    },
    publicId: {
         type: String,
