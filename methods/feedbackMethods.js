@@ -1,6 +1,6 @@
 const Feedback = require('../models/feedback');
-const jwt=require('jwt-simple');
-const config=require('../config/dbconfig');
+// const jwt=require('jwt-simple');
+// const config=require('../config/dbconfig');
 const mongoose=require('mongoose');
 
 var functions = {
@@ -15,12 +15,12 @@ var functions = {
 
         newFeedback.save(function(err,newFeedback){
             if(err){
-                console.log(err);
+                // console.log(err);
                 res.send({success:false,msg:'Failed to add feedback'});
 
             }
             else{
-                res.send({success:true,msg:'Success Saved',Feedback:newFeedback});
+                res.send({success:true,msg:'Success Saved',feedback:newFeedback});
             }
         })
     }

@@ -1,6 +1,4 @@
 const Appointment= require('../models/appointment');
-const jwt=require('jwt-simple');
-const config=require('../config/dbconfig');
 const mongoose=require('mongoose');
 
 var functions = {
@@ -16,11 +14,11 @@ var functions = {
 
         newAppointment.save(function(err,newAppointment){
             if(err){
-                console.log(err);
+                // console.log(err);
                 res.send({success:false,msg:'Failed to save'});
             }
             else{
-                res.send({success:true,msg:'Successfully Saved',Appointment:newAppointment});
+                res.send({success:true,msg:'Successfully Saved',appointment:newAppointment});
             }
         })
     }
