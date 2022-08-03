@@ -4,12 +4,14 @@ const actions = require("../methods/actions");
 const multer = require("multer");
 const path = require("path");
 const shortid = require("shortid");
-const consumerMethods= require("../methods/consumerMethods");
-const contractorMethods= require("../methods/contractorMethods");
-const labourMethods= require("../methods/labourMethods");
-const hardwareMethods=require("../methods/hardwareMethods");
-const transporterMethods= require("../methods/transporterMethods");
-const productMethods=require("../methods/productMethods");
+const consumerMethods = require("../methods/consumerMethods");
+const contractorMethods = require("../methods/contractorMethods");
+const labourMethods = require("../methods/labourMethods");
+const hardwareMethods = require("../methods/hardwareMethods");
+const transporterMethods = require("../methods/transporterMethods");
+const productMethods = require("../methods/productMethods");
+const appointmentMethods = require("../methods/appointmentMethods");
+const feedbackMethods = require("../methods/feedbackMethods");
 
 const storage = multer.diskStorage({
     // destination: function (req, file, cb) {
@@ -51,6 +53,13 @@ const storage = multer.diskStorage({
   
   //add a new Product
   router.post('/addProduct',productMethods.addNewProduct);
+
+  //add a new Appointment
+  router.post('/addAppointment',appointmentMethods.addNewAppointment);
+
+  //add a new Feedback
+  router.post('/addFeedback',feedbackMethods.addNewFeedback);
+
 
   //Authentication
   // =====================================================================================================================================================

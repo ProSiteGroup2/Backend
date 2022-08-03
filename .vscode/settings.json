@@ -1,3 +1,11 @@
 {
-	"cSpell.words": ["cloudinary"]
+	"cSpell.words": [
+		"appointmentdate",
+		"appointmenttime",
+		"cloudinary",
+		"consumerid",
+		"productname",
+		"saveappointment",
+		"sproviderid"
+	]
 }
