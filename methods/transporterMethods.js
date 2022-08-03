@@ -108,6 +108,19 @@ var functions={
             
         });
     },
+
+    //get all the transporters
+    getTransporters:function(req,res){
+        Transporter.find().exec(function(err,transporters){
+            if(err) throw err;
+            if(transporters){
+                res.send({success:true,msg:"transporters found",transporters:transporters});
+            }else{
+                res.send({success:false,msg:"transporters not found"});
+            }
+
+        });
+    },
 }
 
 module.exports=functions;

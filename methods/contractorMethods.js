@@ -91,6 +91,19 @@ var functions={
         }
     },
 
+    //get all the contractors
+    getContractors:function(req,res){
+        Contractor.find().exec(function(err,contractors){
+            if(err) throw err;
+            if(contractors){
+                res.send({success:true,msg:"contractos found",contractors:contractors});
+            }else{
+                res.send({success:false,msg:"contractors not found"});
+            }
+
+        });
+    },
+
     //uploading the profile image of contractor
     contractorProfile:async (req,res)=>{
         const data=await uploadToCloudinary(req.file.path,"images");
