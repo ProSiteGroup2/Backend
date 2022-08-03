@@ -94,6 +94,9 @@ const storage = multer.diskStorage({
   //get product info
   router.get('/getProductInfo/:id',productMethods.getProductInfo);
 
+  //get customer feedback
+  router.get('/getFeedback/:id',feedbackMethods.getFeedback);
+
 
   //Find Users
   // ====================================================================================================================================================
