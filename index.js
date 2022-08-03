@@ -11,7 +11,7 @@ const app = express();
 mongoose.connect("mongodb+srv://Muthahhar:prosite123@cluster0.jlo8n.mongodb.net/?retryWrites=true&w=majority");
 mongoose.Promise = global.Promise;
 
-app.use(cors())
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
