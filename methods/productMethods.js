@@ -127,6 +127,19 @@ var functions={
             }
         });
     },
+
+    //get all the contractors
+    getProducts:function(req,res){
+        Product.find().exec(function(err,products){
+            if(err) throw err;
+            if(products){
+                res.send({success:true,msg:"products found",products:products});
+            }else{
+                res.send({success:false,msg:"products not found"});
+            }
+
+        });
+    },
     
 }
 

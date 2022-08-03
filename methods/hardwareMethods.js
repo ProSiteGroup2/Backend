@@ -107,6 +107,19 @@ var functions={
             
         });
     },
+
+    //get all the hardwares
+    getHardwares:function(req,res){
+        Hardware.find().exec(function(err,hardwares){
+            if(err) throw err;
+            if(hardwares){
+                res.send({success:true,msg:"hardwares found",hardwares:hardwares});
+            }else{
+                res.send({success:false,msg:"hardwares not found"});
+            }
+
+        });
+    },
 }
 
 module.exports=functions;

@@ -107,6 +107,19 @@ var functions={
            
         });
     },
+
+    //get all the labours
+    getLabours:function(req,res){
+        Labour.find().exec(function(err,labours){
+            if(err) throw err;
+            if(labours){
+                res.send({success:true,msg:"labours found",labours:labours});
+            }else{
+                res.send({success:false,msg:"labours not found"});
+            }
+
+        });
+    },
 }
 
 module.exports=functions;
