@@ -54,11 +54,17 @@ const storage = multer.diskStorage({
   //add a new Product
   router.post('/addProduct',productMethods.addNewProduct);
 
+
+
+  //Adding Feedbacks, Appointment
+  // ======================================================================================================================================================================
+
   //add a new Appointment
   router.post('/addAppointment',appointmentMethods.addNewAppointment);
 
   //add a new Feedback
   router.post('/addFeedback',feedbackMethods.addNewFeedback);
+
 
 
   //Authentication
@@ -94,8 +100,6 @@ const storage = multer.diskStorage({
   //get product info
   router.get('/getProductInfo/:id',productMethods.getProductInfo);
 
-  //get customer feedback
-  router.get('/getFeedback/:id',feedbackMethods.getFeedback);
 
 
   //Find Users

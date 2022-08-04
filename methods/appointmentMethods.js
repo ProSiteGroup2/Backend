@@ -18,7 +18,7 @@ var functions = {
                 res.send({success:false,msg:'Failed to save'});
             }
             else{
-                res.send({success:true,msg:'Successfully Saved',appointment:newAppointment});
+                res.send({success:true,msg:'appointment Successfully Saved',appointment:newAppointment});
             }
         })
     }

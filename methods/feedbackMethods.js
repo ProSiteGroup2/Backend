@@ -20,7 +20,7 @@ var functions = {
 
             }
             else{
-                res.send({success:true,msg:'Success Saved',feedback:newFeedback});
+                res.send({success:true,msg:'feedback Successfully Saved',feedback:newFeedback});
             }
         })
     }
