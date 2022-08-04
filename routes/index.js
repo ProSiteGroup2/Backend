@@ -66,6 +66,12 @@ const storage = multer.diskStorage({
   router.post('/addFeedback',feedbackMethods.addNewFeedback);
 
 
+  //Retrieving feedbacks,Appointmnets
+  // ==============================================================================================================================================================
+
+  router.get('/getFeedback/:email',feedbackMethods.getFeedback);
+
+
 
   //Authentication
   // =====================================================================================================================================================

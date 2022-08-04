@@ -23,6 +23,17 @@ var functions = {
                 res.send({success:true,msg:'feedback Successfully Saved',feedback:newFeedback});
             }
         })
+    },
+
+    getFeedback:function(req,res){
+        Feedback.find({service_provider:req.params.email},function(err,feedbacks){
+            if(err) throw err;
+            if(feedbacks){
+                res.send({success:true,msg:"feedbacks found",feedbacks:feedbacks});
+            }else{
+                res.send({success:false,msg:"feedbacks not found"});
+            }
+        });
     }
 };
 
