@@ -6,23 +6,28 @@ const mongoose=require('mongoose');
 var functions = {
 
     addNewFeedback:function(req,res){
+        if(!req.body.consumer|| !req.body.sp_email || !req.body.feedback){
+            res.send({success:false,msg: 'Enter required fields'});
+        }else{
+            var newFeedback=Feedback({
+                consumer:req.body.consumer,
+                sp_email: req.body.sp_email,
+                feedback: req.body.feedback,
+            });
+    
+            newFeedback.save(function(err,newFeedback){
+                if(err){
+                    // console.log(err);
+                    res.send({success:false,msg:'Failed to add feedback'});
+    
+                }
+                else{
+                    res.send({success:true,msg:'feedback Successfully Saved',feedback:newFeedback});
+                }
+            });
+        }
 
-        var newFeedback=Feedback({
-            consumer:req.body.consumer,
-            service_provider: req.body.service_provider,
-            feedback: req.body.feedback,
-        });
-
-        newFeedback.save(function(err,newFeedback){
-            if(err){
-                // console.log(err);
-                res.send({success:false,msg:'Failed to add feedback'});
-
-            }
-            else{
-                res.send({success:true,msg:'feedback Successfully Saved',feedback:newFeedback});
-            }
-        })
+        
     },
 
     getFeedback:function(req,res){

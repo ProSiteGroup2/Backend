@@ -8,7 +8,7 @@ const feedbackSchema=new Schema({
         ref: 'consumer'
     },
 
-    service_provider:{
+    sp_email:{
         type:String,
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Enter a valid email address'],
         required:true
