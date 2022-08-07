@@ -12,6 +12,7 @@ const transporterMethods = require("../methods/transporterMethods");
 const productMethods = require("../methods/productMethods");
 const appointmentMethods = require("../methods/appointmentMethods");
 const feedbackMethods = require("../methods/feedbackMethods");
+const carddetailsMethods = require("../methods/carddetailsMethods");
 
 const storage = multer.diskStorage({
     // destination: function (req, file, cb) {
@@ -53,6 +54,9 @@ const storage = multer.diskStorage({
   
   //add a new Product
   router.post('/addProduct',productMethods.addNewProduct);
+
+  //add a new card
+  router.post('/addCard',carddetailsMethods.addNewCard);
 
 
 
