@@ -67,7 +67,7 @@ const storage = multer.diskStorage({
   router.post('/addAppointment',appointmentMethods.addNewAppointment);
 
   //add a new Feedback
-  router.post('/addFeedback',feedbackMethods.addNewFeedback);
+  router.post('/addFeedback',feedbackMethods.addNewFeedback); 
 
 
   //Retrieving feedbacks,Appointmnets
