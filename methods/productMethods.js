@@ -125,7 +125,7 @@ var functions={
             }else{
                 res.send({success:true, msg:"hardware products found successfully",products:products});
             }
-        });
+        }).populate('seller');
     },
 
     //get all the contractors
