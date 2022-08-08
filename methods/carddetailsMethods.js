@@ -17,10 +17,10 @@ var functions = {
             newCard.save(function(err,newCard){
                 if(err){
                     // console.log(err);
-                    res.send({success:false,msg:'Failed to save'});
+                    res.send({success:false,msg:'Failed to add card'});
                 }
                 else{
-                    res.send({success:true,msg:'Payment Successful',card:newCard});
+                    res.send({success:true,msg:'card added successfully',card:newCard});
                 }
             });
         }
