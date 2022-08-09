@@ -120,6 +120,28 @@ var functions={
 
         });
     },
+
+    getMason:function(req,res){
+        Labour.find({profession:'Mason'},function(err,masons){
+            if(err) throw err;
+            if(masons){
+                res.send({success:true,msg:"Masons found",masons:masons});
+            }else{
+                res.send({success:false,msg:"Coudn't find Masons"});
+            }
+        });
+    },
+
+    getElectrician:function(req,res){
+        Labour.find({profession:'Electrician'},function(err,electricians){
+            if(err) throw err;
+            if(electricians){
+                res.send({success:true,msg:"Electricians found",electricians:electricians});
+            }else{
+                res.send({success:false,msg:"couldn't find Electricians"});
+            }
+        });
+    }
 }
 
 module.exports=functions;
