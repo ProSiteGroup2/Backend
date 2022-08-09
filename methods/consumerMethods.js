@@ -18,56 +18,28 @@ var functions={
             if(consumer){
                 res.send({success:false,msg:'Email already exists!'});
             }else{
-                Labour.findOne({email:req.body.email},function(err,labour){
-                    if(err) throw err;
-                    if(labour){
-                        res.send({success:false,msg:'Email already exists!'});
-                    }else{
-                        Contractor.findOne({email:req.body.email},function(err,contractor){
-                            if(err) throw err;
-                            if(contractor){
-                                res.send({success:false,msg:'Email already exists!'});
-                            }else{
-                                Hardware.findOne({email:req.body.email},function(err,hardware){
-                                    if(err) throw err;
-                                    if(hardware){
-                                        res.send({success:false,msg:'Email already exists!'});
-                                    }else{
-                                        Transporter.findOne({email:req.body.email},function(err,transporter){
-                                            if(err) throw err;
-                                            if(transporter){
-                                                res.send({success:false,msg:'Email already exists!'});
-                                            }else{
-                                                if(!req.body.username || !req.body.email || !req.body.contactNo || !req.body.address || !req.body.hometown|| !req.body.district|| !req.body.password){
-                                                    res.send({success:false,msg: 'Enter all fields'});
-                                                }
-                                                else{
-                                                    var newConsumer=Consumer({
-                                                        username:req.body.username,
-                                                        email: req.body.email,
-                                                        contactNo: req.body.contactNo,
-                                                        address: req.body.address,
-                                                        hometown:req.body.hometown,
-                                                        district: req.body.district,
-                                                        password: req.body.password,
-                                                    });
-                                                    newConsumer.save(function(err,newConsumer){
-                                                        if(err){
-                                                            res.send({success:false,msg:'Failed to save'});
-                                                        }
-                                                        else{
-                                                            res.send({success:true,msg:'Successfully Saved'});
-                                                        }
-                                                    });
-                                                }
-                                            }
-                                        });
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
+                if(!req.body.username || !req.body.email || !req.body.contactNo || !req.body.address || !req.body.hometown|| !req.body.district|| !req.body.password){
+                    res.send({success:false,msg: 'Enter all fields'});
+                }
+                else{
+                    var newConsumer=Consumer({
+                        username:req.body.username,
+                        email: req.body.email,
+                        contactNo: req.body.contactNo,
+                        address: req.body.address,
+                        hometown:req.body.hometown,
+                        district: req.body.district,
+                        password: req.body.password,
+                    });
+                    newConsumer.save(function(err,newConsumer){
+                        if(err){
+                            res.send({success:false,msg:'Failed to save'});
+                        }
+                        else{
+                            res.send({success:true,msg:'Successfully Saved'});
+                        }
+                    });
+                }
             }
         });
     },

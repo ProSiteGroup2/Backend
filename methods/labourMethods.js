@@ -12,58 +12,51 @@ const {uploadToCloudinary}=require('../middleware/cloudinaryImage');
 var functions={
     //add a new labour
     addNewLabour:function(req,res){
-        Consumer.findOne({email:req.body.email},function(err,consumer){
+        Labour.findOne({email:req.body.email},function(err,labour){
             if(err) throw err;
-            if(consumer){
+            if(labour){
                 res.send({success:false,msg:'Email already exists!'});
             }else{
-                Labour.findOne({email:req.body.email},function(err,labour){
+                Contractor.findOne({email:req.body.email},function(err,contractor){
                     if(err) throw err;
-                    if(labour){
+                    if(contractor){
                         res.send({success:false,msg:'Email already exists!'});
                     }else{
-                        Contractor.findOne({email:req.body.email},function(err,contractor){
+                        Hardware.findOne({email:req.body.email},function(err,hardware){
                             if(err) throw err;
-                            if(contractor){
+                            if(hardware){
                                 res.send({success:false,msg:'Email already exists!'});
                             }else{
-                                Hardware.findOne({email:req.body.email},function(err,hardware){
+                                Transporter.findOne({email:req.body.email},function(err,transporter){
                                     if(err) throw err;
-                                    if(hardware){
+                                    if(transporter){
                                         res.send({success:false,msg:'Email already exists!'});
                                     }else{
-                                        Transporter.findOne({email:req.body.email},function(err,transporter){
-                                            if(err) throw err;
-                                            if(transporter){
-                                                res.send({success:false,msg:'Email already exists!'});
-                                            }else{
-                                                if(!req.body.username || !req.body.email || !req.body.contactNo || !req.body.address || !req.body.hometown|| !req.body.district||!req.body.experience || !req.body.profession|| !req.body.qualification || !req.body.password){
-                                                    res.send({success:false,msg: 'Enter all fields'});
+                                        if(!req.body.username || !req.body.email || !req.body.contactNo || !req.body.address || !req.body.hometown|| !req.body.district||!req.body.experience || !req.body.profession|| !req.body.qualification || !req.body.password){
+                                            res.send({success:false,msg: 'Enter all fields'});
+                                        }
+                                        else{
+                                            var newLabour=Labour({
+                                                profession:req.body.profession,
+                                                username:req.body.username,
+                                                email: req.body.email,
+                                                contactNo: req.body.contactNo,
+                                                address: req.body.address,
+                                                hometown:req.body.hometown,
+                                                district: req.body.district,
+                                                qualification:req.body.qualification,
+                                                experience:req.body.experience,
+                                                password: req.body.password
+                                            });
+                                            newLabour.save(function(err,newLabour){
+                                                if(err){
+                                                    res.send({success:false,msg:'Failed to save'});
                                                 }
                                                 else{
-                                                    var newLabour=Labour({
-                                                        profession:req.body.profession,
-                                                        username:req.body.username,
-                                                        email: req.body.email,
-                                                        contactNo: req.body.contactNo,
-                                                        address: req.body.address,
-                                                        hometown:req.body.hometown,
-                                                        district: req.body.district,
-                                                        qualification:req.body.qualification,
-                                                        experience:req.body.experience,
-                                                        password: req.body.password
-                                                    });
-                                                    newLabour.save(function(err,newLabour){
-                                                        if(err){
-                                                            res.send({success:false,msg:'Failed to save'});
-                                                        }
-                                                        else{
-                                                            res.send({success:true,msg:'Successfully Saved'});
-                                                        }
-                                                    });
+                                                    res.send({success:true,msg:'Successfully Saved'});
                                                 }
-                                            }
-                                        });
+                                            });
+                                        }
                                     }
                                 });
                             }
