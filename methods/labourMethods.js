@@ -1,9 +1,7 @@
-const Consumer= require('../models/consumer');
 const Contractor=require('../models/contractor');
 const Hardware=require('../models/hardware');
 const Labour=require('../models/labour');
 const Transporter=require('../models/transporter');
-const Product=require('../models/product');
 const jwt=require('jwt-simple');
 const config=require('../config/dbconfig');
 const mongoose=require('mongoose');
