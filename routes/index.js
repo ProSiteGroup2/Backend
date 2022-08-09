@@ -184,5 +184,11 @@ const storage = multer.diskStorage({
   // ============================================================================================================================================================
   router.get('/getHardwareProduct/:seller_id',productMethods.getHardwareProduct);
 
+
+  // set status for service providers
+  // ====================================================================================================================================================
+
+  router.put('/contractorStatus/:email/:status',contractorMethods.contractorStatus);
+
   
   module.exports=router;

@@ -140,6 +140,17 @@ var functions={
 
         });
     },
+
+    productStatus:async (req,res)=>{
+        Product.findOneAndUpdate({_id:req.params.id},{status:req.params.status},{new:true},function(err,product){
+            if(err) throw err;
+            if(!product){
+                res.send({success:false,msg:"Setting status failed"});
+            }else{
+                res.send({success:true,product:product});
+            }
+        });
+    }
     
 }
 

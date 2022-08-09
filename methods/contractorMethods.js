@@ -112,6 +112,17 @@ var functions={
            
         });
     },
+
+    contractorStatus:async (req,res)=>{
+        Contractor.findOneAndUpdate({email:req.params.email},{status:req.params.status},{new:true},function(err,contractor){
+            if(err) throw err;
+            if(!contractor){
+                res.send({success:false,msg:"Setting status failed"});
+            }else{
+                res.send({success:true,contractor:contractor});
+            }
+        });
+    }
 };
 
 
