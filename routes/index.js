@@ -34,7 +34,7 @@ const storage = multer.diskStorage({
     res.send('hello World');
   });
 
-  // Add Product and Users
+  // Add Product and Users and card
   // ============================================================================================================================================================
   
   //add a new Consumer
@@ -155,6 +155,13 @@ const storage = multer.diskStorage({
 
   router.get('/getProducts',productMethods.getProducts);
 
+
+  //Getting Labours by profession
+  // =================================================================================================================================================================
+
+  router.get('/getMason',labourMethods.getMason);
+
+  router.get('/getElectrician',labourMethods.getElectrician);
 
 
 
