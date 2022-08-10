@@ -132,6 +132,61 @@ var functions={
                 res.send({success:false,msg:"couldn't find Electricians"});
             }
         });
+    },
+
+    getPlumber:function(req,res){
+        Labour.find({profession:'Plumber'},function(err,plumbers){
+            if(err) throw err;
+            if(plumbers){
+                res.send({success:true,msg:"Plumbers found",plumbers:plumbers});
+            }else{
+                res.send({success:false,msg:"couldn't find Plumbers"});
+            }
+        });
+    },
+
+    getCarpenter:function(req,res){
+        Labour.find({profession:'Carpenter'},function(err,carpenters){
+            if(err) throw err;
+            if(carpenters){
+                res.send({success:true,msg:"Carpenters found",carpenters:carpenters});
+            }else{
+                res.send({success:false,msg:"couldn't find Carpenters"});
+            }
+        });
+    },
+
+    getArchitecturer:function(req,res){
+        Labour.find({profession:'Architecturer'},function(err,architecturers){
+            if(err) throw err;
+            if(architecturers){
+                res.send({success:true,msg:"Architecturers found",architecturers:architecturers});
+            }else{
+                res.send({success:false,msg:"couldn't find Architecturers"});
+            }
+        });
+    },
+
+    getPainter:function(req,res){
+        Labour.find({profession:'Painter'},function(err,painters){
+            if(err) throw err;
+            if(painters){
+                res.send({success:true,msg:"Painters found",painters:painters});
+            }else{
+                res.send({success:false,msg:"couldn't find Painters"});
+            }
+        });
+    },
+
+    labourStatus:async (req,res)=>{
+        Labour.findOneAndUpdate({email:req.params.email},{status:req.params.status},{new:true},function(err,labour){
+            if(err) throw err;
+            if(!labour){
+                res.send({success:false,msg:"Setting status failed"});
+            }else{
+                res.send({success:true,labour:labour});
+            }
+        });
     }
 }
 

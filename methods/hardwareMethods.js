@@ -111,6 +111,17 @@ var functions={
 
         });
     },
+
+    hardwareStatus:async (req,res)=>{
+        Hardware.findOneAndUpdate({email:req.params.email},{status:req.params.status},{new:true},function(err,hardware){
+            if(err) throw err;
+            if(!hardware){
+                res.send({success:false,msg:"Setting status failed"});
+            }else{
+                res.send({success:true,hardware:hardware});
+            }
+        });
+    }
 }
 
 module.exports=functions;

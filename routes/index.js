@@ -75,6 +75,10 @@ const storage = multer.diskStorage({
 
   router.get('/getFeedback/:email',feedbackMethods.getFeedback);
 
+  router.get('/getPastAppointments',appointmentMethods.getPastAppointments);
+
+  router.get('/getUpcomingAppointments',appointmentMethods.getUpcomingAppointments);
+
 
 
   //Authentication
@@ -163,6 +167,14 @@ const storage = multer.diskStorage({
 
   router.get('/getElectrician',labourMethods.getElectrician);
 
+  router.get('/getPainter',labourMethods.getPainter);
+
+  router.get('/getArchitecturer',labourMethods.getArchitecturer);
+
+  router.get('/getCarpenter',labourMethods.getCarpenter);
+
+  router.get('/getPlumber',labourMethods.getPlumber);
+
 
 
   // Getting products by Category
@@ -183,6 +195,25 @@ const storage = multer.diskStorage({
   //Get hardware products
   // ============================================================================================================================================================
   router.get('/getHardwareProduct/:seller_id',productMethods.getHardwareProduct);
+
+
+  // set status for users and products
+  // ====================================================================================================================================================
+
+  router.put('/consumerStatus/:email/:status',consumerMethods.consumerStatus);
+
+  router.put('/contractorStatus/:email/:status',contractorMethods.contractorStatus);
+
+  router.put('/labourStatus/:email/:status',labourMethods.labourStatus);
+
+  router.put('/hardwareStatus/:email/:status',hardwareMethods.hardwareStatus);
+
+  router.put('/transporterStatus/:email/:status',transporterMethods.transporterStatus);
+
+  // product status
+
+  router.put('/productStatus/:id/:status',productMethods.productStatus);
+
 
   
   module.exports=router;

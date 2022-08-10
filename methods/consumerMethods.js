@@ -172,6 +172,17 @@ var functions={
                 res.send({success:true,msg:"found the consumer "+consumer.username, consumer:consumer});
             }
         });
+    },
+
+    consumerStatus:async (req,res)=>{
+        Consumer.findOneAndUpdate({email:req.params.email},{status:req.params.status},{new:true},function(err,consumer){
+            if(err) throw err;
+            if(!consumer){
+                res.send({success:false,msg:"Setting status failed"});
+            }else{
+                res.send({success:true,consumer:consumer});
+            }
+        });
     }
 };
 
