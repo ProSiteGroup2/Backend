@@ -75,6 +75,8 @@ const storage = multer.diskStorage({
 
   router.get('/getFeedback/:email',feedbackMethods.getFeedback);
 
+  router.get('/getPastAppointments',appointmentMethods.getPastAppointments);
+
 
 
   //Authentication

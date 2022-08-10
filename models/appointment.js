@@ -15,7 +15,7 @@ const appointmentSchema=new Schema({
     },
 
     date:{
-        type:String,
+        type:Date,
     },
 
     time:{

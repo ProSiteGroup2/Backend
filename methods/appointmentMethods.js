@@ -1,5 +1,6 @@
 const Appointment= require('../models/appointment');
 const mongoose=require('mongoose');
+const { $where } = require('../models/appointment');
 
 var functions = {
 
@@ -26,6 +27,26 @@ var functions = {
         }
        
         
+    },
+
+    getPastAppointments:function(req,res){
+        let ts=Date.now();
+        let current_datetime=new Date(ts);
+
+        let current_date=current_datetime.getDate();
+        let current_month=current_datetime.getMonth()+1;
+        let current_year=current_datetime.getFullYear();
+
+        let current_fulldate=current_year+"-"+current_month+"-"+current_date;
+
+        Appointment.find({date:{$lt:current_fulldate}},function(err,appointments){
+            if(err) throw err;
+            if(!appointments){
+                res.send({success:false,msg:"Appointments not found"});
+            }else{
+                res.send({success:true,msg:"Appointments found successfully",appointments:appointments});
+            }
+        });
     }
 
 };
