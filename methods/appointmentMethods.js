@@ -30,21 +30,33 @@ var functions = {
     },
 
     getPastAppointments:function(req,res){
-        let ts=Date.now();
-        let current_datetime=new Date(ts);
+        // let ts=Date.now();
+        // let current_datetime=new Date(ts);
 
-        let current_date=current_datetime.getDate();
-        let current_month=current_datetime.getMonth()+1;
-        let current_year=current_datetime.getFullYear();
+        // let current_date=current_datetime.getDate();
+        // let current_month=current_datetime.getMonth()+1;
+        // let current_year=current_datetime.getFullYear();
 
-        let current_fulldate=current_year+"-"+current_month+"-"+current_date;
+        // let current_fulldate=current_year+"-"+current_month+"-"+current_date;
 
-        Appointment.find({date:{$lt:current_fulldate}},function(err,appointments){
+        Appointment.find({date:{$lt:Date.now()}},function(err,appointments){
             if(err) throw err;
             if(!appointments){
-                res.send({success:false,msg:"Appointments not found"});
+                res.send({success:false,msg:" Past Appointments not found"});
             }else{
-                res.send({success:true,msg:"Appointments found successfully",appointments:appointments});
+                res.send({success:true,msg:" Past Appointments found successfully",appointments:appointments});
+            }
+        });
+    },
+
+    getUpcomingAppointments:function(req,res){
+
+        Appointment.find({date:{$gte:Date.now()}},function(err,appointments){
+            if(err) throw err;
+            if(!appointments){
+                res.send({success:false,msg:"Upcoming Appointments not found"});
+            }else{
+                res.send({success:true,msg:"Upcoming Appointments found successfully",appointments:appointments});
             }
         });
     }
