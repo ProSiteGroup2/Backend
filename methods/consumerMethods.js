@@ -95,7 +95,7 @@ var functions={
     },
 
     findConsumer:function(req,res){
-        Consumer.findOne({email:req.body.email}, function(err,consumer){
+        Consumer.findOne({email:req.params.email}, function(err,consumer){
             if(err) throw err;
             if(!consumer){
                 res.status(403).send({success:false,msg:'Sorry!! , Consumer not found'});

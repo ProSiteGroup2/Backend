@@ -120,10 +120,10 @@ const storage = multer.diskStorage({
   // ====================================================================================================================================================
 
   //finding a service provider and returning the whole object
-  router.get('/findSP',actions.findSP);
+  router.get('/findSP/:email',actions.findSP);
 
   //finding a consumer and returning the whole object
-  router.get('/findConsumer',consumerMethods.findConsumer);
+  router.get('/findConsumer/:email',consumerMethods.findConsumer);
 
   
   
