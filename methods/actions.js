@@ -83,16 +83,16 @@ var functions={
 
     // find a service provider by email
     findSP:function(req,res){
-        Labour.findOne({email:req.body.email},function(err,labour){
+        Labour.findOne({email:req.params.email},function(err,labour){
             if(err) throw err;
             if(!labour){
-                Contractor.findOne({email:req.body.email},function(err,contractor){
+                Contractor.findOne({email:req.params.email},function(err,contractor){
                     if(err) throw err;
                     if(!contractor){
-                        Hardware.findOne({email:req.body.email},function(err,hardware){
+                        Hardware.findOne({email:req.params.email},function(err,hardware){
                             if(err) throw err;
                             if(!hardware){
-                                Transporter.findOne({email:req.body.email},function(err,transporter){
+                                Transporter.findOne({email:req.params.email},function(err,transporter){
                                     if(err) throw err;
                                     if(!transporter){
                                         res.status(403).send({success:false,msg:'Sorry!! Service Provider not found'});

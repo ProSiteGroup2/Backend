@@ -51,6 +51,12 @@ const labourSchema=new Schema({
     
     imageUrl: {
         type: String,
+    },
+
+    status:{
+        type:String,
+        enum:["active","block"],
+        default:"active"
     }
     
 });

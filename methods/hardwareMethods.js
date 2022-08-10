@@ -1,9 +1,7 @@
-const Consumer= require('../models/consumer');
 const Contractor=require('../models/contractor');
 const Hardware=require('../models/hardware');
 const Labour=require('../models/labour');
 const Transporter=require('../models/transporter');
-const Product=require('../models/product');
 const jwt=require('jwt-simple');
 const config=require('../config/dbconfig');
 const mongoose=require('mongoose');
@@ -12,58 +10,51 @@ const {uploadToCloudinary}=require('../middleware/cloudinaryImage');
 var functions={
     //add a new hardware
     addNewHardware:function(req,res){
-        Consumer.findOne({email:req.body.email},function(err,consumer){
+        Labour.findOne({email:req.body.email},function(err,labour){
             if(err) throw err;
-            if(consumer){
+            if(labour){
                 res.send({success:false,msg:'Email already exists!'});
             }else{
-                Labour.findOne({email:req.body.email},function(err,labour){
+                Contractor.findOne({email:req.body.email},function(err,contractor){
                     if(err) throw err;
-                    if(labour){
+                    if(contractor){
                         res.send({success:false,msg:'Email already exists!'});
                     }else{
-                        Contractor.findOne({email:req.body.email},function(err,contractor){
+                        Hardware.findOne({email:req.body.email},function(err,hardware){
                             if(err) throw err;
-                            if(contractor){
+                            if(hardware){
                                 res.send({success:false,msg:'Email already exists!'});
                             }else{
-                                Hardware.findOne({email:req.body.email},function(err,hardware){
+                                Transporter.findOne({email:req.body.email},function(err,transporter){
                                     if(err) throw err;
-                                    if(hardware){
+                                    if(transporter){
                                         res.send({success:false,msg:'Email already exists!'});
                                     }else{
-                                        Transporter.findOne({email:req.body.email},function(err,transporter){
-                                            if(err) throw err;
-                                            if(transporter){
-                                                res.send({success:false,msg:'Email already exists!'});
-                                            }else{
-                                                if(!req.body.hardwarename || !req.body.email || !req.body.contactNo || !req.body.address || !req.body.city|| !req.body.district||!req.body.regno || !req.body.owner|| !req.body.password){
-                                                    res.send({success:false,msg: 'Enter all fields'});
+                                        if(!req.body.hardwarename || !req.body.email || !req.body.contactNo || !req.body.address || !req.body.city|| !req.body.district||!req.body.regno || !req.body.owner|| !req.body.password){
+                                            res.send({success:false,msg: 'Enter all fields'});
+                                        }
+                                        else{
+                                            var newHardware=Hardware({
+                                                
+                                                hardwarename:req.body.hardwarename,
+                                                email: req.body.email,
+                                                contactNo: req.body.contactNo,
+                                                address: req.body.address,
+                                                city:req.body.city,
+                                                district: req.body.district,
+                                                regno:req.body.regno,
+                                                owner:req.body.owner,
+                                                password: req.body.password
+                                            });
+                                            newHardware.save(function(err,newHardware){
+                                                if(err){
+                                                    res.send({success:false,msg:'Failed to save'});
                                                 }
                                                 else{
-                                                    var newHardware=Hardware({
-                                                        
-                                                        hardwarename:req.body.hardwarename,
-                                                        email: req.body.email,
-                                                        contactNo: req.body.contactNo,
-                                                        address: req.body.address,
-                                                        city:req.body.city,
-                                                        district: req.body.district,
-                                                        regno:req.body.regno,
-                                                        owner:req.body.owner,
-                                                        password: req.body.password
-                                                    });
-                                                    newHardware.save(function(err,newHardware){
-                                                        if(err){
-                                                            res.send({success:false,msg:'Failed to save'});
-                                                        }
-                                                        else{
-                                                            res.send({success:true,msg:'Successfully Saved'});
-                                                        }
-                                                    });
+                                                    res.send({success:true,msg:'Successfully Saved'});
                                                 }
-                                            }
-                                        });
+                                            });
+                                        }
                                     }
                                 });
                             }
@@ -120,6 +111,17 @@ var functions={
 
         });
     },
+
+    hardwareStatus:async (req,res)=>{
+        Hardware.findOneAndUpdate({email:req.params.email},{status:req.params.status},{new:true},function(err,hardware){
+            if(err) throw err;
+            if(!hardware){
+                res.send({success:false,msg:"Setting status failed"});
+            }else{
+                res.send({success:true,hardware:hardware});
+            }
+        });
+    }
 }
 
 module.exports=functions;

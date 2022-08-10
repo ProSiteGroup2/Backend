@@ -34,7 +34,7 @@ const storage = multer.diskStorage({
     res.send('hello World');
   });
 
-  // Add Product and Users
+  // Add Product and Users and card
   // ============================================================================================================================================================
   
   //add a new Consumer
@@ -74,6 +74,10 @@ const storage = multer.diskStorage({
   // ==============================================================================================================================================================
 
   router.get('/getFeedback/:email',feedbackMethods.getFeedback);
+
+  router.get('/getPastAppointments',appointmentMethods.getPastAppointments);
+
+  router.get('/getUpcomingAppointments',appointmentMethods.getUpcomingAppointments);
 
 
 
@@ -116,10 +120,10 @@ const storage = multer.diskStorage({
   // ====================================================================================================================================================
 
   //finding a service provider and returning the whole object
-  router.get('/findSP',actions.findSP);
+  router.get('/findSP/:email',actions.findSP);
 
   //finding a consumer and returning the whole object
-  router.get('/findConsumer',consumerMethods.findConsumer);
+  router.get('/findConsumer/:email',consumerMethods.findConsumer);
 
   
   
@@ -156,6 +160,21 @@ const storage = multer.diskStorage({
   router.get('/getProducts',productMethods.getProducts);
 
 
+  //Getting Labours by profession
+  // =================================================================================================================================================================
+
+  router.get('/getMason',labourMethods.getMason);
+
+  router.get('/getElectrician',labourMethods.getElectrician);
+
+  router.get('/getPainter',labourMethods.getPainter);
+
+  router.get('/getArchitecturer',labourMethods.getArchitecturer);
+
+  router.get('/getCarpenter',labourMethods.getCarpenter);
+
+  router.get('/getPlumber',labourMethods.getPlumber);
+
 
 
   // Getting products by Category
@@ -176,6 +195,25 @@ const storage = multer.diskStorage({
   //Get hardware products
   // ============================================================================================================================================================
   router.get('/getHardwareProduct/:seller_id',productMethods.getHardwareProduct);
+
+
+  // set status for users and products
+  // ====================================================================================================================================================
+
+  router.put('/consumerStatus/:email/:status',consumerMethods.consumerStatus);
+
+  router.put('/contractorStatus/:email/:status',contractorMethods.contractorStatus);
+
+  router.put('/labourStatus/:email/:status',labourMethods.labourStatus);
+
+  router.put('/hardwareStatus/:email/:status',hardwareMethods.hardwareStatus);
+
+  router.put('/transporterStatus/:email/:status',transporterMethods.transporterStatus);
+
+  // product status
+
+  router.put('/productStatus/:id/:status',productMethods.productStatus);
+
 
   
   module.exports=router;

@@ -1,9 +1,7 @@
-const Consumer= require('../models/consumer');
 const Contractor=require('../models/contractor');
 const Hardware=require('../models/hardware');
 const Labour=require('../models/labour');
 const Transporter=require('../models/transporter');
-const Product=require('../models/product');
 const jwt=require('jwt-simple');
 const config=require('../config/dbconfig');
 const mongoose=require('mongoose');
@@ -12,58 +10,51 @@ const {uploadToCloudinary}=require('../middleware/cloudinaryImage');
 var functions={
     //add a new labour
     addNewLabour:function(req,res){
-        Consumer.findOne({email:req.body.email},function(err,consumer){
+        Labour.findOne({email:req.body.email},function(err,labour){
             if(err) throw err;
-            if(consumer){
+            if(labour){
                 res.send({success:false,msg:'Email already exists!'});
             }else{
-                Labour.findOne({email:req.body.email},function(err,labour){
+                Contractor.findOne({email:req.body.email},function(err,contractor){
                     if(err) throw err;
-                    if(labour){
+                    if(contractor){
                         res.send({success:false,msg:'Email already exists!'});
                     }else{
-                        Contractor.findOne({email:req.body.email},function(err,contractor){
+                        Hardware.findOne({email:req.body.email},function(err,hardware){
                             if(err) throw err;
-                            if(contractor){
+                            if(hardware){
                                 res.send({success:false,msg:'Email already exists!'});
                             }else{
-                                Hardware.findOne({email:req.body.email},function(err,hardware){
+                                Transporter.findOne({email:req.body.email},function(err,transporter){
                                     if(err) throw err;
-                                    if(hardware){
+                                    if(transporter){
                                         res.send({success:false,msg:'Email already exists!'});
                                     }else{
-                                        Transporter.findOne({email:req.body.email},function(err,transporter){
-                                            if(err) throw err;
-                                            if(transporter){
-                                                res.send({success:false,msg:'Email already exists!'});
-                                            }else{
-                                                if(!req.body.username || !req.body.email || !req.body.contactNo || !req.body.address || !req.body.hometown|| !req.body.district||!req.body.experience || !req.body.profession|| !req.body.qualification || !req.body.password){
-                                                    res.send({success:false,msg: 'Enter all fields'});
+                                        if(!req.body.username || !req.body.email || !req.body.contactNo || !req.body.address || !req.body.hometown|| !req.body.district||!req.body.experience || !req.body.profession|| !req.body.qualification || !req.body.password){
+                                            res.send({success:false,msg: 'Enter all fields'});
+                                        }
+                                        else{
+                                            var newLabour=Labour({
+                                                profession:req.body.profession,
+                                                username:req.body.username,
+                                                email: req.body.email,
+                                                contactNo: req.body.contactNo,
+                                                address: req.body.address,
+                                                hometown:req.body.hometown,
+                                                district: req.body.district,
+                                                qualification:req.body.qualification,
+                                                experience:req.body.experience,
+                                                password: req.body.password
+                                            });
+                                            newLabour.save(function(err,newLabour){
+                                                if(err){
+                                                    res.send({success:false,msg:'Failed to save'});
                                                 }
                                                 else{
-                                                    var newLabour=Labour({
-                                                        profession:req.body.profession,
-                                                        username:req.body.username,
-                                                        email: req.body.email,
-                                                        contactNo: req.body.contactNo,
-                                                        address: req.body.address,
-                                                        hometown:req.body.hometown,
-                                                        district: req.body.district,
-                                                        qualification:req.body.qualification,
-                                                        experience:req.body.experience,
-                                                        password: req.body.password
-                                                    });
-                                                    newLabour.save(function(err,newLabour){
-                                                        if(err){
-                                                            res.send({success:false,msg:'Failed to save'});
-                                                        }
-                                                        else{
-                                                            res.send({success:true,msg:'Successfully Saved'});
-                                                        }
-                                                    });
+                                                    res.send({success:true,msg:'Successfully Saved'});
                                                 }
-                                            }
-                                        });
+                                            });
+                                        }
                                     }
                                 });
                             }
@@ -120,6 +111,83 @@ var functions={
 
         });
     },
+
+    getMason:function(req,res){
+        Labour.find({profession:'Mason'},function(err,masons){
+            if(err) throw err;
+            if(masons){
+                res.send({success:true,msg:"Masons found",masons:masons});
+            }else{
+                res.send({success:false,msg:"Coudn't find Masons"});
+            }
+        });
+    },
+
+    getElectrician:function(req,res){
+        Labour.find({profession:'Electrician'},function(err,electricians){
+            if(err) throw err;
+            if(electricians){
+                res.send({success:true,msg:"Electricians found",electricians:electricians});
+            }else{
+                res.send({success:false,msg:"couldn't find Electricians"});
+            }
+        });
+    },
+
+    getPlumber:function(req,res){
+        Labour.find({profession:'Plumber'},function(err,plumbers){
+            if(err) throw err;
+            if(plumbers){
+                res.send({success:true,msg:"Plumbers found",plumbers:plumbers});
+            }else{
+                res.send({success:false,msg:"couldn't find Plumbers"});
+            }
+        });
+    },
+
+    getCarpenter:function(req,res){
+        Labour.find({profession:'Carpenter'},function(err,carpenters){
+            if(err) throw err;
+            if(carpenters){
+                res.send({success:true,msg:"Carpenters found",carpenters:carpenters});
+            }else{
+                res.send({success:false,msg:"couldn't find Carpenters"});
+            }
+        });
+    },
+
+    getArchitecturer:function(req,res){
+        Labour.find({profession:'Architecturer'},function(err,architecturers){
+            if(err) throw err;
+            if(architecturers){
+                res.send({success:true,msg:"Architecturers found",architecturers:architecturers});
+            }else{
+                res.send({success:false,msg:"couldn't find Architecturers"});
+            }
+        });
+    },
+
+    getPainter:function(req,res){
+        Labour.find({profession:'Painter'},function(err,painters){
+            if(err) throw err;
+            if(painters){
+                res.send({success:true,msg:"Painters found",painters:painters});
+            }else{
+                res.send({success:false,msg:"couldn't find Painters"});
+            }
+        });
+    },
+
+    labourStatus:async (req,res)=>{
+        Labour.findOneAndUpdate({email:req.params.email},{status:req.params.status},{new:true},function(err,labour){
+            if(err) throw err;
+            if(!labour){
+                res.send({success:false,msg:"Setting status failed"});
+            }else{
+                res.send({success:true,labour:labour});
+            }
+        });
+    }
 }
 
 module.exports=functions;
