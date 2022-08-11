@@ -118,7 +118,7 @@ var functions={
             //console.log(token);
             var decodedtoken=jwt.decode(token,config.secret);
            
-            console.log("user");
+            //console.log("user");
             if(!req.body.username || !req.body.email || !req.body.contactNo || !req.body.address || !req.body.hometown|| !req.body.district|| !req.body.password){
                 var user = await Consumer.findByIdAndUpdate(decodedtoken._id,req.body,{
                     new :true,
