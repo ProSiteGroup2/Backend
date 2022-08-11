@@ -113,6 +113,8 @@ const storage = multer.diskStorage({
   
   router.put('/updatehardwareinfo',hardwareMethods.updateHardwareInfo);
 
+  router.put('/updatelabourinfo',labourMethods.updateLabourInfo);
+
   //uploading images
   // ============================================================================================================================================
   
