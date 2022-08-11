@@ -83,7 +83,7 @@ var functions={
                 consumer.comparePassword(req.body.password, function(err,isMatch){
                     if(isMatch && !err){
                         var token=jwt.encode(consumer,config.secret);
-                        res.send({success:true, token:token});
+                        res.send({success:true, token:token}); 
                     }
                     else{
                         return res.status(403).send({success:false,msg:"Authentication failed, wrong password"});
@@ -95,14 +95,44 @@ var functions={
 
     // get consumer info from a token
     getConsumerInfo: async (req,res)=>{
+        
         if(req.headers.authorization && req.headers.authorization.split(' ')[0]==='Bearer'){
             var token=req.headers.authorization.split(' ')[1];
             var decodedtoken=jwt.decode(token,config.secret);
-            // console.log(decodedtoken);
+            // console.lsog(decodedtoken);
             req.user=await Consumer.findById(decodedtoken._id);
 
             console.log(req.user);
             return res.send({success:true, msg: 'Hello '+decodedtoken.username,consumer:req.user});
+        }
+        else{
+            return res.send({success:false, msg:'No Headers'});
+        }
+    },
+
+
+    //update consumer info from a token
+    updateConsumerInfo: async(req,res)=>{
+        if(req.headers.authorization && req.headers.authorization.split(' ')[0]==='Bearer'){
+            var token=req.headers.authorization.split(' ')[1];
+            //console.log(token);
+            var decodedtoken=jwt.decode(token,config.secret);
+           
+            console.log("user");
+            if(!req.body.username || !req.body.email || !req.body.contactNo || !req.body.address || !req.body.hometown|| !req.body.district|| !req.body.password){
+                var user = await Consumer.findByIdAndUpdate(decodedtoken._id,req.body,{
+                    new :true,
+                    runValidators:true
+                });
+
+    
+                res.send({success:true, data:user});
+            }
+            else{
+                res.send({success:false, msg:"missing fields"});
+            }
+            
+
         }
         else{
             return res.send({success:false, msg:'No Headers'});
