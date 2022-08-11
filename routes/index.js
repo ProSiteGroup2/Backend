@@ -75,9 +75,14 @@ const storage = multer.diskStorage({
 
   router.get('/getFeedback/:email',feedbackMethods.getFeedback);
 
-  router.get('/getPastAppointments',appointmentMethods.getPastAppointments);
+  router.get('/getConsumerPastAppointments/:id',appointmentMethods.getConsumerPastAppointments);
 
-  router.get('/getUpcomingAppointments',appointmentMethods.getUpcomingAppointments);
+  router.get('/getConsumerUpcomingAppointments/:id',appointmentMethods.getConsumerUpcomingAppointments);
+
+  router.get('/getSPPastAppointments/:email',appointmentMethods.getSPPastAppointments);
+
+  router.get('/getSPUpcomingAppointments/:email',appointmentMethods.getSPUpcomingAppointments);
+
 
 
 
