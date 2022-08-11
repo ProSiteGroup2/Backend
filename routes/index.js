@@ -81,7 +81,7 @@ const storage = multer.diskStorage({
   router.get('/getContractorInfo',contractorMethods.getContractorInfo);
 
   //getting Consumer info from token
-  router.get('/getConsumerInfo',consumerMethods.getConsumerInfo); //---krishan
+  router.get('/getConsumerInfo',consumerMethods.getConsumerInfo); 
 
   //getting Labour info from token
   router.get('/getLabourInfo',labourMethods.getLabourInfo);
@@ -108,8 +108,10 @@ const storage = multer.diskStorage({
   //Update users
   // ====================================================================================================================================================
   router.put('/updateconsumerinfo',consumerMethods.updateConsumerInfo);
+
+  router.put('/updatecontractorinfo',contractorMethods.updateContractorInfo);
   
-  
+  router.put('/updatehardwareinfo',hardwareMethods.updateHardwareInfo);
 
   //uploading images
   // ============================================================================================================================================
