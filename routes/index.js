@@ -12,7 +12,7 @@ const transporterMethods = require("../methods/transporterMethods");
 const productMethods = require("../methods/productMethods");
 const appointmentMethods = require("../methods/appointmentMethods");
 const feedbackMethods = require("../methods/feedbackMethods");
-const {protect} = require("../middleware/protect"); //----krishan
+
 
 const storage = multer.diskStorage({
     // destination: function (req, file, cb) {
