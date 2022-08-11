@@ -97,15 +97,15 @@ var functions={
             //console.log(token);
             var decodedtoken=jwt.decode(token,config.secret);
            
-            console.log("user");
-            if(!req.body.username || !req.body.email || !req.body.contactNo || !req.body.address || !req.body.hometown|| !req.body.district|| !req.body.password){
-                var user = await Consumer.findByIdAndUpdate(decodedtoken._id,req.body,{
+            
+            if(!req.body.hardwarename || !req.body.email || !req.body.contactNo || !req.body.address || !req.body.city|| !req.body.district||!req.body.regno || !req.body.owner|| !req.body.password){
+                var hardware = await Hardware.findByIdAndUpdate(decodedtoken._id,req.body,{
                     new :true,
                     runValidators:true
                 });
 
     
-                res.send({success:true, data:user});
+                res.send({success:true, data:hardware});
             }
             else{
                 res.send({success:false, msg:"missing fields"});
