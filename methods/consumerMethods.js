@@ -38,6 +38,74 @@ var functions={
             }
         });
     },
+    otpForgotPass: async(req,res) => {
+        const account = await consumer.findOne({contactNo:req.body.contactNo, user_status:1});
+        if(!account) return res.status(400).json({success:false, msg:"Consumer nnot found!"});
+        const OTP = otpGenerator.generate(4,{lowerCaseAlphabets:false, upperCaseAlphabets:false, specialChars:false});
+        const number = req.body.contactNo;
+        console.log(OTP);
+
+        const otp = new Otp({contactNo:number, otp: OTP});
+        const salt = await bcrypt.genSalt(10)
+        otp.otp = await bcrypt.hash(otp.otp, salt);
+        const result = await otp.save();
+
+        //send otp using shoutout
+        var apikey = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxNGQxNGYyMC0xODA4LTExZWQtYjZjMy1mZmY3N2VkMzlhYmIiLCJzdWIiOiJTSE9VVE9VVF9BUElfVVNFUiIsImlhdCI6MTY2MDA2NTg1MCwiZXhwIjoxOTc1Njg1MDUwLCJzY29wZXMiOnsiYWN0aXZpdGllcyI6WyJyZWFkIiwid3JpdGUiXSwibWVzc2FnZXMiOlsicmVhZCIsIndyaXRlIl0sImNvbnRhY3RzIjpbInJlYWQiLCJ3cml0ZSJdfSwic29fdXNlcl9pZCI6IjczMjAwIiwic29fdXNlcl9yb2xlIjoidXNlciIsInNvX3Byb2ZpbGUiOiJhbGwiLCJzb191c2VyX25hbWUiOiIiLCJzb19hcGlrZXkiOiJub25lIn0.jVq83MI6WcwE8MlRpYNHvidl8_Ven3oOeOEvxMJGMzs;
+        var debug = true, verifySSL = false;
+        var client = new ShoutoutClient(apikey,debug,verifySSL);
+        var message = {
+            source: 'ShoutDEMO',
+            destinations: [number],
+             content: {
+                sms: `yoor OTP is: ${OTP}`
+             },
+             transports: ['sms']
+            };
+        client.sendMessage(message, (error, result) => {
+            if (error) {
+                console.error('error ', error);
+                return res.status(400).json({success:false, msg:"OTP not sent"});
+            } else {
+                console.log('result ',result);
+                return res.status(200).json({success:true, msg:"OTP sent"});
+            }
+        });
+    },
+
+
+    otpVerify: async(req,res) => {
+        const otpHolder = await Otp.find({contactNo:req.body.contactNo});
+        if(otpHolder.length===0){
+            return res.status(400).json({success:false, msg:"OTP is expired"});
+        }
+        //get the newest OTP from the DB
+        const rightOtpFind = otpHolder[otpHolder.length - 1];
+        const validOtp =  await bcrypt.compare(req.body.otp, rightOtpFind.otp);
+        if(rightOtpFind.number === req.body.number && validOtp){
+            const OTPDelete = await Otp.deleteMany({
+                contactNo:req.body.number
+            })
+            return res.status(200).json({success:true, msg:"OTP verified"});
+        } else {
+            return res.status(400).json({success:false, msg:"OTP is wrong. Try Again"});
+        }
+    },
+
+    //forgot password
+    forgotPassword:async(req,res) => {
+        try{
+            consumer.findOne({contactNo:req.body.contactNo, user_status:1}).then(consumer =>{
+                consumer.password = req.body.newPassword;
+                consumer.save();
+                res.status(200).json({success: true, msg:"Password change successfully"});
+            });
+        } catch (err) {
+            console.log(err);
+            return res.status(400).json({success:false, error:err})
+        }
+    },
+
 
     //authenticate consumer
     authenticateConsumer: function(req,res){
