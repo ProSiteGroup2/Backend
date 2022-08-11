@@ -37,7 +37,7 @@ var functions = {
             }else{
                 res.send({success:true,msg:" Past Appointments found successfully",appointments:appointments});
             }
-        });
+        }).populate('consumer');
     },
 
     getSPPastAppointments:function(req,res){
@@ -48,7 +48,7 @@ var functions = {
             }else{
                 res.send({success:true,msg:" Past Appointments found successfully",appointments:appointments});
             }
-        });
+        }).populate('consumer');
     }, 
 
     getConsumerUpcomingAppointments:function(req,res){
@@ -60,7 +60,7 @@ var functions = {
             }else{
                 res.send({success:true,msg:"Upcoming Appointments found successfully",appointments:appointments});
             }
-        });
+        }).populate('consumer');
     },
 
     getSPUpcomingAppointments:function(req,res){
@@ -72,7 +72,7 @@ var functions = {
             }else{
                 res.send({success:true,msg:"Upcoming Appointments found successfully",appointments:appointments});
             }
-        });
+        }).populate('consumer');
     }
 
 };
