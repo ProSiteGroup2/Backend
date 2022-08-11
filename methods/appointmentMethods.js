@@ -29,17 +29,8 @@ var functions = {
         
     },
 
-    getPastAppointments:function(req,res){
-        // let ts=Date.now();
-        // let current_datetime=new Date(ts);
-
-        // let current_date=current_datetime.getDate();
-        // let current_month=current_datetime.getMonth()+1;
-        // let current_year=current_datetime.getFullYear();
-
-        // let current_fulldate=current_year+"-"+current_month+"-"+current_date;
-
-        Appointment.find({date:{$lt:Date.now()}},function(err,appointments){
+    getConsumerPastAppointments:function(req,res){
+        Appointment.find({consumer:req.params.id,date:{$lt:Date.now()}},function(err,appointments){
             if(err) throw err;
             if(!appointments){
                 res.send({success:false,msg:" Past Appointments not found"});
@@ -49,9 +40,32 @@ var functions = {
         });
     },
 
-    getUpcomingAppointments:function(req,res){
+    getSPPastAppointments:function(req,res){
+        Appointment.find({sp_email:req.params.email,date:{$lt:Date.now()}},function(err,appointments){
+            if(err) throw err;
+            if(!appointments){
+                res.send({success:false,msg:" Past Appointments not found"});
+            }else{
+                res.send({success:true,msg:" Past Appointments found successfully",appointments:appointments});
+            }
+        });
+    }, 
 
-        Appointment.find({date:{$gte:Date.now()}},function(err,appointments){
+    getConsumerUpcomingAppointments:function(req,res){
+
+        Appointment.find({consumer:req.params.id,date:{$gte:Date.now()}},function(err,appointments){
+            if(err) throw err;
+            if(!appointments){
+                res.send({success:false,msg:"Upcoming Appointments not found"});
+            }else{
+                res.send({success:true,msg:"Upcoming Appointments found successfully",appointments:appointments});
+            }
+        });
+    },
+
+    getSPUpcomingAppointments:function(req,res){
+
+        Appointment.find({sp_email:req.params.email,date:{$gte:Date.now()}},function(err,appointments){
             if(err) throw err;
             if(!appointments){
                 res.send({success:false,msg:"Upcoming Appointments not found"});
