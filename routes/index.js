@@ -12,6 +12,7 @@ const transporterMethods = require("../methods/transporterMethods");
 const productMethods = require("../methods/productMethods");
 const appointmentMethods = require("../methods/appointmentMethods");
 const feedbackMethods = require("../methods/feedbackMethods");
+const {protect} = require("../middleware/protect"); //----krishan
 
 const storage = multer.diskStorage({
     // destination: function (req, file, cb) {
@@ -80,7 +81,7 @@ const storage = multer.diskStorage({
   router.get('/getContractorInfo',contractorMethods.getContractorInfo);
 
   //getting Consumer info from token
-  router.get('/getConsumerInfo',consumerMethods.getConsumerInfo);
+  router.get('/getConsumerInfo',consumerMethods.getConsumerInfo); //---krishan
 
   //getting Labour info from token
   router.get('/getLabourInfo',labourMethods.getLabourInfo);
@@ -104,6 +105,9 @@ const storage = multer.diskStorage({
   //finding a consumer and returning the whole object
   router.get('/findConsumer',consumerMethods.findConsumer);
 
+  //Update users
+  // ====================================================================================================================================================
+  router.put('/updateconsumerinfo',consumerMethods.updateConsumerInfo);
   
   
 
