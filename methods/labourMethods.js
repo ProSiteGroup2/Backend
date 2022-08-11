@@ -81,6 +81,34 @@ var functions={
         }
     },
 
+    //update labor info from a token
+    updateLabourInfo: async(req,res)=>{
+        if(req.headers.authorization && req.headers.authorization.split(' ')[0]==='Bearer'){
+            var token=req.headers.authorization.split(' ')[1];
+            //console.log(token);
+            var decodedtoken=jwt.decode(token,config.secret);
+           
+            //console.log("user");
+            if(!req.body.username || !req.body.email || !req.body.contactNo || !req.body.address || !req.body.hometown|| !req.body.district||!req.body.experience || !req.body.profession|| !req.body.qualification || !req.body.password){
+                var labour = await Labour.findByIdAndUpdate(decodedtoken._id,req.body,{
+                    new :true,
+                    runValidators:true
+                });
+
+    
+                res.send({success:true, data:labour});
+            }
+            else{
+                res.send({success:false, msg:"missing fields"});
+            }
+            
+
+        }
+        else{
+            return res.send({success:false, msg:'No Headers'});
+        }
+    },
+
     //uploading the profile image of labour
     labourProfile:async (req,res)=>{
         const data=await uploadToCloudinary(req.file.path,"images");

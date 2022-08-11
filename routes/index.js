@@ -14,6 +14,7 @@ const appointmentMethods = require("../methods/appointmentMethods");
 const feedbackMethods = require("../methods/feedbackMethods");
 const carddetailsMethods = require("../methods/carddetailsMethods");
 
+
 const storage = multer.diskStorage({
     // destination: function (req, file, cb) {
     //   cb(null, "upload/");
@@ -105,7 +106,7 @@ const storage = multer.diskStorage({
   router.get('/getContractorInfo',contractorMethods.getContractorInfo);
 
   //getting Consumer info from token
-  router.get('/getConsumerInfo',consumerMethods.getConsumerInfo);
+  router.get('/getConsumerInfo',consumerMethods.getConsumerInfo); 
 
   //getting Labour info from token
   router.get('/getLabourInfo',labourMethods.getLabourInfo);
@@ -130,8 +131,17 @@ const storage = multer.diskStorage({
   //finding a consumer and returning the whole object
   router.get('/findConsumer/:email',consumerMethods.findConsumer);
 
+  //Update users
+  // ====================================================================================================================================================
+  router.put('/updateconsumerinfo',consumerMethods.updateConsumerInfo);
+
+  router.put('/updatecontractorinfo',contractorMethods.updateContractorInfo);
   
-  
+  router.put('/updatehardwareinfo',hardwareMethods.updateHardwareInfo);
+
+  router.put('/updatelabourinfo',labourMethods.updateLabourInfo);
+
+  router.put('/updatetransporterinfo',transporterMethods.updateTransporterInfo);
 
   //uploading images
   // ============================================================================================================================================

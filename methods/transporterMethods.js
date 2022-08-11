@@ -82,6 +82,34 @@ var functions={
         }
     },
 
+    //update consumer info from a token
+    updateTransporterInfo: async(req,res)=>{
+        if(req.headers.authorization && req.headers.authorization.split(' ')[0]==='Bearer'){
+            var token=req.headers.authorization.split(' ')[1];
+            //console.log(token);
+            var decodedtoken=jwt.decode(token,config.secret);
+           
+            //console.log("user");
+            if(!req.body.username || !req.body.email || !req.body.contactNo || !req.body.address || !req.body.hometown|| !req.body.district||!req.body.vehicle || !req.body.password){
+                var transporter = await Transporter.findByIdAndUpdate(decodedtoken._id,req.body,{
+                    new :true,
+                    runValidators:true
+                });
+
+    
+                res.send({success:true, data:transporter});
+            }
+            else{
+                res.send({success:false, msg:"missing fields"});
+            }
+            
+
+        }
+        else{
+            return res.send({success:false, msg:'No Headers'});
+        }
+    },
+
     //uploading the profile image of transporter
     transporterProfile:async (req,res)=>{
         const data=await uploadToCloudinary(req.file.path,"images");
