@@ -97,19 +97,19 @@ var functions={
                                     if(!transporter){
                                         res.status(403).send({success:false,msg:'Sorry!! Service Provider not found'});
                                     }else{
-                                        res.send({success:true,msg:"found the transporter "+transporter.username,sp:transporter});
+                                        res.send({success:true,msg:"found the transporter "+transporter.username,sp:transporter,role:"transporter"});
                                     }
                                 });
                             }else{
-                                res.send({success:true,msg:"found the hardware "+hardware.hardwarename, sp:hardware});
+                                res.send({success:true,msg:"found the hardware "+hardware.hardwarename, sp:hardware,role:"hardware"});
                             }
                         });
                     }else{
-                        res.send({success:true,msg:"found the contractor "+contractor.contractorname, sp:contractor});
+                        res.send({success:true,msg:"found the contractor "+contractor.contractorname, sp:contractor,role:"contractor"});
                     }
                 });
             }else{
-                res.send({success:true,msg:"found the labour "+labour.username,sp:labour});
+                res.send({success:true,msg:"found the labour "+labour.username,sp:labour,role:"labour"});
             }
            });
     },
