@@ -98,9 +98,9 @@ var functions={
             //console.log(token);
             var decodedtoken=jwt.decode(token,config.secret);
            
-            console.log("user");
-            if(!req.body.username || !req.body.email || !req.body.contactNo || !req.body.address || !req.body.hometown|| !req.body.district|| !req.body.password){
-                var user = await Consumer.findByIdAndUpdate(decodedtoken._id,req.body,{
+            //console.log("user");
+            if(!req.body.contractorname || !req.body.email || !req.body.contactNo || !req.body.address || !req.body.hometown|| !req.body.district||!req.body.regno || !req.body.no_of_workers|| !req.body.password){
+                var contractor = await Contractor.findByIdAndUpdate(decodedtoken._id,req.body,{
                     new :true,
                     runValidators:true
                 });
