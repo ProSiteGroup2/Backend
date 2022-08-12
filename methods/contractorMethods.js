@@ -51,7 +51,7 @@ var functions={
                                                     res.send({success:false,msg:'Failed to save'});
                                                 }
                                                 else{
-                                                    res.send({success:true,msg:'Successfully Saved'});
+                                                    res.send({success:true,msg:'Successfully Saved',contractor:newContractor});
                                                 }
                                             });
                                         }

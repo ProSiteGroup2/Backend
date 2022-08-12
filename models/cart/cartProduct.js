@@ -16,3 +16,6 @@ const cartProductSchema=new Schema({
         type:Number
     }
 });
+
+const CartProduct=mongoose.model('cartProduct',cartProductSchema);
+module.exports=CartProduct;
