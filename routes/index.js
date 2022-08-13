@@ -227,5 +227,7 @@ router.post('/addCartProduct/:id',cartMethods.addNewCartProduct);
 
 //adding a new cartn for a user
 router.post('/addCart/:id',cartMethods.addNewCart);
+
+
   
   module.exports=router;
