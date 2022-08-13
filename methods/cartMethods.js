@@ -1,5 +1,5 @@
-const CartProduct=require('../models/cart/cartProduct');
-const Cart=require('../models/cart/cart');
+const CartProduct=require('../models/Cart/cartProduct');
+const Cart=require('../models/Cart/cart');
 const Consumer= require('../models/consumer');
 const Contractor=require('../models/contractor');
 const Hardware=require('../models/hardware');
