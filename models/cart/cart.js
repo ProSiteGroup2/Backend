@@ -33,3 +33,6 @@ const CartSchema=new Schema({
     totalPrice:Number
 });
 
+const Cart=mongoose.model('cart',CartSchema);
+module.exports=Cart;
+

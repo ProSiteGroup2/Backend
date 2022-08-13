@@ -13,6 +13,7 @@ const productMethods = require("../methods/productMethods");
 const appointmentMethods = require("../methods/appointmentMethods");
 const feedbackMethods = require("../methods/feedbackMethods");
 const carddetailsMethods = require("../methods/carddetailsMethods");
+const cartMethods=require('../methods/cartMethods');
 
 const storage = multer.diskStorage({
     // destination: function (req, file, cb) {
@@ -216,9 +217,15 @@ const storage = multer.diskStorage({
   router.put('/transporterStatus/:email/:status',transporterMethods.transporterStatus);
 
   // product status
-
   router.put('/productStatus/:id/:status',productMethods.productStatus);
 
+//Cart methods
+// =================================================================================================================================================================================
 
+// adding a cartProduct
+router.post('/addCartProduct/:id',cartMethods.addNewCartProduct);
+
+//adding a new cartn for a user
+router.post('/addCart/:id',cartMethods.addNewCart);
   
   module.exports=router;
