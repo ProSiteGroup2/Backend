@@ -25,7 +25,8 @@
 		"passport": "^0.6.0",
 		"passport-jwt": "^4.0.0",
 		"path": "^0.12.7",
-		"shortid": "^2.2.16"
+		"shortid": "^2.2.16",
+		"shoutout-sdk": "^3.0.4"
 	},
 	"devDependencies": {
 		"nodemon": "^2.0.19"
