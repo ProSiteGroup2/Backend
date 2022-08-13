@@ -179,29 +179,62 @@ var functions={
                 });
             }
         });
-        
-        // if(!req.body.buyer_consumer && !req.body.buyer_contractor && !req.body.buyer_transporter && !req.body.buyer_labour){
-        //     res.send({success:false,msg:"Enter a user id"});
-        // }else{
-        //     var newCart=Cart({
-        //         buyer_consumer:req.body.buyer_consumer,
-        //         buyer_contractor:req.body.buyer_contractor,
-        //         buyer_labour:req.body.buyer_labour,
-        //         buyer_transporter:req.body.buyer_transporter,
-        //     });
-
-        //     newCart.save(function(err,newCart){
-        //         if(err){
-        //             res.send({success:false,msg:'Failed to create cart'});
-        //         }else{
-        //             res.send({success:true,msg:'cart created Successfully',cart:newCart});
-        //         }
-        //     });
-        // }
     },
 
     addProducttoCart:function(req,res){
-
+        Cart.findOne({buyer_consumer:req.params.id},function(err,consumer){
+            if(err) throw err;
+            if(consumer){
+                Cart.findOneAndUpdate({buyer_consumer:req.params.id},{$push:{cartProducts:req.body.cartProduct}},{new:true},function(err,cartitem){
+                    if(err){
+                        res.send({success:false,msg:"adding cart product failed"});
+                    }else{
+                        res.send({success:true,msg:"cart product added successfully",cartitem:cartitem})
+                    }
+                });
+            }else{
+                Cart.findOne({buyer_contractor:req.params.id},function(err,contractor){
+                    if(err) throw err;
+                    if(contractor){
+                        Cart.findOneAndUpdate({buyer_contractor:req.params.id},{$push:{cartProducts:req.body.cartProduct}},{new:true},function(err,cartitem){
+                            if(err){
+                                res.send({success:false,msg:"adding cart product failed"});
+                            }else{
+                                res.send({success:true,msg:"cart product added successfully",cartitem:cartitem})
+                            }
+                        });
+                    }else{
+                        Cart.findOne({buyer_labour:req.params.id},function(err,labour){
+                            if(err) throw err;
+                            if(labour){
+                                Cart.findOneAndUpdate({buyer_labour:req.params.id},{$push:{cartProducts:req.body.cartProduct}},{new:true},function(err,cartitem){
+                                    if(err){
+                                        res.send({success:false,msg:"adding cart product failed"});
+                                    }else{
+                                        res.send({success:true,msg:"cart product added successfully",cartitem:cartitem})
+                                    }
+                                });
+                            }else{
+                                Cart.findOne({buyer_transporter:req.params.id},function(err,transporter){
+                                    if(err) throw err;
+                                    if(transporter){
+                                        Cart.findOneAndUpdate({buyer_transporter:req.params.id},{$push:{cartProducts:req.body.cartProduct}},{new:true},function(err,cartitem){
+                                            if(err){
+                                                res.send({success:false,msg:"adding cart product failed"});
+                                            }else{
+                                                res.send({success:true,msg:"cart product added successfully",cartitem:cartitem})
+                                            }
+                                        });
+                                    }else{
+                                        res.send({success:false,msg:"Coudn't find the buyer"});
+                                    }
+                                });
+                            }
+                        });
+                    }
+                })
+            }
+        })
     }
 }
 
