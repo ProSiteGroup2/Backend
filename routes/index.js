@@ -230,5 +230,15 @@ const storage = multer.diskStorage({
   router.put('/productStatus/:id/:status',productMethods.productStatus);
 
 
+  // reset password
+  //=============================================================================================================================================================
+
+  router.post('/otpForgotPass',consumerMethods.otpForgotPass);
+
+  router.post('/otpVerify',consumerMethods.otpVerify);
+
+  router.post('/forgotPassword',consumerMethods.forgotPassword);
+
+
   
   module.exports=router;

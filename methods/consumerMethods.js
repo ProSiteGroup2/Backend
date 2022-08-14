@@ -3,6 +3,11 @@ const jwt=require('jwt-simple');
 const config=require('../config/dbconfig');
 const mongoose=require('mongoose');
 const {uploadToCloudinary}=require('../middleware/cloudinaryImage');
+const otpGenerator = require('otp-generator');
+const Otp= require('../models/otp');
+const bcrypt=require('bcrypt');
+const ShoutoutClient = require('shoutout-sdk')
+
 
 var functions={
 
@@ -39,11 +44,14 @@ var functions={
         });
     },
     otpForgotPass: async(req,res) => {
-        const account = await consumer.findOne({contactNo:req.body.contactNo, user_status:1});
-        if(!account) return res.status(400).json({success:false, msg:"Consumer nnot found!"});
+        const account = await Consumer.findOne({contactNo:req.body.contactNo});
+        if(!account) return res.status(400).json({success:false, msg:"Consumer not found!"});
         const OTP = otpGenerator.generate(4,{lowerCaseAlphabets:false, upperCaseAlphabets:false, specialChars:false});
         const number = req.body.contactNo;
+        const country_code = '94';
+        const code_with_number = country_code + number.substring(1);
         console.log(OTP);
+        console.log(code_with_number);
 
         const otp = new Otp({contactNo:number, otp: OTP});
         const salt = await bcrypt.genSalt(10)
@@ -51,12 +59,12 @@ var functions={
         const result = await otp.save();
 
         //send otp using shoutout
-        var apikey = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIxNGQxNGYyMC0xODA4LTExZWQtYjZjMy1mZmY3N2VkMzlhYmIiLCJzdWIiOiJTSE9VVE9VVF9BUElfVVNFUiIsImlhdCI6MTY2MDA2NTg1MCwiZXhwIjoxOTc1Njg1MDUwLCJzY29wZXMiOnsiYWN0aXZpdGllcyI6WyJyZWFkIiwid3JpdGUiXSwibWVzc2FnZXMiOlsicmVhZCIsIndyaXRlIl0sImNvbnRhY3RzIjpbInJlYWQiLCJ3cml0ZSJdfSwic29fdXNlcl9pZCI6IjczMjAwIiwic29fdXNlcl9yb2xlIjoidXNlciIsInNvX3Byb2ZpbGUiOiJhbGwiLCJzb191c2VyX25hbWUiOiIiLCJzb19hcGlrZXkiOiJub25lIn0.jVq83MI6WcwE8MlRpYNHvidl8_Ven3oOeOEvxMJGMzs;
+        var apikey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzYzhkYmFiMC0xYjQ4LTExZWQtYTQ4Yi04NzUxZmQ3YjQ1ZjUiLCJzdWIiOiJTSE9VVE9VVF9BUElfVVNFUiIsImlhdCI6MTY2MDQyMzI1OCwiZXhwIjoxOTc2MDQyNDU4LCJzY29wZXMiOnsiYWN0aXZpdGllcyI6WyJyZWFkIiwid3JpdGUiXSwibWVzc2FnZXMiOlsicmVhZCIsIndyaXRlIl0sImNvbnRhY3RzIjpbInJlYWQiLCJ3cml0ZSJdfSwic29fdXNlcl9pZCI6IjczMjMxIiwic29fdXNlcl9yb2xlIjoidXNlciIsInNvX3Byb2ZpbGUiOiJhbGwiLCJzb191c2VyX25hbWUiOiIiLCJzb19hcGlrZXkiOiJub25lIn0.5yaj6wxkxkjMTl3hkJq8aoSXX0FzKurGL640sBWx8_8';
         var debug = true, verifySSL = false;
         var client = new ShoutoutClient(apikey,debug,verifySSL);
         var message = {
             source: 'ShoutDEMO',
-            destinations: [number],
+            destinations: [code_with_number],
              content: {
                 sms: `yoor OTP is: ${OTP}`
              },
@@ -95,7 +103,7 @@ var functions={
     //forgot password
     forgotPassword:async(req,res) => {
         try{
-            consumer.findOne({contactNo:req.body.contactNo, user_status:1}).then(consumer =>{
+            Consumer.findOne({contactNo:req.body.contactNo}).then(consumer =>{
                 consumer.password = req.body.newPassword;
                 consumer.save();
                 res.status(200).json({success: true, msg:"Password change successfully"});
