@@ -14,7 +14,6 @@ const appointmentMethods = require("../methods/appointmentMethods");
 const feedbackMethods = require("../methods/feedbackMethods");
 const carddetailsMethods = require("../methods/carddetailsMethods");
 
-
 const storage = multer.diskStorage({
     // destination: function (req, file, cb) {
     //   cb(null, "upload/");
@@ -229,16 +228,8 @@ const storage = multer.diskStorage({
 
   router.put('/productStatus/:id/:status',productMethods.productStatus);
 
-
-  // reset password
-  //=============================================================================================================================================================
-
-  router.post('/otpForgotPass',consumerMethods.otpForgotPass);
-
-  router.post('/otpVerify',consumerMethods.otpVerify);
-
-  router.post('/forgotPassword',consumerMethods.forgotPassword);
-
+// delete cart products of a single user
+router.delete('/deleteCartProduct/:id',cartMethods.deleteCartProducts);
 
   
   module.exports=router;
