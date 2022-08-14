@@ -231,6 +231,13 @@ router.post('/addCart/:id',cartMethods.addNewCart);
 // add products to cart
 router.put('/addCartItem/:id',cartMethods.addProducttoCart);
 
+//get cart items using a user id
+router.get('/getCartItem/:id',cartMethods.getCartItems);
 
+// delete cart products of a single user
+router.delete('/deleteCartProduct/:id',cartMethods.deleteCartProducts);
+
+// delete products in a cart item
+router.put('/deleteProductsinCart/:id',cartMethods.deleteProductsinCart);
   
   module.exports=router;

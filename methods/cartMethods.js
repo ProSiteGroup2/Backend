@@ -101,6 +101,7 @@ var functions={
         });
     },
 
+    // Create a cart for a user
     addNewCart:function(req,res){
         Consumer.findById({_id:req.params.id},function(err,consumer){
             if(err) throw err;
@@ -181,6 +182,7 @@ var functions={
         });
     },
 
+    // add a product to the cart
     addProducttoCart:function(req,res){
         Cart.findOne({buyer_consumer:req.params.id},function(err,consumer){
             if(err) throw err;
@@ -235,6 +237,166 @@ var functions={
                 })
             }
         })
+    },
+
+    // Get a cart record from a user id
+    getCartItems:function(req,res){
+        Cart.findOne({buyer_consumer:req.params.id},function(err,cartitem){
+            if(err) throw err;
+            if(cartitem){
+                res.send({success:true,msg:"Cart Item found",cartitem:cartitem});
+            }else{
+                Cart.findOne({buyer_contractor:req.params.id},function(err,cartitem){
+                    if(err) throw err;
+                    if(cartitem){
+                        res.send({success:true,msg:"Cart Item found",cartitem:cartitem});
+                    }else{
+                        Cart.findOne({buyer_labour:req.params.id},function(err,cartitem){
+                            if(err) throw err;
+                            if(cartitem){
+                                res.send({success:true,msg:"Cart Item found",cartitem:cartitem});
+                            }else{
+                                Cart.findOne({buyer_transporter:req.params.id},function(err,cartitem){
+                                    if(err) throw err;
+                                    if(cartitem){
+                                        res.send({success:true,msg:"Cart Item found",cartitem:cartitem});
+                                    }else{
+                                        res.send({success:false,msg:"Entered user Id is invalid"});
+                                    }
+                                });
+                            }
+                        });  
+                    }
+                });
+            }
+        });
+    },
+
+    // Delete cart products by user id
+    deleteCartProducts:function(req,res){
+        CartProduct.find({buyer_consumer:req.params.id},function(err,cartproducts){
+            if(err) throw err;
+            if(cartproducts.length!=0){
+                CartProduct.deleteMany({buyer_consumer:req.params.id},function(err){
+                    if(err){
+                        res.send({success:false,msg:"cart products deletion failed"})
+                    }else{
+                        res.send({success:true,msg:"cart products deletion successful"})
+                    }
+                });
+            }else{
+                CartProduct.find({buyer_contractor:req.params.id},function(err,cartproducts){
+                    if(err) throw err;
+                    if(cartproducts.length!=0){
+                        CartProduct.deleteMany({buyer_contractor:req.params.id},function(err){
+                            if(err){
+                                res.send({success:false,msg:"cart products deletion failed"})
+                            }else{
+                                res.send({success:true,msg:"cart products deletion successful"})
+                            }
+                        });
+                    }else{
+                        CartProduct.find({buyer_labour:req.params.id},function(err,cartproducts){
+                            if(err) throw err;
+                            if(cartproducts.length!=0){
+                                CartProduct.deleteMany({buyer_labour:req.params.id},function(err){
+                                    if(err){
+                                        res.send({success:false,msg:"cart products deletion failed"})
+                                    }else{
+                                        res.send({success:true,msg:"cart products deletion successful"})
+                                    }
+                                });
+                            }else{
+                                CartProduct.find({buyer_transporter:req.params.id},function(err,cartproducts){
+                                    if(err) throw err;
+                                    if(cartproducts.length!=0){
+                                        CartProduct.deleteMany({buyer_transporter:req.params.id},function(err){
+                                            if(err){
+                                                res.send({success:false,msg:"cart products deletion failed"})
+                                            }else{
+                                                res.send({success:true,msg:"cart products deletion successful"})
+                                            }
+                                        });
+                                    }else{
+                                        res.send({success:false,msg:"Entered user id is invald or Coudn't find the cart products"});
+                                    }
+                                }); 
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    },
+
+
+    // delete added products in cart
+    deleteProductsinCart:function(req,res){
+        Cart.findOne({buyer_consumer:req.params.id},function(err,cartitem){
+            if(err) {
+                res.send({success:false,msg:"An error occured"});
+                console.log(err);
+            }
+            if(cartitem){
+                Cart.findOneAndUpdate({buyer_consumer:req.params.id},{$set:{cartProducts:[]}},{new:true},function(err,cartitem){
+                    if(err){
+                        res.send({success:false,msg:"An error occured"});
+                    }else{
+                        res.send({success:true,msg:"products in the cart deleted successfully",cartitem:cartitem});
+                    }
+                });
+            }else{
+                Cart.findOne({buyer_contractor:req.params.id},function(err,cartitem){
+                    if(err) {
+                        res.send({success:false,msg:"An error occured"});
+                        console.log(err);
+                    }
+                    if(cartitem){
+                        Cart.findOneAndUpdate({buyer_contractor:req.params.id},{$set:{cartProducts:[]}},{new:true},function(err,cartitem){
+                            if(err){
+                                res.send({success:false,msg:"An error occured"});
+                            }else{
+                                res.send({success:true,msg:"products in the cart deleted successfully",cartitem:cartitem});
+                            }
+                        });
+                    }else{
+                        Cart.findOne({buyer_labour:req.params.id},function(err,cartitem){
+                            if(err) {
+                                res.send({success:false,msg:"An error occured"});
+                                console.log(err);
+                            }
+                            if(cartitem){
+                                Cart.findOneAndUpdate({buyer_labour:req.params.id},{$set:{cartProducts:[]}},{new:true},function(err,cartitem){
+                                    if(err){
+                                        res.send({success:false,msg:"An error occured"});
+                                    }else{
+                                        res.send({success:true,msg:"products in the cart deleted successfully",cartitem:cartitem});
+                                    }
+                                });
+                            }else{
+                                Cart.findOne({buyer_transporter:req.params.id},function(err,cartitem){
+                                    if(err) {
+                                        res.send({success:false,msg:"An error occured"});
+                                        console.log(err);
+                                    }
+                                    if(cartitem){
+                                        Cart.findOneAndUpdate({buyer_transporter:req.params.id},{$set:{cartProducts:[]}},{new:true},function(err,cartitem){
+                                            if(err){
+                                                res.send({success:false,msg:"An error occured"});
+                                            }else{
+                                                res.send({success:true,msg:"products in the cart deleted successfully",cartitem:cartitem});
+                                            }
+                                        });
+                                    }else{
+                                        res.send({success:false,msg:"Coudn't find the cart item"});
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
     }
 }
 
