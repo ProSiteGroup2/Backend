@@ -225,5 +225,33 @@ const storage = multer.diskStorage({
   router.post('/forgotPassword',consumerMethods.forgotPassword);
 
 
+  router.post('/otpForgotPass',hardwareMethods.otpForgotPass);
+
+  router.post('/otpVerify',hardwareMethods.otpVerify);
+
+  router.post('/forgotPassword',hardwareMethods.forgotPassword);
+
+
+  router.post('/otpForgotPass',contractorMethods.otpForgotPass);
+
+  router.post('/otpVerify',contractorMethods.otpVerify);
+
+  router.post('/forgotPassword',contractorMethods.forgotPassword);
+
+
+  router.post('/otpForgotPass',labourMethods.otpForgotPass);
+
+  router.post('/otpVerify',labourMethods.otpVerify);
+
+  router.post('/forgotPassword',labourMethods.forgotPassword);
+
+
+  router.post('/otpForgotPass',transporterMethods.otpForgotPass);
+
+  router.post('/otpVerify',transporterMethods.otpVerify);
+
+  router.post('/forgotPassword',transporterMethods.forgotPassword);
+
+
   
   module.exports=router;
