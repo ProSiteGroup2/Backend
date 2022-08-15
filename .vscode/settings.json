@@ -3,6 +3,7 @@
 		"appointmentdate",
 		"appointmenttime",
 		"carddetails",
+		"cartproducts",
 		"cloudinary",
 		"consumerid",
 		"productname",

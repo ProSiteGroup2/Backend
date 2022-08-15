@@ -13,251 +13,234 @@ const productMethods = require("../methods/productMethods");
 const appointmentMethods = require("../methods/appointmentMethods");
 const feedbackMethods = require("../methods/feedbackMethods");
 const carddetailsMethods = require("../methods/carddetailsMethods");
+const cartMethods = require("../methods/cartMethods");
 
 const storage = multer.diskStorage({
-    // destination: function (req, file, cb) {
-    //   cb(null, "upload/");
-    // },
-    // filename: function (req, file, cb) {
-    //   cb(null, shortid.generate() + "-" + file.originalname);
-    // },  
-  });
-  
-  //upload parameters for multer
-  const upload=multer({
-    storage:storage
-  });
-  
-  //http requests get,post,update,delete
+	// destination: function (req, file, cb) {
+	//   cb(null, "upload/");
+	// },
+	// filename: function (req, file, cb) {
+	//   cb(null, shortid.generate() + "-" + file.originalname);
+	// },
+});
 
-  router.get('/',(req,res)=>{
-    res.send('hello World');
-  });
+//upload parameters for multer
+const upload = multer({
+	storage: storage,
+});
 
-  // Add Product and Users and card
-  // ============================================================================================================================================================
-  
-  //add a new Consumer
-  router.post('/addConsumer', consumerMethods.addNewConsumer);
-  
-  //add a new Labour
-  router.post('/addLabour',labourMethods.addNewLabour);
-  
-  //add a new Hardware
-  router.post('/addHardware',hardwareMethods.addNewHardware);
-  
-  //add a new Contractor
-  router.post('/addContractor',contractorMethods.addNewContractor);
-  
-  //add a new Transporter
-  router.post('/addTransporter',transporterMethods.addNewTransporter);
-  
-  //add a new Product
-  router.post('/addProduct',productMethods.addNewProduct);
+//http requests get,post,update,delete
 
-  //add a new card
-  router.post('/addCard',carddetailsMethods.addNewCard);
+router.get("/", (req, res) => {
+	res.send("hello World");
+});
 
+// Add Product and Users and card
+// ============================================================================================================================================================
 
+//add a new Consumer
+router.post("/addConsumer", consumerMethods.addNewConsumer);
 
-  //Adding Feedbacks, Appointment
-  // ======================================================================================================================================================================
+//add a new Labour
+router.post("/addLabour", labourMethods.addNewLabour);
 
-  //add a new Appointment
-  router.post('/addAppointment',appointmentMethods.addNewAppointment);
+//add a new Hardware
+router.post("/addHardware", hardwareMethods.addNewHardware);
 
-  //add a new Feedback
-  router.post('/addFeedback',feedbackMethods.addNewFeedback); 
+//add a new Contractor
+router.post("/addContractor", contractorMethods.addNewContractor);
 
+//add a new Transporter
+router.post("/addTransporter", transporterMethods.addNewTransporter);
 
-  //Retrieving feedbacks,Appointmnets
-  // ==============================================================================================================================================================
+//add a new Product
+router.post("/addProduct", productMethods.addNewProduct);
 
-  router.get('/getFeedback/:email',feedbackMethods.getFeedback);
+//add a new card
+router.post("/addCard", carddetailsMethods.addNewCard);
 
-  router.get('/getConsumerPastAppointments/:id',appointmentMethods.getConsumerPastAppointments);
+//Adding Feedbacks, Appointment
+// ======================================================================================================================================================================
 
-  router.get('/getConsumerUpcomingAppointments/:id',appointmentMethods.getConsumerUpcomingAppointments);
+//add a new Appointment
+router.post("/addAppointment", appointmentMethods.addNewAppointment);
 
-  router.get('/getSPPastAppointments/:email',appointmentMethods.getSPPastAppointments);
+//add a new Feedback
+router.post("/addFeedback", feedbackMethods.addNewFeedback);
 
-  router.get('/getSPUpcomingAppointments/:email',appointmentMethods.getSPUpcomingAppointments);
+//Retrieving feedbacks,Appointmnets
+// ==============================================================================================================================================================
 
+router.get("/getFeedback/:email", feedbackMethods.getFeedback);
 
+router.get("/getConsumerPastAppointments/:id", appointmentMethods.getConsumerPastAppointments);
 
+router.get("/getConsumerUpcomingAppointments/:id", appointmentMethods.getConsumerUpcomingAppointments);
 
-  //Authentication
-  // =====================================================================================================================================================
-  
-  //authentication of a consumer
-  router.post('/consumerLogin', consumerMethods.authenticateConsumer);
+router.get("/getSPPastAppointments/:email", appointmentMethods.getSPPastAppointments);
 
-  //authentication of SP
-  router.post('/SPLogin',actions.authenticateSP);
+router.get("/getSPUpcomingAppointments/:email", appointmentMethods.getSPUpcomingAppointments);
 
-  //Get Info
-  // ==============================================================================================================================================
-  
-  //getting SP info from token
-  //router.get('/getSPInfo',actions.getSPInfo);
+//Authentication
+// =====================================================================================================================================================
 
-  //getting Contractor info from token
-  router.get('/getContractorInfo',contractorMethods.getContractorInfo);
+//authentication of a consumer
+router.post("/consumerLogin", consumerMethods.authenticateConsumer);
 
-  //getting Consumer info from token
-  router.get('/getConsumerInfo',consumerMethods.getConsumerInfo); 
+//authentication of SP
+router.post("/SPLogin", actions.authenticateSP);
 
-  //getting Labour info from token
-  router.get('/getLabourInfo',labourMethods.getLabourInfo);
+//Get Info
+// ==============================================================================================================================================
 
-  //getting Hardware info from token
-  router.get('/getHardwareInfo',hardwareMethods.getHardwareInfo);
+//getting SP info from token
+//router.get('/getSPInfo',actions.getSPInfo);
 
-  //getting Transporter info from token
-  router.get('/getTransporterInfo',transporterMethods.getTransporterInfo);
+//getting Contractor info from token
+router.get("/getContractorInfo", contractorMethods.getContractorInfo);
 
-  //get product info
-  router.get('/getProductInfo/:id',productMethods.getProductInfo);
+//getting Consumer info from token
+router.get("/getConsumerInfo", consumerMethods.getConsumerInfo);
 
+//getting Labour info from token
+router.get("/getLabourInfo", labourMethods.getLabourInfo);
 
+//getting Hardware info from token
+router.get("/getHardwareInfo", hardwareMethods.getHardwareInfo);
 
-  //Find Users
-  // ====================================================================================================================================================
+//getting Transporter info from token
+router.get("/getTransporterInfo", transporterMethods.getTransporterInfo);
 
-  //finding a service provider and returning the whole object
-  router.get('/findSP/:email',actions.findSP);
+//get product info
+router.get("/getProductInfo/:id", productMethods.getProductInfo);
 
-  //finding a consumer and returning the whole object
-  router.get('/findConsumer/:email',consumerMethods.findConsumer);
+//Find Users
+// ====================================================================================================================================================
 
-  //Update users
-  // ====================================================================================================================================================
-  router.put('/updateconsumerinfo',consumerMethods.updateConsumerInfo);
+//finding a service provider and returning the whole object
+router.get("/findSP/:email", actions.findSP);
 
-  router.put('/updatecontractorinfo',contractorMethods.updateContractorInfo);
-  
-  router.put('/updatehardwareinfo',hardwareMethods.updateHardwareInfo);
+//finding a consumer and returning the whole object
+router.get("/findConsumer/:email", consumerMethods.findConsumer);
 
-  router.put('/updatelabourinfo',labourMethods.updateLabourInfo);
+//Update users
+// ====================================================================================================================================================
+router.put("/updateconsumerinfo", consumerMethods.updateConsumerInfo);
 
-  router.put('/updatetransporterinfo',transporterMethods.updateTransporterInfo);
+router.put("/updatecontractorinfo", contractorMethods.updateContractorInfo);
 
-  //uploading images
-  // ============================================================================================================================================
-  
-  //uploading profile images
-  router.put('/consumerProfile/:email',upload.single('profile'),consumerMethods.consumerProfile);
-  
-  router.put('/contractorProfile/:email',upload.single('profile'),contractorMethods.contractorProfile);
-  
-  router.put('/hardwareProfile/:email',upload.single('profile'),hardwareMethods.hardwareProfile);
-  
-  router.put('/labourProfile/:email',upload.single('profile'),labourMethods.labourProfile);
-  
-  router.put('/transporterProfile/:email',upload.single('profile'),transporterMethods.transporterProfile);
+router.put("/updatehardwareinfo", hardwareMethods.updateHardwareInfo);
 
-  // uploading product image
-  router.put('/productImage/:id',upload.single('image'),productMethods.productImage);
+router.put("/updatelabourinfo", labourMethods.updateLabourInfo);
 
-  
-  //Getting all the records in a table
-  // =========================================================================================================================================================
+router.put("/updatetransporterinfo", transporterMethods.updateTransporterInfo);
 
-  router.get('/getContractors',contractorMethods.getContractors);
+//uploading images
+// ============================================================================================================================================
 
-  router.get('/getLabours',labourMethods.getLabours);
+//uploading profile images
+router.put("/consumerProfile/:email", upload.single("profile"), consumerMethods.consumerProfile);
 
-  router.get('/getHardwares',hardwareMethods.getHardwares);
+router.put("/contractorProfile/:email", upload.single("profile"), contractorMethods.contractorProfile);
 
-  router.get('/getTransporters',transporterMethods.getTransporters);
+router.put("/hardwareProfile/:email", upload.single("profile"), hardwareMethods.hardwareProfile);
 
-  router.get('/getProducts',productMethods.getProducts);
+router.put("/labourProfile/:email", upload.single("profile"), labourMethods.labourProfile);
 
+router.put("/transporterProfile/:email", upload.single("profile"), transporterMethods.transporterProfile);
 
-  //Getting Labours by profession
-  // =================================================================================================================================================================
+// uploading product image
+router.put("/productImage/:id", upload.single("image"), productMethods.productImage);
 
-  router.get('/getMason',labourMethods.getMason);
+//Getting all the records in a table
+// =========================================================================================================================================================
 
-  router.get('/getElectrician',labourMethods.getElectrician);
+router.get("/getContractors", contractorMethods.getContractors);
 
-  router.get('/getPainter',labourMethods.getPainter);
+router.get("/getLabours", labourMethods.getLabours);
 
-  router.get('/getArchitecturer',labourMethods.getArchitecturer);
+router.get("/getHardwares", hardwareMethods.getHardwares);
 
-  router.get('/getCarpenter',labourMethods.getCarpenter);
+router.get("/getTransporters", transporterMethods.getTransporters);
 
-  router.get('/getPlumber',labourMethods.getPlumber);
+router.get("/getProducts", productMethods.getProducts);
 
+//Getting Labours by profession
+// =================================================================================================================================================================
 
+router.get("/getMason", labourMethods.getMason);
 
-  // Getting products by Category
-  // ==============================================================================================================================================================
+router.get("/getElectrician", labourMethods.getElectrician);
 
-  // get cement products
-  router.get('/getCementProduct',productMethods.getCementProduct);
+router.get("/getPainter", labourMethods.getPainter);
 
-  // get bricks products
-  router.get('/getBricksProduct',productMethods.getBricksProduct);
+router.get("/getArchitecturer", labourMethods.getArchitecturer);
 
-  // get steel products
-  router.get('/getSteelProduct',productMethods.getSteelProduct);
+router.get("/getCarpenter", labourMethods.getCarpenter);
 
-  // get sand products
-  router.get('/getSandProduct',productMethods.getSandProduct);
+router.get("/getPlumber", labourMethods.getPlumber);
 
-  //Get hardware products
-  // ============================================================================================================================================================
-  router.get('/getHardwareProduct/:seller_id',productMethods.getHardwareProduct);
+// Getting products by Category
+// ==============================================================================================================================================================
 
+// get cement products
+router.get("/getCementProduct", productMethods.getCementProduct);
 
-  // set status for users and products
-  // ====================================================================================================================================================
+// get bricks products
+router.get("/getBricksProduct", productMethods.getBricksProduct);
 
-  router.put('/consumerStatus/:email/:status',consumerMethods.consumerStatus);
+// get steel products
+router.get("/getSteelProduct", productMethods.getSteelProduct);
 
-  router.put('/contractorStatus/:email/:status',contractorMethods.contractorStatus);
+// get sand products
+router.get("/getSandProduct", productMethods.getSandProduct);
 
-  router.put('/labourStatus/:email/:status',labourMethods.labourStatus);
+//Get hardware products
+// ============================================================================================================================================================
+router.get("/getHardwareProduct/:seller_id", productMethods.getHardwareProduct);
 
-  router.put('/hardwareStatus/:email/:status',hardwareMethods.hardwareStatus);
+// set status for users and products
+// ====================================================================================================================================================
 
-  router.put('/transporterStatus/:email/:status',transporterMethods.transporterStatus);
+router.put("/consumerStatus/:email/:status", consumerMethods.consumerStatus);
 
-  // product status
+router.put("/contractorStatus/:email/:status", contractorMethods.contractorStatus);
 
-  router.put('/productStatus/:id/:status',productMethods.productStatus);
+router.put("/labourStatus/:email/:status", labourMethods.labourStatus);
+
+router.put("/hardwareStatus/:email/:status", hardwareMethods.hardwareStatus);
+
+router.put("/transporterStatus/:email/:status", transporterMethods.transporterStatus);
+
+// product status
+
+router.put("/productStatus/:id/:status", productMethods.productStatus);
 
 // delete cart products of a single user
-router.delete('/deleteCartProduct/:id',cartMethods.deleteCartProducts);
+router.delete("/deleteCartProduct/:id", cartMethods.deleteCartProducts);
 
-  router.post('/otpForgotPass',hardwareMethods.otpForgotPass);
+router.post("/otpForgotPass", hardwareMethods.otpForgotPass);
 
-  router.post('/otpVerify',hardwareMethods.otpVerify);
+router.post("/otpVerify", hardwareMethods.otpVerify);
 
-  router.post('/forgotPassword',hardwareMethods.forgotPassword);
+router.post("/forgotPassword", hardwareMethods.forgotPassword);
 
+router.post("/otpForgotPass", contractorMethods.otpForgotPass);
 
-  router.post('/otpForgotPass',contractorMethods.otpForgotPass);
+router.post("/otpVerify", contractorMethods.otpVerify);
 
-  router.post('/otpVerify',contractorMethods.otpVerify);
+router.post("/forgotPassword", contractorMethods.forgotPassword);
 
-  router.post('/forgotPassword',contractorMethods.forgotPassword);
+router.post("/otpForgotPass", labourMethods.otpForgotPass);
 
+router.post("/otpVerify", labourMethods.otpVerify);
 
-  router.post('/otpForgotPass',labourMethods.otpForgotPass);
+router.post("/forgotPassword", labourMethods.forgotPassword);
 
-  router.post('/otpVerify',labourMethods.otpVerify);
+router.post("/otpForgotPass", transporterMethods.otpForgotPass);
 
-  router.post('/forgotPassword',labourMethods.forgotPassword);
+router.post("/otpVerify", transporterMethods.otpVerify);
 
+router.post("/forgotPassword", transporterMethods.forgotPassword);
 
-  router.post('/otpForgotPass',transporterMethods.otpForgotPass);
-
-  router.post('/otpVerify',transporterMethods.otpVerify);
-
-  router.post('/forgotPassword',transporterMethods.forgotPassword);
-
-
-  
-  module.exports=router;
+module.exports = router;

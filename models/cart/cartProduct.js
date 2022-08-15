@@ -1,42 +1,41 @@
-const mongoose=require('mongoose');
-const Schema=mongoose.Schema;
-const Product=require('../product');
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+const Product = require("../product");
 
-const cartProductSchema=new Schema({
+const cartProductSchema = new Schema({
+	buyer_consumer: {
+		type: Schema.Types.ObjectId,
+		ref: "consumer",
+	},
 
-    buyer_consumer:{
-        type: Schema.Types.ObjectId,
-        ref: 'consumer'
-    },
+	buyer_labour: {
+		type: Schema.Types.ObjectId,
+		ref: "labour",
+	},
 
-    buyer_labour:{
-        type: Schema.Types.ObjectId,
-        ref: 'labour'
-    },
+	buyer_transporter: {
+		type: Schema.Types.ObjectId,
+		ref: "transporter",
+	},
 
-    buyer_transporter:{
-        type: Schema.Types.ObjectId,
-        ref: 'transporter'
-    },
+	buyer_contractor: {
+		type: Schema.Types.ObjectId,
+		ref: "contractor",
+	},
 
-    buyer_contractor:{
-        type: Schema.Types.ObjectId,
-        ref: 'contractor'
-    },
-    
-    product:{
-        type: Schema.Types.ObjectId,
-        ref: 'product'
-    },
+	product: {
+		type: Schema.Types.ObjectId,
+		ref: "product",
+	},
 
-    quantity:{
-        type:Number
-    },
+	quantity: {
+		type: Number,
+	},
 
-    price:{
-        type:Number
-    }
+	price: {
+		type: Number,
+	},
 });
 
-const CartProduct=mongoose.model('cartProduct',cartProductSchema);
-module.exports=CartProduct;
+const CartProduct = mongoose.model("cartproduct", cartProductSchema);
+module.exports = CartProduct;
