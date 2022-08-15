@@ -5,6 +5,7 @@ const Contractor=require('../models/contractor');
 const Hardware=require('../models/hardware');
 const Labour=require('../models/labour');
 const Transporter=require('../models/transporter');
+const { populate } = require('../models/hardware');
 
 var functions={
 
@@ -263,13 +264,13 @@ var functions={
                                     }else{
                                         res.send({success:false,msg:"Entered user Id is invalid"});
                                     }
-                                });
+                                }).populate({path:"cartProducts",populate:{path:"product"}});
                             }
-                        });  
+                        }).populate({path:"cartProducts",populate:{path:"product"}});  
                     }
-                });
+                }).populate({path:"cartProducts",populate:{path:"product"}});
             }
-        });
+        }).populate({path:"cartProducts",populate:{path:"product"}});
     },
 
     // Delete cart products by user id
