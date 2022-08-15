@@ -263,13 +263,13 @@ var functions={
                                     }else{
                                         res.send({success:false,msg:"Entered user Id is invalid"});
                                     }
-                                });
+                                }).populate("cartProducts");
                             }
-                        });  
+                        }).populate("cartProducts");  
                     }
-                });
+                }).populate("cartProducts");
             }
-        });
+        }).populate("cartProducts");
     },
 
     // Delete cart products by user id
