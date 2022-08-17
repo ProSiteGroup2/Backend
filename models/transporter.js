@@ -91,6 +91,10 @@ transporterSchema.methods.comparePassword= function(passw,cb){
     });
 };
 
+//comparing the password while changing password
+transporterSchema.methods.comparePasswordChanging=async function(passw) {
+    return await bcrypt.compare(passw,this.password);
+};
 
 //export transporter
 const Transporter=mongoose.model('transporter',transporterSchema);
