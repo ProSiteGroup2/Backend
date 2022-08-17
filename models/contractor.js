@@ -90,6 +90,11 @@ contractorSchema.methods.comparePassword= function(passw,cb){
     });
 };
 
+//comparing the password while changing password
+contractorSchema.methods.comparePasswordChanging=async function(passw) {
+    return await bcrypt.compare(passw,this.password);
+};
+
 //export contractor
 const Contractor=mongoose.model('contractor',contractorSchema);
 module.exports=Contractor;
