@@ -135,6 +135,34 @@ router.put("/updatelabourinfo", labourMethods.updateLabourInfo);
 
 router.put("/updatetransporterinfo", transporterMethods.updateTransporterInfo);
 
+//Change password of users
+// ====================================================================================================================================================
+router.put("/changeConsumerPw", consumerMethods.changeConsumerPw);
+router.put("/changeHardwarePw", hardwareMethods.changeHardwarePw);
+router.put("/changeContractorPw", contractorMethods.changeContractorPw);
+router.put("/changeTransporterPw", transporterMethods.changeTransporterPw);
+
+//Change password of users
+// ====================================================================================================================================================
+router.put("/changeConsumerPw", consumerMethods.changeConsumerPw);
+router.put("/changeHardwarePw", hardwareMethods.changeHardwarePw);
+router.put("/changeContractorPw", contractorMethods.changeContractorPw);
+router.put("/changeTransporterPw", transporterMethods.changeTransporterPw);
+
+//Change password of users
+// ====================================================================================================================================================
+router.put("/changeConsumerPw", consumerMethods.changeConsumerPw);
+router.put("/changeHardwarePw", hardwareMethods.changeHardwarePw);
+router.put("/changeContractorPw", contractorMethods.changeContractorPw);
+router.put("/changeTransporterPw", transporterMethods.changeTransporterPw);
+
+//Change password of users
+// ====================================================================================================================================================
+router.put("/changeConsumerPw", consumerMethods.changeConsumerPw);
+router.put("/changeHardwarePw", hardwareMethods.changeHardwarePw);
+router.put("/changeContractorPw", contractorMethods.changeContractorPw);
+router.put("/changeTransporterPw", transporterMethods.changeTransporterPw);
+
 //uploading images
 // ============================================================================================================================================
 
@@ -161,6 +189,8 @@ router.get("/getLabours", labourMethods.getLabours);
 
 router.get("/getHardwares", hardwareMethods.getHardwares);
 
+router.get("/getHardwares", hardwareMethods.getHardwares);
+
 router.get("/getTransporters", transporterMethods.getTransporters);
 
 router.get("/getProducts", productMethods.getProducts);
@@ -169,6 +199,10 @@ router.get("/getProducts", productMethods.getProducts);
 // =================================================================================================================================================================
 
 router.get("/getMason", labourMethods.getMason);
+
+router.get("/getElectrician", labourMethods.getElectrician);
+
+router.get("/getPainter", labourMethods.getPainter);
 
 router.get("/getElectrician", labourMethods.getElectrician);
 

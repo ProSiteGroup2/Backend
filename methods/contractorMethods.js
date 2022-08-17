@@ -185,6 +185,29 @@ var functions={
                 }
             },
 
+    //Change password of contractor
+    changeContractorPw:async (req,res)=>{
+        if(req.headers.authorization && req.headers.authorization.split(' ')[0]==='Bearer'){
+            var token=req.headers.authorization.split(' ')[1];
+            var decodedtoken=jwt.decode(token,config.secret);
+            var contractor = await Contractor.findById(decodedtoken._id);
+
+           
+            if(!(await contractor.comparePasswordChanging(req.body.password))){
+                res.json({success:false,err:'Password not match'});
+            }
+            else{
+                contractor.password =req.body.newPassword;
+                await contractor.save();
+                res.json({success:true,msg:'sucessfuly change password'});
+            }
+
+        }
+
+    },
+            
+
+
             //get all the contractors
             getContractors:function(req,res){
                 Contractor.find().exec(function(err,contractors){

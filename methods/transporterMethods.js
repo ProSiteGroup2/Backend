@@ -185,6 +185,27 @@ var functions={
         }
     },
 
+    //Change password of transporter
+    changeTransporterPw:async (req,res)=>{
+        if(req.headers.authorization && req.headers.authorization.split(' ')[0]==='Bearer'){
+            var token=req.headers.authorization.split(' ')[1];
+            var decodedtoken=jwt.decode(token,config.secret);
+            var Transporter = await Transporter.findById(decodedtoken._id);
+
+           
+            if(!(await Transporter.comparePasswordChanging(req.body.password))){
+                res.json({success:false,err:'Password not match'});
+            }
+            else{
+                Transporter.password =req.body.newPassword;
+                await Transporter.save();
+                res.json({success:true,msg:'sucessfuly change password'});
+            }
+
+        }
+
+    },
+
     //uploading the profile image of transporter
     transporterProfile:async (req,res)=>{
         const data=await uploadToCloudinary(req.file.path,"images");

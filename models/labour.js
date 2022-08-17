@@ -93,5 +93,10 @@ labourSchema.methods.comparePassword= function(passw,cb){
     });
 };
 
+//comparing the password while changing password
+labourSchema.methods.comparePasswordChanging=async function(passw) {
+    return await bcrypt.compare(passw,this.password);
+};
+
 const Labour=mongoose.model('labour',labourSchema);
 module.exports=Labour;

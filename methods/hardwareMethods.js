@@ -184,6 +184,27 @@ var functions={
         }
     },
 
+    //Change password of hardware
+    changeHardwarePw:async (req,res)=>{
+        if(req.headers.authorization && req.headers.authorization.split(' ')[0]==='Bearer'){
+            var token=req.headers.authorization.split(' ')[1];
+            var decodedtoken=jwt.decode(token,config.secret);
+            var hardware = await Hardware.findById(decodedtoken._id);
+
+           
+            if(!(await hardware.comparePasswordChanging(req.body.password))){
+                res.json({success:false,err:'Password not match'});
+            }
+            else{
+                hardware.password =req.body.newPassword;
+                await hardware.save();
+                res.json({success:true,msg:'sucessfuly change password'});
+            }
+
+        }
+
+    },
+
     //uploading the profile image of hardware
     hardwareProfile:async (req,res)=>{
         const data=await uploadToCloudinary(req.file.path,"images");

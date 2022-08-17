@@ -144,7 +144,7 @@ var functions={
             var decodedtoken=jwt.decode(token,config.secret);
             // console.lsog(decodedtoken);
             req.user=await Consumer.findById(decodedtoken._id);
-
+            
             console.log(req.user);
             return res.send({success:true, msg: 'Hello '+decodedtoken.username,consumer:req.user});
         }
@@ -180,6 +180,28 @@ var functions={
         else{
             return res.send({success:false, msg:'No Headers'});
         }
+    },
+
+
+    //Change password of consumer
+    changeConsumerPw:async (req,res)=>{
+        if(req.headers.authorization && req.headers.authorization.split(' ')[0]==='Bearer'){
+            var token=req.headers.authorization.split(' ')[1];
+            var decodedtoken=jwt.decode(token,config.secret);
+            var user = await Consumer.findById(decodedtoken._id);
+
+           
+            if(!(await user.comparePasswordChanging(req.body.password))){
+                res.json({success:false,err:'Password not match'});
+            }
+            else{
+                user.password =req.body.newPassword;
+                await user.save();
+                res.json({success:true,msg:'sucessfuly change password'});
+            }
+
+        }
+
     },
 
     //uploading the profile image of consumer

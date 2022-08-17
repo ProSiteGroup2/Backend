@@ -81,6 +81,10 @@ consumerSchema.methods.comparePassword= function(passw,cb){
     });
 };
 
+//comparing the password while changing password
+consumerSchema.methods.comparePasswordChanging=async function(passw) {
+    return await bcrypt.compare(passw,this.password);
+};
 
 const Consumer=mongoose.model('consumer',consumerSchema);
 module.exports=Consumer;
