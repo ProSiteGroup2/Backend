@@ -89,5 +89,10 @@ hardwareSchema.methods.comparePassword= function(passw,cb){
     });
 };
 
+//comparing the password while changing password
+hardwareSchema.methods.comparePasswordChanging=async function(passw) {
+    return await bcrypt.compare(passw,this.password);
+};
+
 const Hardware=mongoose.model('hardware',hardwareSchema);
 module.exports=Hardware;
