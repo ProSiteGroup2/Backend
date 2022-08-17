@@ -142,27 +142,6 @@ router.put("/changeHardwarePw", hardwareMethods.changeHardwarePw);
 router.put("/changeContractorPw", contractorMethods.changeContractorPw);
 router.put("/changeTransporterPw", transporterMethods.changeTransporterPw);
 
-//Change password of users
-// ====================================================================================================================================================
-router.put("/changeConsumerPw", consumerMethods.changeConsumerPw);
-router.put("/changeHardwarePw", hardwareMethods.changeHardwarePw);
-router.put("/changeContractorPw", contractorMethods.changeContractorPw);
-router.put("/changeTransporterPw", transporterMethods.changeTransporterPw);
-
-//Change password of users
-// ====================================================================================================================================================
-router.put("/changeConsumerPw", consumerMethods.changeConsumerPw);
-router.put("/changeHardwarePw", hardwareMethods.changeHardwarePw);
-router.put("/changeContractorPw", contractorMethods.changeContractorPw);
-router.put("/changeTransporterPw", transporterMethods.changeTransporterPw);
-
-//Change password of users
-// ====================================================================================================================================================
-router.put("/changeConsumerPw", consumerMethods.changeConsumerPw);
-router.put("/changeHardwarePw", hardwareMethods.changeHardwarePw);
-router.put("/changeContractorPw", contractorMethods.changeContractorPw);
-router.put("/changeTransporterPw", transporterMethods.changeTransporterPw);
-
 //uploading images
 // ============================================================================================================================================
 
