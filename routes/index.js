@@ -239,5 +239,11 @@ router.delete('/deleteCartProduct/:id',cartMethods.deleteCartProducts);
 
 // delete products in a cart item
 router.put('/deleteProductsinCart/:id',cartMethods.deleteProductsinCart);
+
+// updating cartProduct
+router.put('/updateCartProduct/:id',cartMethods.updateCartProduct);
+
+// remove a cartProduct from cart item
+router.put('/removeCPfromCart/:id',cartMethods.removeCPfromCart);
   
   module.exports=router;

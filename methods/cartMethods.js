@@ -398,6 +398,28 @@ var functions={
                 });
             }
         });
+    },
+
+    // updating a cartProduct
+    updateCartProduct:function(req,res){
+        CartProduct.findByIdAndUpdate({_id:req.params.id},req.body,{new:true},function(err,cartproduct){
+            if(err){
+                res.send({success:false,msg:'Error ocuured: BackEnd'});
+            }else{
+                res.send({succes:true,msg:"cart product nupdate successful",cartProduct:cartproduct});
+            }
+        });
+    },
+
+    //deleting a cart product from cart
+    removeCPfromCart:function(req,res){
+        Cart.findByIdAndUpdate({_id:req.params.id},{$pull:{cartProducts:req.body.cartProduct}},{new:true},function(err,cartitem){
+            if(err){
+                res.send({succes:false,msg:"Error occured:backend"});
+            }else{
+                res.send({succes:true,msg:"cartProduct removal successful",cartitem:cartitem});
+            }
+        })
     }
 }
 
