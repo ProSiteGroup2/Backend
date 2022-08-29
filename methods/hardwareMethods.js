@@ -176,7 +176,7 @@ var functions={
 
     //get all the hardwares
     getHardwares:function(req,res){
-        Hardware.find().exec(function(err,hardwares){
+        Hardware.find({status:"active"}).exec(function(err,hardwares){
             if(err) throw err;
             if(hardwares){
                 res.send({success:true,msg:"hardwares found",hardwares:hardwares});
@@ -187,16 +187,7 @@ var functions={
         });
     },
 
-    hardwareStatus:async (req,res)=>{
-        Hardware.findOneAndUpdate({email:req.params.email},{status:req.params.status},{new:true},function(err,hardware){
-            if(err) throw err;
-            if(!hardware){
-                res.send({success:false,msg:"Setting status failed"});
-            }else{
-                res.send({success:true,hardware:hardware});
-            }
-        });
-    }
+    
 }
 
 module.exports=functions;

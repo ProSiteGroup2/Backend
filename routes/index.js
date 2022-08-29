@@ -13,6 +13,8 @@ const productMethods = require("../methods/productMethods");
 const appointmentMethods = require("../methods/appointmentMethods");
 const feedbackMethods = require("../methods/feedbackMethods");
 const carddetailsMethods = require("../methods/carddetailsMethods");
+const adminMethods = require("../methods/adminMethods");
+
 
 const storage = multer.diskStorage({
     // destination: function (req, file, cb) {
@@ -160,6 +162,22 @@ const storage = multer.diskStorage({
   router.get('/getProducts',productMethods.getProducts);
 
 
+   //Getting all the records in a table for admin
+  // =========================================================================================================================================================
+
+  router.get('/admin/getContractors',adminMethods.getContractor);
+
+  router.get('/admin/getLabours',adminMethods.getLabour);
+
+  router.get('/admin/getHardwares',adminMethods.getHardware);
+
+  router.get('/admin/getTransporters',adminMethods.getTransporter);
+
+  router.get('/admin/getProducts',adminMethods.getProduct);
+
+  router.get('/admin/getConsumers',adminMethods.getConsumer);
+
+
   //Getting Labours by profession
   // =================================================================================================================================================================
 
@@ -200,19 +218,19 @@ const storage = multer.diskStorage({
   // set status for users and products
   // ====================================================================================================================================================
 
-  router.put('/consumerStatus/:email/:status',consumerMethods.consumerStatus);
+  router.put('/consumerStatus/:email/:status',adminMethods.consumerStatus);
 
-  router.put('/contractorStatus/:email/:status',contractorMethods.contractorStatus);
+  router.put('/contractorStatus/:email/:status',adminMethods.contractorStatus);
 
-  router.put('/labourStatus/:email/:status',labourMethods.labourStatus);
+  router.put('/labourStatus/:email/:status',adminMethods.labourStatus);
 
-  router.put('/hardwareStatus/:email/:status',hardwareMethods.hardwareStatus);
+  router.put('/hardwareStatus/:email/:status',adminMethods.hardwareStatus);
 
-  router.put('/transporterStatus/:email/:status',transporterMethods.transporterStatus);
+  router.put('/transporterStatus/:email/:status',adminMethods.transporterStatus);
 
   // product status
 
-  router.put('/productStatus/:id/:status',productMethods.productStatus);
+  router.put('/productStatus/:id/:status',adminMethods.productStatus);
 
 
   // reset password

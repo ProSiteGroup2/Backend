@@ -159,7 +159,7 @@ var functions={
 
     //get all the contractors
     getContractors:function(req,res){
-        Contractor.find().exec(function(err,contractors){
+        Contractor.find({status:"active"}).exec(function(err,contractors){
             if(err) throw err;
             if(contractors){
                 res.send({success:true,msg:"contractos found",contractors:contractors});
@@ -188,16 +188,7 @@ var functions={
         });
     },
 
-    contractorStatus:async (req,res)=>{
-        Contractor.findOneAndUpdate({email:req.params.email},{status:req.params.status},{new:true},function(err,contractor){
-            if(err) throw err;
-            if(!contractor){
-                res.send({success:false,msg:"Setting status failed"});
-            }else{
-                res.send({success:true,contractor:contractor});
-            }
-        });
-    }
+
 };
 
 

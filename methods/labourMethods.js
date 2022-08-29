@@ -176,7 +176,7 @@ var functions={
 
     //get all the labours
     getLabours:function(req,res){
-        Labour.find().exec(function(err,labours){
+        Labour.find({status:"active"}).exec(function(err,labours){
             if(err) throw err;
             if(labours){
                 res.send({success:true,msg:"labours found",labours:labours});
@@ -253,16 +253,7 @@ var functions={
         });
     },
 
-    labourStatus:async (req,res)=>{
-        Labour.findOneAndUpdate({email:req.params.email},{status:req.params.status},{new:true},function(err,labour){
-            if(err) throw err;
-            if(!labour){
-                res.send({success:false,msg:"Setting status failed"});
-            }else{
-                res.send({success:true,labour:labour});
-            }
-        });
-    }
+    
 }
 
 module.exports=functions;
