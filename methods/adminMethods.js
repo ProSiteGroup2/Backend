@@ -329,6 +329,32 @@ productStatus:async (req,res)=>{
           res.send({success:true,product:product});
       }
   });
+},
+
+// deleteContractor:async (req,res,next) => {
+//     try{
+//         const contractor = await Contractor.findOneAndDelete(req.params.id);
+
+//         if(!contractor) {
+//             return next(
+//                 new ErrorResponse(`Contractor not Found with id of ${req.parms.id}`,404)
+//             );
+//         }
+//         res.status(200).json({success: true,data: {} });
+//     } catch (err){
+//         next(err);
+//     }
+// }
+
+deleteContractor:function(req,res){
+    Contractor.findOneAndDelete({email:req.params.email},function(err){
+        if(err){
+            res.send({success:false,msg:"Deletion Contractor failed"});
+        }else{
+            res.send({success:true,msg:"Deletion Contractor Successfull"});
+        }
+
+    });
 }
 
 };

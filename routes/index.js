@@ -271,5 +271,11 @@ const storage = multer.diskStorage({
   router.post('/forgotPassword',transporterMethods.forgotPassword);
 
 
+
+  
+  // delete users
+  //=============================================================================================================================================================
+
+  router.delete('/deleteContractor/:email',adminMethods.deleteContractor);
   
   module.exports=router;
