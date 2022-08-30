@@ -420,6 +420,16 @@ var functions={
                 res.send({success:true,msg:"cartProduct removal successful",cartitem:cartitem});
             }
         })
+    },
+
+    updateCartPrice:function(req,res){
+        Cart.findByIdAndUpdate({_id:req.params.id},{totalPrice:req.body.totalPrice},{new:true},function(err,cartitem){
+            if(err){
+                res.send({success:false,msg:"Cart total price update failed"});
+            }else{
+                res.send({success:true,msg:"Cart total price update successful",cartitem:cartitem});
+            }
+        });
     }
 }
 
