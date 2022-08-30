@@ -130,7 +130,7 @@ var functions={
 
     //get all the contractors
     getProducts:function(req,res){
-        Product.find().exec(function(err,products){
+        Product.find({status:"active"}).exec(function(err,products){
             if(err) throw err;
             if(products){
                 res.send({success:true,msg:"products found",products:products});
@@ -141,16 +141,7 @@ var functions={
         });
     },
 
-    productStatus:async (req,res)=>{
-        Product.findOneAndUpdate({_id:req.params.id},{status:req.params.status},{new:true},function(err,product){
-            if(err) throw err;
-            if(!product){
-                res.send({success:false,msg:"Setting status failed"});
-            }else{
-                res.send({success:true,product:product});
-            }
-        });
-    }
+    
     
 }
 

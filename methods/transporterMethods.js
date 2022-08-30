@@ -226,7 +226,7 @@ var functions={
 
     //get all the transporters
     getTransporters:function(req,res){
-        Transporter.find().exec(function(err,transporters){
+        Transporter.find({status:"active"}).exec(function(err,transporters){
             if(err) throw err;
             if(transporters){
                 res.send({success:true,msg:"transporters found",transporters:transporters});
@@ -237,16 +237,7 @@ var functions={
         });
     },
 
-    transporterStatus:async (req,res)=>{
-        Transporter.findOneAndUpdate({email:req.params.email},{status:req.params.status},{new:true},function(err,transporter){
-            if(err) throw err;
-            if(!transporter){
-                res.send({success:false,msg:"Setting status failed"});
-            }else{
-                res.send({success:true,transporter:transporter});
-            }
-        });
-    }
+   
 }
 
 module.exports=functions;

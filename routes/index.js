@@ -13,7 +13,7 @@ const productMethods = require("../methods/productMethods");
 const appointmentMethods = require("../methods/appointmentMethods");
 const feedbackMethods = require("../methods/feedbackMethods");
 const carddetailsMethods = require("../methods/carddetailsMethods");
-const cartMethods = require("../methods/cartMethods");
+const adminMethods = require("../methods/adminMethods");
 
 const storage = multer.diskStorage({
 	// destination: function (req, file, cb) {
@@ -123,25 +123,6 @@ router.get("/findSP/:email", actions.findSP);
 //finding a consumer and returning the whole object
 router.get("/findConsumer/:email", consumerMethods.findConsumer);
 
-//Update users
-// ====================================================================================================================================================
-router.put("/updateconsumerinfo", consumerMethods.updateConsumerInfo);
-
-router.put("/updatecontractorinfo", contractorMethods.updateContractorInfo);
-
-router.put("/updatehardwareinfo", hardwareMethods.updateHardwareInfo);
-
-router.put("/updatelabourinfo", labourMethods.updateLabourInfo);
-
-router.put("/updatetransporterinfo", transporterMethods.updateTransporterInfo);
-
-//Change password of users
-// ====================================================================================================================================================
-router.put("/changeConsumerPw", consumerMethods.changeConsumerPw);
-router.put("/changeHardwarePw", hardwareMethods.changeHardwarePw);
-router.put("/changeContractorPw", contractorMethods.changeContractorPw);
-router.put("/changeTransporterPw", transporterMethods.changeTransporterPw);
-
 //uploading images
 // ============================================================================================================================================
 
@@ -174,14 +155,25 @@ router.get("/getTransporters", transporterMethods.getTransporters);
 
 router.get("/getProducts", productMethods.getProducts);
 
+//Getting all the records in a table for admin
+// =========================================================================================================================================================
+
+router.get("/admin/getContractors", adminMethods.getContractor);
+
+router.get("/admin/getLabours", adminMethods.getLabour);
+
+router.get("/admin/getHardwares", adminMethods.getHardware);
+
+router.get("/admin/getTransporters", adminMethods.getTransporter);
+
+router.get("/admin/getProducts", adminMethods.getProduct);
+
+router.get("/admin/getConsumers", adminMethods.getConsumer);
+
 //Getting Labours by profession
 // =================================================================================================================================================================
 
 router.get("/getMason", labourMethods.getMason);
-
-router.get("/getElectrician", labourMethods.getElectrician);
-
-router.get("/getPainter", labourMethods.getPainter);
 
 router.get("/getElectrician", labourMethods.getElectrician);
 
@@ -192,6 +184,8 @@ router.get("/getArchitecturer", labourMethods.getArchitecturer);
 router.get("/getCarpenter", labourMethods.getCarpenter);
 
 router.get("/getPlumber", labourMethods.getPlumber);
+
+router.get("/getCarpenter", labourMethods.getCarpenter);
 
 // Getting products by Category
 // ==============================================================================================================================================================
@@ -226,36 +220,45 @@ router.put("/hardwareStatus/:email/:status", hardwareMethods.hardwareStatus);
 router.put("/transporterStatus/:email/:status", transporterMethods.transporterStatus);
 
 // product status
-router.put("/productStatus/:id/:status", productMethods.productStatus);
 
-//Cart methods
-// =================================================================================================================================================================================
+router.put("/productStatus/:id/:status", adminMethods.productStatus);
 
-// adding a cartProduct
-router.post("/addCartProduct/:id", cartMethods.addNewCartProduct);
+// reset password
+//=============================================================================================================================================================
 
-//adding a new cartn for a user
-router.post("/addCart/:id", cartMethods.addNewCart);
+router.post("/otpForgotPass", consumerMethods.otpForgotPass);
 
-// add products to cart
-router.put("/addCartItem/:id", cartMethods.addProducttoCart);
+router.post("/otpVerify", consumerMethods.otpVerify);
 
-//get cart items using a user id
-router.get("/getCartItem/:id", cartMethods.getCartItems);
+router.post("/forgotPassword", consumerMethods.forgotPassword);
 
-// delete cart products of a single user
-router.delete("/deleteCartProduct/:id", cartMethods.deleteCartProducts);
+router.post("/otpForgotPass", hardwareMethods.otpForgotPass);
 
-// delete products in a cart item
-router.put("/deleteProductsinCart/:id", cartMethods.deleteProductsinCart);
+router.post("/otpVerify", hardwareMethods.otpVerify);
 
-// updating cartProduct
-router.put("/updateCartProduct/:id", cartMethods.updateCartProduct);
+router.post("/forgotPassword", hardwareMethods.forgotPassword);
 
-// remove a cartProduct from cart item
-router.put("/removeCPfromCart/:id", cartMethods.removeCPfromCart);
+router.post("/otpForgotPass", contractorMethods.otpForgotPass);
 
-// update the cart total price
-router.put("/updateCartPrice/:id", cartMethods.updateCartPrice);
+router.post("/otpVerify", contractorMethods.otpVerify);
+
+router.post("/forgotPassword", contractorMethods.forgotPassword);
+
+router.post("/otpForgotPass", labourMethods.otpForgotPass);
+
+router.post("/otpVerify", labourMethods.otpVerify);
+
+router.post("/forgotPassword", labourMethods.forgotPassword);
+
+router.post("/otpForgotPass", transporterMethods.otpForgotPass);
+
+router.post("/otpVerify", transporterMethods.otpVerify);
+
+router.post("/forgotPassword", transporterMethods.forgotPassword);
+
+// delete users
+//=============================================================================================================================================================
+
+router.delete("/deleteContractor/:email", adminMethods.deleteContractor);
 
 module.exports = router;
