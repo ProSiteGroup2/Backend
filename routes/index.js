@@ -226,34 +226,36 @@ router.put("/hardwareStatus/:email/:status", hardwareMethods.hardwareStatus);
 router.put("/transporterStatus/:email/:status", transporterMethods.transporterStatus);
 
 // product status
-
 router.put("/productStatus/:id/:status", productMethods.productStatus);
+
+//Cart methods
+// =================================================================================================================================================================================
+
+// adding a cartProduct
+router.post("/addCartProduct/:id", cartMethods.addNewCartProduct);
+
+//adding a new cartn for a user
+router.post("/addCart/:id", cartMethods.addNewCart);
+
+// add products to cart
+router.put("/addCartItem/:id", cartMethods.addProducttoCart);
+
+//get cart items using a user id
+router.get("/getCartItem/:id", cartMethods.getCartItems);
 
 // delete cart products of a single user
 router.delete("/deleteCartProduct/:id", cartMethods.deleteCartProducts);
 
-router.post("/otpForgotPass", hardwareMethods.otpForgotPass);
+// delete products in a cart item
+router.put("/deleteProductsinCart/:id", cartMethods.deleteProductsinCart);
 
-router.post("/otpVerify", hardwareMethods.otpVerify);
+// updating cartProduct
+router.put("/updateCartProduct/:id", cartMethods.updateCartProduct);
 
-router.post("/forgotPassword", hardwareMethods.forgotPassword);
+// remove a cartProduct from cart item
+router.put("/removeCPfromCart/:id", cartMethods.removeCPfromCart);
 
-router.post("/otpForgotPass", contractorMethods.otpForgotPass);
-
-router.post("/otpVerify", contractorMethods.otpVerify);
-
-router.post("/forgotPassword", contractorMethods.forgotPassword);
-
-router.post("/otpForgotPass", labourMethods.otpForgotPass);
-
-router.post("/otpVerify", labourMethods.otpVerify);
-
-router.post("/forgotPassword", labourMethods.forgotPassword);
-
-router.post("/otpForgotPass", transporterMethods.otpForgotPass);
-
-router.post("/otpVerify", transporterMethods.otpVerify);
-
-router.post("/forgotPassword", transporterMethods.forgotPassword);
+// update the cart total price
+router.put("/updateCartPrice/:id", cartMethods.updateCartPrice);
 
 module.exports = router;

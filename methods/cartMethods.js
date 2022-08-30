@@ -414,6 +414,38 @@ var functions = {
 			}
 		});
 	},
+
+	// updating a cartProduct
+	updateCartProduct: function (req, res) {
+		CartProduct.findByIdAndUpdate({ _id: req.params.id }, req.body, { new: true }, function (err, cartproduct) {
+			if (err) {
+				res.send({ success: false, msg: "Error ocuured: BackEnd" });
+			} else {
+				res.send({ success: true, msg: "cart product nupdate successful", cartProduct: cartproduct });
+			}
+		});
+	},
+
+	//deleting a cart product from cart
+	removeCPfromCart: function (req, res) {
+		Cart.findByIdAndUpdate({ _id: req.params.id }, { $pull: { cartProducts: req.body.cartProduct } }, { new: true }, function (err, cartitem) {
+			if (err) {
+				res.send({ success: false, msg: "Error occured:backend" });
+			} else {
+				res.send({ success: true, msg: "cartProduct removal successful", cartitem: cartitem });
+			}
+		});
+	},
+
+	updateCartPrice: function (req, res) {
+		Cart.findByIdAndUpdate({ _id: req.params.id }, { totalPrice: req.body.totalPrice }, { new: true }, function (err, cartitem) {
+			if (err) {
+				res.send({ success: false, msg: "Cart total price update failed" });
+			} else {
+				res.send({ success: true, msg: "Cart total price update successful", cartitem: cartitem });
+			}
+		});
+	},
 };
 
 module.exports = functions;
