@@ -248,5 +248,8 @@ router.put('/removeCPfromCart/:id',cartMethods.removeCPfromCart);
 
 // update the cart total price
 router.put('/updateCartPrice/:id',cartMethods.updateCartPrice);
+
+// product stock update
+router.put('/updateStock/:id',productMethods.productStockUpdate);
   
   module.exports=router;

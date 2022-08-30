@@ -150,6 +150,17 @@ var functions={
                 res.send({success:true,product:product});
             }
         });
+    },
+
+    productStockUpdate:function(req,res){
+        Product.findByIdAndUpdate({_id:req.params.id},{stock:req.body.stock},{new:true},function(err,product){
+            if(err) throw err;
+            if(!product){
+                res.send({success:false,msg:"product not found"});
+            }else{
+                res.send({success:true,msg:"stock updated successfully",product:product});
+            }
+        });
     }
     
 }
