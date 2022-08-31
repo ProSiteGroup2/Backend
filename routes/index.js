@@ -133,7 +133,15 @@ const storage = multer.diskStorage({
 
   //Update users
   // ====================================================================================================================================================
+  router.put('/updateconsumerinfo',consumerMethods.updateConsumerInfo);
 
+  router.put('/updatecontractorinfo',contractorMethods.updateContractorInfo);
+  
+  router.put('/updatehardwareinfo',hardwareMethods.updateHardwareInfo);
+
+  router.put('/updatelabourinfo',labourMethods.updateLabourInfo);
+
+  router.put('/updatetransporterinfo',transporterMethods.updateTransporterInfo);
 
   //Change password of users
   // ====================================================================================================================================================
