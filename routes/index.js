@@ -232,45 +232,39 @@ router.put("/hardwareStatus/:email/:status", hardwareMethods.hardwareStatus);
 router.put("/transporterStatus/:email/:status", transporterMethods.transporterStatus);
 
 // product status
+router.put("/productStatus/:id/:status", productMethods.productStatus);
 
-router.put("/productStatus/:id/:status", adminMethods.productStatus);
+//Cart methods
+// =================================================================================================================================================================================
 
-// reset password
-//=============================================================================================================================================================
+// adding a cartProduct
+router.post("/addCartProduct/:id", cartMethods.addNewCartProduct);
 
-router.post("/otpForgotPass", consumerMethods.otpForgotPass);
+//adding a new cartn for a user
+router.post("/addCart/:id", cartMethods.addNewCart);
 
-router.post("/otpVerify", consumerMethods.otpVerify);
+// add products to cart
+router.put("/addCartItem/:id", cartMethods.addProducttoCart);
 
-router.post("/forgotPassword", consumerMethods.forgotPassword);
+//get cart items using a user id
+router.get("/getCartItem/:id", cartMethods.getCartItems);
 
-router.post("/otpForgotPass", hardwareMethods.otpForgotPass);
+// delete cart products of a single user
+router.delete("/deleteCartProduct/:id", cartMethods.deleteCartProducts);
 
-router.post("/otpVerify", hardwareMethods.otpVerify);
+// delete products in a cart item
+router.put("/deleteProductsinCart/:id", cartMethods.deleteProductsinCart);
 
-router.post("/forgotPassword", hardwareMethods.forgotPassword);
+// updating cartProduct
+router.put("/updateCartProduct/:id", cartMethods.updateCartProduct);
 
-router.post("/otpForgotPass", contractorMethods.otpForgotPass);
+// remove a cartProduct from cart item
+router.put("/removeCPfromCart/:id", cartMethods.removeCPfromCart);
 
-router.post("/otpVerify", contractorMethods.otpVerify);
+// update the cart total price
+router.put("/updateCartPrice/:id", cartMethods.updateCartPrice);
 
-router.post("/forgotPassword", contractorMethods.forgotPassword);
-
-router.post("/otpForgotPass", labourMethods.otpForgotPass);
-
-router.post("/otpVerify", labourMethods.otpVerify);
-
-router.post("/forgotPassword", labourMethods.forgotPassword);
-
-router.post("/otpForgotPass", transporterMethods.otpForgotPass);
-
-router.post("/otpVerify", transporterMethods.otpVerify);
-
-router.post("/forgotPassword", transporterMethods.forgotPassword);
-
-// delete users
-//=============================================================================================================================================================
-
-router.delete("/deleteContractor/:email", adminMethods.deleteContractor);
+// product stock update
+router.put("/updateStock/:id", productMethods.productStockUpdate);
 
 module.exports = router;
