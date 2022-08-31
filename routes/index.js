@@ -135,6 +135,7 @@ router.put("/updatehardwareinfo", hardwareMethods.updateHardwareInfo);
 router.put("/updatelabourinfo", labourMethods.updateLabourInfo);
 
 router.put("/transporterProfile/:email", upload.single("profile"), transporterMethods.transporterProfile);
+
 router.put("/updatetransporterinfo", transporterMethods.updateTransporterInfo);
 
 // uploading product image
@@ -146,6 +147,16 @@ router.put("/productImage/:id", upload.single("image"), productMethods.productIm
 router.get("/getContractors", contractorMethods.getContractors);
 
 router.get("/getLabours", labourMethods.getLabours);
+
+//Change password of users
+// ====================================================================================================================================================
+router.put("/changeConsumerPw", consumerMethods.changeConsumerPw);
+
+router.put("/changeHardwarePw", hardwareMethods.changeHardwarePw);
+
+router.put("/changeContractorPw", contractorMethods.changeContractorPw);
+
+router.put("/changeTransporterPw", transporterMethods.changeTransporterPw);
 
 //uploading images
 // ============================================================================================================================================
