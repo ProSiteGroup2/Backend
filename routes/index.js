@@ -135,6 +135,7 @@ router.put("/updatehardwareinfo", hardwareMethods.updateHardwareInfo);
 router.put("/updatelabourinfo", labourMethods.updateLabourInfo);
 
 router.put("/transporterProfile/:email", upload.single("profile"), transporterMethods.transporterProfile);
+
 router.put("/updatetransporterinfo", transporterMethods.updateTransporterInfo);
 
 // uploading product image
