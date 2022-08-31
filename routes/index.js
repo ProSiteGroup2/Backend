@@ -152,18 +152,7 @@ const storage = multer.diskStorage({
   router.put('/productImage/:id',upload.single('image'),productMethods.productImage);
 
   
-  //Getting all the records in a table
-  // =========================================================================================================================================================
-
-  router.get('/getContractors',contractorMethods.getContractors);
-
-  router.get('/getLabours',labourMethods.getLabours);
-
-  router.get('/getHardwares',hardwareMethods.getHardwares);
-
-  router.get('/getTransporters',transporterMethods.getTransporters);
-
-  router.get('/getProducts',productMethods.getProducts);
+  
 
 
   //Getting Labours by profession
