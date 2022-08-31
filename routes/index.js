@@ -148,6 +148,12 @@ router.get("/getContractors", contractorMethods.getContractors);
 
 router.get("/getLabours", labourMethods.getLabours);
 
+router.get("/getHardwares", hardwareMethods.getHardwares);
+
+router.get("/getTransporters", transporterMethods.getTransporters);
+
+router.get("/getProducts", productMethods.getProducts);
+
 //Change password of users
 // ====================================================================================================================================================
 router.put("/changeConsumerPw", consumerMethods.changeConsumerPw);
