@@ -123,6 +123,21 @@ router.get("/findSP/:email", actions.findSP);
 //finding a consumer and returning the whole object
 router.get("/findConsumer/:email", consumerMethods.findConsumer);
 
+//Update users
+// ====================================================================================================================================================
+
+router.put("/transporterProfile/:email", upload.single("profile"), transporterMethods.transporterProfile);
+
+// uploading product image
+router.put("/productImage/:id", upload.single("image"), productMethods.productImage);
+
+//Getting all the records in a table
+// =========================================================================================================================================================
+
+router.get("/getContractors", contractorMethods.getContractors);
+
+router.get("/getLabours", labourMethods.getLabours);
+
 //uploading images
 // ============================================================================================================================================
 
@@ -140,19 +155,6 @@ router.put("/transporterProfile/:email", upload.single("profile"), transporterMe
 // uploading product image
 router.put("/productImage/:id", upload.single("image"), productMethods.productImage);
 
-//Getting all the records in a table
-// =========================================================================================================================================================
-
-router.get("/getContractors", contractorMethods.getContractors);
-
-router.get("/getLabours", labourMethods.getLabours);
-
-router.get("/getHardwares", hardwareMethods.getHardwares);
-
-router.get("/getHardwares", hardwareMethods.getHardwares);
-
-router.get("/getTransporters", transporterMethods.getTransporters);
-
 router.get("/getProducts", productMethods.getProducts);
 
 //Getting all the records in a table for admin
@@ -166,7 +168,7 @@ router.get("/admin/getHardwares", adminMethods.getHardware);
 
 router.get("/admin/getTransporters", adminMethods.getTransporter);
 
-router.get("/admin/getProducts", adminMethods.getProduct);
+router.get("/getProducts", productMethods.getProducts);
 
 router.get("/admin/getConsumers", adminMethods.getConsumer);
 
@@ -174,6 +176,8 @@ router.get("/admin/getConsumers", adminMethods.getConsumer);
 // =================================================================================================================================================================
 
 router.get("/getMason", labourMethods.getMason);
+
+router.get("/getElectrician", labourMethods.getElectrician);
 
 router.get("/getElectrician", labourMethods.getElectrician);
 
