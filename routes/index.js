@@ -5,6 +5,7 @@ const multer = require("multer");
 const path = require("path");
 const shortid = require("shortid");
 const consumerMethods = require("../methods/consumerMethods");
+const cartMethods = require("../methods/cartMethods");
 const contractorMethods = require("../methods/contractorMethods");
 const labourMethods = require("../methods/labourMethods");
 const hardwareMethods = require("../methods/hardwareMethods");
