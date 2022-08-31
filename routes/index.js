@@ -125,8 +125,16 @@ router.get("/findConsumer/:email", consumerMethods.findConsumer);
 
 //Update users
 // ====================================================================================================================================================
+router.put("/updateconsumerinfo", consumerMethods.updateConsumerInfo);
+
+router.put("/updatecontractorinfo", contractorMethods.updateContractorInfo);
+
+router.put("/updatehardwareinfo", hardwareMethods.updateHardwareInfo);
+
+router.put("/updatelabourinfo", labourMethods.updateLabourInfo);
 
 router.put("/transporterProfile/:email", upload.single("profile"), transporterMethods.transporterProfile);
+router.put("/updatetransporterinfo", transporterMethods.updateTransporterInfo);
 
 // uploading product image
 router.put("/productImage/:id", upload.single("image"), productMethods.productImage);
