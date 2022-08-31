@@ -154,7 +154,7 @@ var functions={
     },
 
 
-    //update consumer info from a token
+    //update consumer info from a token---- krishan
     updateConsumerInfo: async(req,res)=>{
         if(req.headers.authorization && req.headers.authorization.split(' ')[0]==='Bearer'){
             var token=req.headers.authorization.split(' ')[1];
