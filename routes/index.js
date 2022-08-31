@@ -138,9 +138,6 @@ router.put("/transporterProfile/:email", upload.single("profile"), transporterMe
 
 router.put("/updatetransporterinfo", transporterMethods.updateTransporterInfo);
 
-// uploading product image
-router.put("/productImage/:id", upload.single("image"), productMethods.productImage);
-
 //Getting all the records in a table
 // =========================================================================================================================================================
 
@@ -181,7 +178,6 @@ router.put("/transporterProfile/:email", upload.single("profile"), transporterMe
 // uploading product image
 router.put("/productImage/:id", upload.single("image"), productMethods.productImage);
 
-router.get("/getProducts", productMethods.getProducts);
 
 //Getting all the records in a table for admin
 // =========================================================================================================================================================
@@ -194,7 +190,7 @@ router.get("/admin/getHardwares", adminMethods.getHardware);
 
 router.get("/admin/getTransporters", adminMethods.getTransporter);
 
-router.get("/getProducts", productMethods.getProducts);
+router.get("/getProducts", adminMethods.getProduct);
 
 router.get("/admin/getConsumers", adminMethods.getConsumer);
 

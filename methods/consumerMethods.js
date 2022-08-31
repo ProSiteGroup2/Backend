@@ -16,15 +16,7 @@ var functions = {
 			if (consumer) {
 				res.send({ success: false, msg: "Email already exists!" });
 			} else {
-				if (
-					!req.body.username ||
-					!req.body.email ||
-					!req.body.contactNo ||
-					!req.body.address ||
-					!req.body.hometown ||
-					!req.body.district ||
-					!req.body.password
-				) {
+				if (!req.body.username ||!req.body.email ||!req.body.contactNo ||!req.body.address ||!req.body.hometown ||!req.body.district ||!req.body.password) {
 					res.send({ success: false, msg: "Enter all fields" });
 				} else {
 					var newConsumer = Consumer({
@@ -47,6 +39,7 @@ var functions = {
 			}
 		});
 	},
+	
 	otpForgotPass: async (req, res) => {
 		const account = await Consumer.findOne({ contactNo: req.body.contactNo });
 		if (!account) return res.status(400).json({ success: false, msg: "Consumer not found!" });
@@ -161,15 +154,7 @@ var functions = {
 			var decodedtoken = jwt.decode(token, config.secret);
 
 			//console.log("user");
-			if (
-				!req.body.username ||
-				!req.body.email ||
-				!req.body.contactNo ||
-				!req.body.address ||
-				!req.body.hometown ||
-				!req.body.district ||
-				!req.body.password
-			) {
+			if (!req.body.username ||!req.body.email ||!req.body.contactNo ||!req.body.address ||!req.body.hometown ||!req.body.district ||!req.body.password) {
 				var user = await Consumer.findByIdAndUpdate(decodedtoken._id, req.body, {
 					new: true,
 					runValidators: true,
