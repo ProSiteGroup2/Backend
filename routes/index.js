@@ -285,4 +285,51 @@ router.put("/updateCartPrice/:id", cartMethods.updateCartPrice);
 // product stock update
 router.put("/updateStock/:id", productMethods.productStockUpdate);
 
+ // reset password
+  //=============================================================================================================================================================
+
+  router.post('/otpForgotPass',consumerMethods.otpForgotPass);
+
+  router.post('/otpVerify',consumerMethods.otpVerify);
+
+  router.post('/forgotPassword',consumerMethods.forgotPassword);
+
+
+  router.post('/otpForgotPass',hardwareMethods.otpForgotPass);
+
+  router.post('/otpVerify',hardwareMethods.otpVerify);
+
+  router.post('/forgotPassword',hardwareMethods.forgotPassword);
+
+
+  router.post('/otpForgotPass',contractorMethods.otpForgotPass);
+
+  router.post('/otpVerify',contractorMethods.otpVerify);
+
+  router.post('/forgotPassword',contractorMethods.forgotPassword);
+
+
+  router.post('/otpForgotPass',labourMethods.otpForgotPass);
+
+  router.post('/otpVerify',labourMethods.otpVerify);
+
+  router.post('/forgotPassword',labourMethods.forgotPassword);
+
+
+  router.post('/otpForgotPass',transporterMethods.otpForgotPass);
+
+  router.post('/otpVerify',transporterMethods.otpVerify);
+
+  router.post('/forgotPassword',transporterMethods.forgotPassword);
+
+
+
+  
+  // delete users
+  //=============================================================================================================================================================
+
+  router.delete('/deleteContractor/:email',adminMethods.deleteContractor);
+  
+  module.exports=router;
+
 module.exports = router;
