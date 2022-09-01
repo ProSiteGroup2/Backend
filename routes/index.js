@@ -188,7 +188,7 @@ router.get("/admin/getHardwares", adminMethods.getHardware);
 
 router.get("/admin/getTransporters", adminMethods.getTransporter);
 
-router.get("admin/getProducts", productMethods.getProducts);
+router.get("/admin/getProducts", productMethods.getProducts);
 
 router.get("/admin/getConsumers", adminMethods.getConsumer);
 
