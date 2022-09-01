@@ -10,7 +10,7 @@ var functions = {
             var newCard=Card({
                 cardNumber:req.body.cardNumber,
                 expiryDate:req.body.expiryDate,
-                cvvCode:req.body.expiryDate,
+                cvvCode:req.body.cvvCode,
                 cardHolderName:req.body.cardHolderName,
             });
 
