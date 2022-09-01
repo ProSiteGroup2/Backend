@@ -355,7 +355,7 @@ deleteContractor:function(req,res){
         }
 
     });
-}
+},
 
 deleteHardware:function(req,res){
     Hardware.findOneAndDelete({email:req.params.email},function(err){
@@ -366,7 +366,7 @@ deleteHardware:function(req,res){
         }
 
     });
-}
+},
 
 deleteLabour:function(req,res){
     Labour.findOneAndDelete({email:req.params.email},function(err){
@@ -377,7 +377,7 @@ deleteLabour:function(req,res){
         }
 
     });
-}
+},
 
 deleteTransporter:function(req,res){
     Transporter.findOneAndDelete({email:req.params.email},function(err){
@@ -388,7 +388,7 @@ deleteTransporter:function(req,res){
         }
 
     });
-}
+},
 
 deleteConsumer:function(req,res){
     Consumer.findOneAndDelete({email:req.params.email},function(err){
@@ -399,7 +399,7 @@ deleteConsumer:function(req,res){
         }
 
     });
-}
+},
 
 deleteProduct:function(req,res){
     Product.findOneAndDelete({email:req.params.email},function(err){
@@ -410,7 +410,7 @@ deleteProduct:function(req,res){
         }
 
     });
-}
+},
 
 };
 
