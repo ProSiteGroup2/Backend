@@ -188,7 +188,7 @@ var functions = {
 					runValidators: true,
 				});
 
-				res.send({ success: true, data: user });
+				res.send({ success: true, data: contractor });
 			} else {
 				res.send({ success: false, msg: "missing fields" });
 			}
