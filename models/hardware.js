@@ -55,7 +55,7 @@ const hardwareSchema=new Schema({
         default:"active"
     }
     
-});
+},{timestamps:true});
 
 //encrypt the password
 hardwareSchema.pre('save',function(next){

@@ -15,6 +15,7 @@ const appointmentMethods = require("../methods/appointmentMethods");
 const feedbackMethods = require("../methods/feedbackMethods");
 const carddetailsMethods = require("../methods/carddetailsMethods");
 const adminMethods = require("../methods/adminMethods");
+const orderMethods=require('../methods/orderMethods');
 
 const storage = multer.diskStorage({
 	// destination: function (req, file, cb) {
@@ -280,5 +281,11 @@ router.put("/updateCartPrice/:id", cartMethods.updateCartPrice);
 
 // product stock update
 router.put("/updateStock/:id", productMethods.productStockUpdate);
+
+//order routes
+// =====================================================================================================================================================================================
+
+// adding a new order
+router.post("/addOrder/:userid",orderMethods.addOrder);
 
 module.exports = router;

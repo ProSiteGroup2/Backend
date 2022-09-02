@@ -55,7 +55,7 @@ const contractorSchema=new Schema({
         default:"active"
     }
     
-});
+},{timestamps:true});
 
 
 //encrypt the password

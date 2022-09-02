@@ -1,10 +1,7 @@
 const mongoose=require('mongoose');
 const Schema=mongoose.Schema;
-const CartProduct=require('./cartProduct');
-const Consumer=require('../consumer');
 
-const CartSchema=new Schema({
-
+const OrderSchema=new Schema({
     buyer_consumer:{
         type: Schema.Types.ObjectId,
         ref: 'consumer'
@@ -25,14 +22,29 @@ const CartSchema=new Schema({
         ref: 'contractor'
     },
 
-    cartProducts:[{
+    item:{
         type: Schema.Types.ObjectId,
-        ref: 'cartproduct'
-    }],
+        ref: 'product',
+        require:true
+    },
 
-    totalPrice:Number
+    seller:{
+        type: Schema.Types.ObjectId,
+        ref: 'hardware',
+        require:true
+    },
+
+    quantity:{
+        type:Number,
+        required:true
+    },
+
+    amount:{
+        type:Number,
+        required:true
+    }
 },{timestamps:true});
 
-const Cart=mongoose.model('cart',CartSchema);
-module.exports=Cart;
+const Order=mongoose.model('order',OrderSchema);
+module.exports=Order;
 

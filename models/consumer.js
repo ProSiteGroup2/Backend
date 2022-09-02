@@ -46,7 +46,7 @@ const consumerSchema=new Schema({
         enum:["active","block"],
         default:"active"
     }
-});
+},{timestamps:true});
 
 
 //encrypt the password
