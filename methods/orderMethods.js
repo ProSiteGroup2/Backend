@@ -7,7 +7,7 @@ const Transporter = require("../models/transporter");
 
 var functions = {
 	//adding a order
-	addNewOrder: function (req, res) {
+	addNeOrder: function (req, res) {
 		Consumer.findById({ _id: req.params.id }, function (err, consumer) {
 			if (err) throw err;
 			if (!consumer) {
