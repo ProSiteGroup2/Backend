@@ -194,7 +194,7 @@ router.get("/admin/getHardwares", adminMethods.getHardware);
 
 router.get("/admin/getTransporters", adminMethods.getTransporter);
 
-router.get("/getProducts", productMethods.getProducts);
+router.get("/admin/getProducts", adminMethods.getProduct);
 
 router.get("/admin/getConsumers", adminMethods.getConsumer);
 
@@ -285,51 +285,54 @@ router.put("/updateCartPrice/:id", cartMethods.updateCartPrice);
 // product stock update
 router.put("/updateStock/:id", productMethods.productStockUpdate);
 
- // reset password
-  //=============================================================================================================================================================
+// reset password
+//=============================================================================================================================================================
 
-  router.post('/otpForgotPass',consumerMethods.otpForgotPass);
+router.post("/otpForgotPass", consumerMethods.otpForgotPass);
 
-  router.post('/otpVerify',consumerMethods.otpVerify);
+router.post("/otpVerify", consumerMethods.otpVerify);
 
-  router.post('/forgotPassword',consumerMethods.forgotPassword);
+router.post("/forgotPassword", consumerMethods.forgotPassword);
 
+router.post("/otpForgotPass", hardwareMethods.otpForgotPass);
 
-  router.post('/otpForgotPass',hardwareMethods.otpForgotPass);
+router.post("/otpVerify", hardwareMethods.otpVerify);
 
-  router.post('/otpVerify',hardwareMethods.otpVerify);
+router.post("/forgotPassword", hardwareMethods.forgotPassword);
 
-  router.post('/forgotPassword',hardwareMethods.forgotPassword);
+router.post("/otpForgotPass", contractorMethods.otpForgotPass);
 
+router.post("/otpVerify", contractorMethods.otpVerify);
 
-  router.post('/otpForgotPass',contractorMethods.otpForgotPass);
+router.post("/forgotPassword", contractorMethods.forgotPassword);
 
-  router.post('/otpVerify',contractorMethods.otpVerify);
+router.post("/otpForgotPass", labourMethods.otpForgotPass);
 
-  router.post('/forgotPassword',contractorMethods.forgotPassword);
+router.post("/otpVerify", labourMethods.otpVerify);
 
+router.post("/forgotPassword", labourMethods.forgotPassword);
 
-  router.post('/otpForgotPass',labourMethods.otpForgotPass);
+router.post("/otpForgotPass", transporterMethods.otpForgotPass);
 
-  router.post('/otpVerify',labourMethods.otpVerify);
+router.post("/otpVerify", transporterMethods.otpVerify);
 
-  router.post('/forgotPassword',labourMethods.forgotPassword);
+router.post("/forgotPassword", transporterMethods.forgotPassword);
 
+// delete users
+//=============================================================================================================================================================
 
-  router.post('/otpForgotPass',transporterMethods.otpForgotPass);
+router.delete("/deleteContractor/:email", adminMethods.deleteContractor);
 
-  router.post('/otpVerify',transporterMethods.otpVerify);
+module.exports = router;
 
-  router.post('/forgotPassword',transporterMethods.forgotPassword);
+router.delete("/deleteHardware/:email", adminMethods.deleteHardware);
 
+router.delete("/deleteLabour/:email", adminMethods.deleteLabour);
 
+router.delete("/deleteTransporter/:email", adminMethods.deleteTransporter);
 
-  
-  // delete users
-  //=============================================================================================================================================================
+router.delete("/deleteConsumer/:email", adminMethods.deleteConsumer);
 
-  router.delete('/deleteContractor/:email',adminMethods.deleteContractor);
-  
-  module.exports=router;
+router.delete("/deleteProduct/:email", adminMethods.deleteProduct);
 
 module.exports = router;
