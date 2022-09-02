@@ -239,6 +239,7 @@ var functions = {
 			}
 		});
 	},
+	
 	transporterStatus: async (req, res) => {
 		Transporter.findOneAndUpdate({ email: req.params.email }, { status: req.params.status }, { new: true }, function (err, transporter) {
 			if (err) throw err;
