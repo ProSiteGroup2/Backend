@@ -229,7 +229,7 @@ var functions = {
 	},
 
 	getMason: function (req, res) {
-		Labour.find({ profession: "Mason" }, function (err, masons) {
+		Labour.find({ profession: "Mason",status:"active" }, function (err, masons) {
 			if (err) throw err;
 			if (masons) {
 				res.send({ success: true, msg: "Masons found", masons: masons });
@@ -240,7 +240,7 @@ var functions = {
 	},
 
 	getElectrician: function (req, res) {
-		Labour.find({ profession: "Electrician" }, function (err, electricians) {
+		Labour.find({ profession: "Electrician",status:"active" }, function (err, electricians) {
 			if (err) throw err;
 			if (electricians) {
 				res.send({ success: true, msg: "Electricians found", electricians: electricians });
@@ -251,7 +251,7 @@ var functions = {
 	},
 
 	getPlumber: function (req, res) {
-		Labour.find({ profession: "Plumber" }, function (err, plumbers) {
+		Labour.find({ profession: "Plumber",status:"active" }, function (err, plumbers) {
 			if (err) throw err;
 			if (plumbers) {
 				res.send({ success: true, msg: "Plumbers found", plumbers: plumbers });
@@ -262,7 +262,7 @@ var functions = {
 	},
 
 	getCarpenter: function (req, res) {
-		Labour.find({ profession: "Carpenter" }, function (err, carpenters) {
+		Labour.find({ profession: "Carpenter",status:"active" }, function (err, carpenters) {
 			if (err) throw err;
 			if (carpenters) {
 				res.send({ success: true, msg: "Carpenters found", carpenters: carpenters });
@@ -273,7 +273,7 @@ var functions = {
 	},
 
 	getArchitecturer: function (req, res) {
-		Labour.find({ profession: "Architecturer" }, function (err, architecturers) {
+		Labour.find({ profession: "Architecturer" ,status:"active"}, function (err, architecturers) {
 			if (err) throw err;
 			if (architecturers) {
 				res.send({ success: true, msg: "Architecturers found", architecturers: architecturers });
@@ -284,7 +284,7 @@ var functions = {
 	},
 
 	getPainter: function (req, res) {
-		Labour.find({ profession: "Painter" }, function (err, painters) {
+		Labour.find({ profession: "Painter" ,status:"active"}, function (err, painters) {
 			if (err) throw err;
 			if (painters) {
 				res.send({ success: true, msg: "Painters found", painters: painters });
