@@ -180,10 +180,7 @@ var functions = {
 			if (err) throw err;
 			if (consumer) {
 				Cart.findOneAndUpdate(
-					{ buyer_consumer: req.params.id },
-					{ $push: { cartProducts: req.body.cartProduct } },
-					{ new: true },
-					function (err, cartitem) {
+					{ buyer_consumer: req.params.id },{ $push: { cartProducts: req.body.cartProduct } },{ new: true },function (err, cartitem) {
 						if (err) {
 							res.send({ success: false, msg: "adding cart product failed" });
 						} else {
@@ -197,7 +194,7 @@ var functions = {
 					if (contractor) {
 						Cart.findOneAndUpdate(
 							{ buyer_contractor: req.params.id },
-							{ $push: { cartProducts: req.body.cartProduct } },
+							{ $push: {cartProducts: req.body.cartProduct } },
 							{ new: true },
 							function (err, cartitem) {
 								if (err) {
@@ -446,6 +443,7 @@ var functions = {
 			}
 		});
 	},
+
 };
 
 module.exports = functions;
