@@ -43,18 +43,6 @@ var functions = {
 		}).populate("seller");
 	},
 
-	//get product info
-	getProduct: function (req, res) {
-		Product.findById({ _id: req.params.id }, function (err, product) {
-			if (err) throw err;
-			if (product) {
-				res.send({ success: true, product: product });
-			} else {
-				res.send({ sucess: false, msg: "Coudn't find the product info" });
-			}
-		}).populate("seller");
-	},
-
 	// upload product image
 	productImage: async (req, res) => {
 		const data = await uploadToCloudinary(req.file.path, "images");
@@ -132,6 +120,18 @@ var functions = {
 				res.send({ success: true, msg: "hardware products found successfully", products: products });
 			}
 		}).populate("seller");
+	},
+
+	//get all the contractors
+	getProducts: function (req, res) {
+		Product.find({ status: "active" }).exec(function (err, products) {
+			if (err) throw err;
+			if (products) {
+				res.send({ success: true, msg: "products found", products: products });
+			} else {
+				res.send({ success: false, msg: "products not found" });
+			}
+		});
 	},
 
 	productStatus: async (req, res) => {
