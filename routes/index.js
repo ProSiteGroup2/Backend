@@ -193,7 +193,7 @@ router.get("/admin/getHardwares", adminMethods.getHardware);
 
 router.get("/admin/getTransporters", adminMethods.getTransporter);
 
-router.get("/getProducts", adminMethods.getProduct);
+router.get("/admin/getProducts", adminMethods.getProduct);
 
 router.get("/admin/getConsumers", adminMethods.getConsumer);
 
@@ -321,5 +321,15 @@ router.post("/forgotPassword", transporterMethods.forgotPassword);
 //=============================================================================================================================================================
 
 router.delete("/deleteContractor/:email", adminMethods.deleteContractor);
+
+router.delete("/deleteHardware/:email", adminMethods.deleteHardware);
+
+router.delete("/deleteLabour/:email", adminMethods.deleteLabour);
+
+router.delete("/deleteTransporter/:email", adminMethods.deleteTransporter);
+
+router.delete("/deleteConsumer/:email", adminMethods.deleteConsumer);
+
+router.delete("/deleteProduct/:email", adminMethods.deleteProduct);
 
 module.exports = router;

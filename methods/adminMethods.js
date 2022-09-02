@@ -355,7 +355,62 @@ deleteContractor:function(req,res){
         }
 
     });
-}
+},
+
+deleteHardware:function(req,res){
+    Hardware.findOneAndDelete({email:req.params.email},function(err){
+        if(err){
+            res.send({success:false,msg:"Deletion Hardware failed"});
+        }else{
+            res.send({success:true,msg:"Deletion Hardware Successfull"});
+        }
+
+    });
+},
+
+deleteLabour:function(req,res){
+    Labour.findOneAndDelete({email:req.params.email},function(err){
+        if(err){
+            res.send({success:false,msg:"Deletion Labour failed"});
+        }else{
+            res.send({success:true,msg:"Deletion Labour Successfull"});
+        }
+
+    });
+},
+
+deleteTransporter:function(req,res){
+    Transporter.findOneAndDelete({email:req.params.email},function(err){
+        if(err){
+            res.send({success:false,msg:"Deletion Transporter failed"});
+        }else{
+            res.send({success:true,msg:"Deletion Transporter Successfull"});
+        }
+
+    });
+},
+
+deleteConsumer:function(req,res){
+    Consumer.findOneAndDelete({email:req.params.email},function(err){
+        if(err){
+            res.send({success:false,msg:"Deletion Consumer failed"});
+        }else{
+            res.send({success:true,msg:"Deletion Consumer Successfull"});
+        }
+
+    });
+},
+
+deleteProduct:function(req,res){
+    Product.findOneAndDelete({email:req.params.email},function(err){
+        if(err){
+            res.send({success:false,msg:"Deletion Product failed"});
+        }else{
+            res.send({success:true,msg:"Deletion Product Successfull"});
+        }
+
+    });
+},
 
 };
 
