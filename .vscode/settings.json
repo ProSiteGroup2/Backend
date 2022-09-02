@@ -9,11 +9,6 @@
 		"productname",
 		"Productsin",
 		"saveappointment",
-		"sproviderid",
-		"updateconsumerinfo",
-		"updatecontractorinfo",
-		"updatehardwareinfo",
-		"updatelabourinfo",
-		"updatetransporterinfo"
+		"sproviderid"
 	]
 }

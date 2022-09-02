@@ -216,7 +216,7 @@ var functions = {
 
 	//get all the contractors
 	getContractors: function (req, res) {
-		Contractor.find({status:"active"}).exec(function (err, contractors) {
+		Contractor.find().exec(function (err, contractors) {
 			if (err) throw err;
 			if (contractors) {
 				res.send({ success: true, msg: "contractos found", contractors: contractors });

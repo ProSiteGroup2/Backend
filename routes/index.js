@@ -14,7 +14,6 @@ const productMethods = require("../methods/productMethods");
 const appointmentMethods = require("../methods/appointmentMethods");
 const feedbackMethods = require("../methods/feedbackMethods");
 const carddetailsMethods = require("../methods/carddetailsMethods");
-const orderMethods = require("../methods/orderMethods");
 const adminMethods = require("../methods/adminMethods");
 
 const storage = multer.diskStorage({
@@ -61,7 +60,7 @@ router.post("/addProduct", productMethods.addNewProduct);
 //add a new card
 router.post("/addCard", carddetailsMethods.addNewCard);
 
-//Adding Feedbacks, Appointment, Order
+//Adding Feedbacks, Appointment
 // ======================================================================================================================================================================
 
 //add a new Appointment
@@ -69,9 +68,6 @@ router.post("/addAppointment", appointmentMethods.addNewAppointment);
 
 //add a new Feedback
 router.post("/addFeedback", feedbackMethods.addNewFeedback);
-
-//add a new order
-router.post("/addOrder", orderMethods.addNewOrder);
 
 //Retrieving feedbacks,Appointmnets
 // ==============================================================================================================================================================
@@ -142,6 +138,9 @@ router.put("/transporterProfile/:email", upload.single("profile"), transporterMe
 
 router.put("/updatetransporterinfo", transporterMethods.updateTransporterInfo);
 
+// uploading product image
+router.put("/productImage/:id", upload.single("image"), productMethods.productImage);
+
 //Getting all the records in a table
 // =========================================================================================================================================================
 
@@ -182,6 +181,8 @@ router.put("/transporterProfile/:email", upload.single("profile"), transporterMe
 // uploading product image
 router.put("/productImage/:id", upload.single("image"), productMethods.productImage);
 
+router.get("/getProducts", productMethods.getProducts);
+
 //Getting all the records in a table for admin
 // =========================================================================================================================================================
 
@@ -193,7 +194,7 @@ router.get("/admin/getHardwares", adminMethods.getHardware);
 
 router.get("/admin/getTransporters", adminMethods.getTransporter);
 
-router.get("/getProducts", adminMethods.getProduct);
+router.get("/getProducts", productMethods.getProducts);
 
 router.get("/admin/getConsumers", adminMethods.getConsumer);
 
@@ -284,42 +285,51 @@ router.put("/updateCartPrice/:id", cartMethods.updateCartPrice);
 // product stock update
 router.put("/updateStock/:id", productMethods.productStockUpdate);
 
-// reset password
-//=============================================================================================================================================================
+ // reset password
+  //=============================================================================================================================================================
 
-router.post("/otpForgotPass", consumerMethods.otpForgotPass);
+  router.post('/otpForgotPass',consumerMethods.otpForgotPass);
 
-router.post("/otpVerify", consumerMethods.otpVerify);
+  router.post('/otpVerify',consumerMethods.otpVerify);
 
-router.post("/forgotPassword", consumerMethods.forgotPassword);
+  router.post('/forgotPassword',consumerMethods.forgotPassword);
 
-router.post("/otpForgotPass", hardwareMethods.otpForgotPass);
 
-router.post("/otpVerify", hardwareMethods.otpVerify);
+  router.post('/otpForgotPass',hardwareMethods.otpForgotPass);
 
-router.post("/forgotPassword", hardwareMethods.forgotPassword);
+  router.post('/otpVerify',hardwareMethods.otpVerify);
 
-router.post("/otpForgotPass", contractorMethods.otpForgotPass);
+  router.post('/forgotPassword',hardwareMethods.forgotPassword);
 
-router.post("/otpVerify", contractorMethods.otpVerify);
 
-router.post("/forgotPassword", contractorMethods.forgotPassword);
+  router.post('/otpForgotPass',contractorMethods.otpForgotPass);
 
-router.post("/otpForgotPass", labourMethods.otpForgotPass);
+  router.post('/otpVerify',contractorMethods.otpVerify);
 
-router.post("/otpVerify", labourMethods.otpVerify);
+  router.post('/forgotPassword',contractorMethods.forgotPassword);
 
-router.post("/forgotPassword", labourMethods.forgotPassword);
 
-router.post("/otpForgotPass", transporterMethods.otpForgotPass);
+  router.post('/otpForgotPass',labourMethods.otpForgotPass);
 
-router.post("/otpVerify", transporterMethods.otpVerify);
+  router.post('/otpVerify',labourMethods.otpVerify);
 
-router.post("/forgotPassword", transporterMethods.forgotPassword);
+  router.post('/forgotPassword',labourMethods.forgotPassword);
 
-// delete users
-//=============================================================================================================================================================
 
-router.delete("/deleteContractor/:email", adminMethods.deleteContractor);
+  router.post('/otpForgotPass',transporterMethods.otpForgotPass);
+
+  router.post('/otpVerify',transporterMethods.otpVerify);
+
+  router.post('/forgotPassword',transporterMethods.forgotPassword);
+
+
+
+  
+  // delete users
+  //=============================================================================================================================================================
+
+  router.delete('/deleteContractor/:email',adminMethods.deleteContractor);
+  
+  module.exports=router;
 
 module.exports = router;

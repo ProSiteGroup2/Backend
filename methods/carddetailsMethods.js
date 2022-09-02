@@ -4,15 +4,14 @@ const mongoose=require('mongoose');
 var functions = {
 
     addNewCard:function(req,res){
-        if(!req.body.cardNumber|| !req.body.expiryDate || !req.body.cvvCode || !req.body.cardHolderName||!req.body.amount){
+        if(!req.body.cardNumber|| !req.body.expiryDate || !req.body.cvvCode || !req.body.cardHolderName){
             res.send({success:false,msg: 'Enter required fields'});
         }else{
             var newCard=Card({
                 cardNumber:req.body.cardNumber,
                 expiryDate:req.body.expiryDate,
-                cvvCode:req.body.cvvCode,
+                cvvCode:req.body.expiryDate,
                 cardHolderName:req.body.cardHolderName,
-                amount:req.body.amount
             });
 
             newCard.save(function(err,newCard){
