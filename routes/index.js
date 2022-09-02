@@ -323,5 +323,3 @@ router.post("/forgotPassword", transporterMethods.forgotPassword);
 router.delete("/deleteContractor/:email", adminMethods.deleteContractor);
 
 module.exports = router;
-
-module.exports = router;
