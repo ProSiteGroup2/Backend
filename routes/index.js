@@ -323,7 +323,17 @@ router.put("/updateStock/:id", productMethods.productStockUpdate);
   //=============================================================================================================================================================
 
   router.delete('/deleteContractor/:email',adminMethods.deleteContractor);
+  
+  router.delete('/deleteHardware/:email',adminMethods.deleteHardware);
 
+  router.delete('/deleteLabour/:email',adminMethods.deleteLabour);
+
+  router.delete('/deleteTransporter/:email',adminMethods.deleteTransporter);
+
+  router.delete('/deleteConsumer/:email',adminMethods.deleteConsumer);
+
+  router.delete('/deleteProduct/:email',adminMethods.deleteProduct);
+  
   
 
 module.exports = router;
