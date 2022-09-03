@@ -16,7 +16,6 @@ const feedbackMethods = require("../methods/feedbackMethods");
 const carddetailsMethods = require("../methods/carddetailsMethods");
 const orderMethods = require("../methods/orderMethods");
 const adminMethods = require("../methods/adminMethods");
-const orderMethods = require("../methods/orderMethods");
 
 const storage = multer.diskStorage({
 	// destination: function (req, file, cb) {
@@ -72,7 +71,7 @@ router.post("/addAppointment", appointmentMethods.addNewAppointment);
 router.post("/addFeedback", feedbackMethods.addNewFeedback);
 
 //add a new order
-router.post("/addOrder", orderMethods.addNewOrder);
+router.post("/addOrder", orderMethods.addOrder);
 
 //Retrieving feedbacks,Appointmnets
 // ==============================================================================================================================================================
