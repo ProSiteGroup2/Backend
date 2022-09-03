@@ -164,6 +164,16 @@ var functions = {
 				res.send({success:true,msg:"product deletion successful"});
 			}
 		})
+	},
+
+	updateProduct:function(req,res){
+		Product.findByIdAndUpdate(req.params.id,req.body,{new:true},function(err,product){
+			if(err){
+				res.send({success:false,msg:"product update failed"});
+			}else{
+				res.send({success:true,msg:"product update successful",product:product});
+			}
+		});
 	}
 };
 

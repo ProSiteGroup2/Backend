@@ -255,6 +255,9 @@ router.put("/productStatus/:id/:status", productMethods.productStatus);
 // delete a product
 router.delete("/deleteProduct/:id",productMethods.deleteProduct);
 
+// updating a product details
+router.put("updateProduct/:id",productMethods.updateProduct);
+
 //Cart methods
 // =================================================================================================================================================================================
 
