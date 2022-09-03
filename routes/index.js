@@ -16,6 +16,7 @@ const feedbackMethods = require("../methods/feedbackMethods");
 const carddetailsMethods = require("../methods/carddetailsMethods");
 const orderMethods = require("../methods/orderMethods");
 const adminMethods = require("../methods/adminMethods");
+const orderMethods = require("../methods/orderMethods");
 
 const storage = multer.diskStorage({
 	// destination: function (req, file, cb) {
@@ -251,6 +252,15 @@ router.put("/transporterStatus/:email/:status", transporterMethods.transporterSt
 // product status
 router.put("/productStatus/:id/:status", productMethods.productStatus);
 
+// product methods
+// ========================================================================================================================================================================
+
+// delete a product
+router.delete("/deleteProduct/:id", productMethods.deleteProduct);
+
+// updating a product details
+router.put("/updateProduct/:id", productMethods.updateProduct);
+
 //Cart methods
 // =================================================================================================================================================================================
 
@@ -331,5 +341,10 @@ router.delete("/deleteTransporter/:email", adminMethods.deleteTransporter);
 router.delete("/deleteConsumer/:email", adminMethods.deleteConsumer);
 
 router.delete("/deleteProduct/:email", adminMethods.deleteProduct);
+//order routes
+// =====================================================================================================================================================================================
+
+// adding a new order
+router.post("/addOrder/:userid", orderMethods.addOrder);
 
 module.exports = router;

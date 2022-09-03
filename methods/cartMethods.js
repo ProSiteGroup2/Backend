@@ -22,7 +22,7 @@ var functions = {
 								Transporter.findById({ _id: req.params.id }, function (err, transporter) {
 									if (err) throw err;
 									if (!transporter) {
-										res.send({ success: false, msg: "Entered User ID is invalid" });
+										res.send({ success: false, msg: "Entered User ID is invalid or adding cartProduct is failed" });
 									} else {
 										var newCartProduct = CartProduct({
 											buyer_transporter: req.params.id,

@@ -18,7 +18,7 @@ const feedbackSchema=new Schema({
         type:String,
         require:true
     }
-});
+},{timestamps:true});
 
 const Feedback=mongoose.model('feedback',feedbackSchema);
 module.exports=Feedback;

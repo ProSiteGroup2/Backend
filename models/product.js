@@ -29,7 +29,7 @@ const productSchema=new Schema({
         enum:["active","block"],
         default:"active"
     }
-});
+},{timestamps:true});
 
 const Product=mongoose.model('product',productSchema);
 module.exports=Product;

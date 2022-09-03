@@ -35,7 +35,7 @@ const cartProductSchema = new Schema({
 	price: {
 		type: Number,
 	},
-});
+},{timestamps:true});
 
 const CartProduct = mongoose.model("cartproduct", cartProductSchema);
 module.exports = CartProduct;
