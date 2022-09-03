@@ -249,6 +249,12 @@ router.put("/transporterStatus/:email/:status", transporterMethods.transporterSt
 // product status
 router.put("/productStatus/:id/:status", productMethods.productStatus);
 
+// product methods
+// ========================================================================================================================================================================
+
+// delete a product
+router.delete("/deleteProduct/:id",productMethods.deleteProduct);
+
 //Cart methods
 // =================================================================================================================================================================================
 

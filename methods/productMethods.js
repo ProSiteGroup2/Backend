@@ -155,6 +155,16 @@ var functions = {
 			}
 		});
 	},
+
+	deleteProduct:function(req,res){
+		Product.findByIdAndDelete(req.params.id,function(err){
+			if(err){
+				res.send({success:false,msg:"product deletion failed"});
+			}else{
+				res.send({success:true,msg:"product deletion successful"});
+			}
+		})
+	}
 };
 
 module.exports = functions;
