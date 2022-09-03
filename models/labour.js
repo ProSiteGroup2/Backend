@@ -59,7 +59,7 @@ const labourSchema=new Schema({
         default:"active"
     }
     
-});
+},{timestamps:true});
 
 //encrypt the password
 labourSchema.pre('save',function(next){

@@ -31,7 +31,7 @@ const CartSchema=new Schema({
     }],
 
     totalPrice:Number
-});
+},{timestamps:true});
 
 const Cart=mongoose.model('cart',CartSchema);
 module.exports=Cart;

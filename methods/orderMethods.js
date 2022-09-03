@@ -1,91 +1,111 @@
-const Order = require("../models/order");
 const Consumer = require("../models/consumer");
 const Contractor = require("../models/contractor");
-const Hardware = require("../models/hardware");
 const Labour = require("../models/labour");
 const Transporter = require("../models/transporter");
+const Order=require('../models/order');
 
-var functions = {
-	//adding a order
-	addNewOrder: function (req, res) {
-		Consumer.findById({ _id: req.params.id }, function (err, consumer) {
-			if (err) throw err;
-			if (!consumer) {
-				Labour.findById({ _id: req.params.id }, function (err, labour) {
-					if (err) throw err;
-					if (!labour) {
-						Contractor.findById({ _id: req.params.id }, function (err, contractor) {
-							if (err) throw err;
-							if (!contractor) {
-								Transporter.findById({ _id: req.params.id }, function (err, transporter) {
-									if (err) throw err;
-									if (!transporter) {
-										res.send({ success: false, msg: "Entered User ID is invalid" });
-									} else {
-										var newOrder = Order({
-											buyer_transporter: req.params.id,
-											product: req.params.product,
-											quantity: req.params.quantity,
-											price: req.body.price,
-										});
-										newOrder.save(function (err, newOrder) {
-											if (err) {
-												res.send({ success: false, msg: "Failed to place the order details" });
-											} else {
-												res.send({ success: true, msg: "Order details added successfully.", order: newOrder });
-											}
-										});
-									}
-								});
-							} else {
-								var newOrder = Order({
-									buyer_contractor: req.params.id,
-									product: req.params.product,
-									quantity: req.params.quantity,
-									price: req.body.price,
-								});
-								newOrder.save(function (err, newOrder) {
-									if (err) {
-										res.send({ success: false, msg: "Failed to place the order details" });
-									} else {
-										res.send({ success: true, msg: "Order details added successfully.", order: newOrder });
-									}
-								});
-							}
-						});
-					} else {
-						var newOrder = Order({
-							buyer_labour: req.params.id,
-							product: req.params.product,
-							quantity: req.params.quantity,
-							price: req.body.price,
-						});
-						newOrder.save(function (err, newOrder) {
-							if (err) {
-								res.send({ success: false, msg: "Failed to place the order details" });
-							} else {
-								res.send({ success: true, msg: "Order details added successfully.", order: newOrder });
-							}
-						});
-					}
-				});
-			} else {
-				var newOrder = Order({
-					buyer_consumer: req.params.id,
-					product: req.params.product,
-					quantity: req.params.quantity,
-					price: req.body.price,
-				});
-				newOrder.save(function (err, newOrder) {
-					if (err) {
-						res.send({ success: false, msg: "Failed to place the order details" });
-					} else {
-						res.send({ success: true, msg: "Order details added successfully.", order: newOrder });
-					}
-				});
-			}
-		});
-	},
+var functions={
+
+    // adding orders to the table
+    addOrder:function(req,res){
+        Consumer.findById(req.params.userid,function(err,consumer){
+            if(err) throw err;
+            if(consumer){
+
+                var newOrder = Order({
+                    buyer_consumer:req.params.userid,
+                    item:req.body.item,
+                    seller:req.body.seller,
+                    quantity:req.body.quantity,
+                    amount:req.body.amount
+
+                });
+
+                newOrder.save(function (err, newOrder) {
+                    if (err) {
+                        // console.log(err);
+                        res.send({ success: false, msg: "Failed to add Order: backend" });
+                    } else {
+                        res.send({ success: true, msg: "Order Successfully Added", order: newOrder});
+                    }
+                });
+
+            }else{
+                Labour.findById(req.params.userid,function(err,labour){
+                    if(err) throw err;
+                    if(labour){
+                        var newOrder = Order({
+                            buyer_labour:req.params.userid,
+                            item:req.body.item,
+                            seller:req.body.seller,
+                            quantity:req.body.quantity,
+                            amount:req.body.amount
+
+                        });
+
+                        newOrder.save(function (err, newOrder) {
+                            if (err) {
+                                // console.log(err);
+                                res.send({ success: false, msg: "Failed to add Order: backend" });
+                            } else {
+                                res.send({ success: true, msg: "Order Successfully Added", order: newOrder});
+                            }
+                        });
+                    }else{
+                        Contractor.findById(req.params.userid,function(err,contractor){
+                            if(err) throw err;
+                            if(contractor){
+                                var newOrder = Order({
+                                    buyer_contractor:req.params.userid,
+                                    item:req.body.item,
+                                    seller:req.body.seller,
+                                    quantity:req.body.quantity,
+                                    amount:req.body.amount
+                
+                                });
+                
+                                newOrder.save(function (err, newOrder) {
+                                    if (err) {
+                                        // console.log(err);
+                                        res.send({ success: false, msg: "Failed to add Order: backend" });
+                                    } else {
+                                        res.send({ success: true, msg: "Order Successfully Added", order: newOrder});
+                                    }
+                                });
+                            }else{
+                                Transporter.findById(req.params.userid,function(err,transporter){
+                                    if(err) throw err;
+                                    if(transporter){
+                                        var newOrder = Order({
+                                            buyer_transporter:req.params.userid,
+                                            item:req.body.item,
+                                            seller:req.body.seller,
+                                            quantity:req.body.quantity,
+                                            amount:req.body.amount
+                        
+                                        });
+                        
+                                        newOrder.save(function (err, newOrder) {
+                                            if (err) {
+                                                // console.log(err);
+                                                res.send({ success: false, msg: "Failed to add Order: backend" });
+                                            } else {
+                                                res.send({ success: true, msg: "Order Successfully Added", order: newOrder});
+                                            }
+                                        });
+                                    }else{
+                                        res.send({success:false,msg:"adding order failed:backend"});
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    },
+
+
 };
 
 module.exports = functions;

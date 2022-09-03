@@ -24,7 +24,7 @@ const cardSchema = new Schema({
         required:true,
     }
 
-});
+},{timestamps:true});
 
 const Card =mongoose.model('card',cardSchema);
 module.exports= Card;

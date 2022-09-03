@@ -1,41 +1,50 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-const Product = require("./product");
+const mongoose=require('mongoose');
+const Schema=mongoose.Schema;
 
-const orderSchema = new Schema({
-	buyer_consumer: {
-		type: Schema.Types.ObjectId,
-		ref: "consumer",
-	},
+const OrderSchema=new Schema({
+    buyer_consumer:{
+        type: Schema.Types.ObjectId,
+        ref: 'consumer'
+    },
 
-	buyer_labour: {
-		type: Schema.Types.ObjectId,
-		ref: "labour",
-	},
+    buyer_labour:{
+        type: Schema.Types.ObjectId,
+        ref: 'labour'
+    },
 
-	buyer_transporter: {
-		type: Schema.Types.ObjectId,
-		ref: "transporter",
-	},
+    buyer_transporter:{
+        type: Schema.Types.ObjectId,
+        ref: 'transporter'
+    },
 
-	buyer_contractor: {
-		type: Schema.Types.ObjectId,
-		ref: "contractor",
-	},
+    buyer_contractor:{
+        type: Schema.Types.ObjectId,
+        ref: 'contractor'
+    },
 
-	product: {
-		type: Schema.Types.ObjectId,
-		ref: "product",
-	},
+    item:{
+        type: Schema.Types.ObjectId,
+        ref: 'product',
+        require:true
+    },
 
-	quantity: {
-		type: Number,
-	},
+    seller:{
+        type: Schema.Types.ObjectId,
+        ref: 'hardware',
+        require:true
+    },
 
-	price: {
-		type: Number,
-	},
-});
+    quantity:{
+        type:Number,
+        required:true
+    },
 
-const Order = mongoose.model("order", orderSchema);
-module.exports = Order;
+    amount:{
+        type:Number,
+        required:true
+    }
+},{timestamps:true});
+
+const Order=mongoose.model('order',OrderSchema);
+module.exports=Order;
+

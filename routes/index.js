@@ -69,6 +69,9 @@ router.post("/addAppointment", appointmentMethods.addNewAppointment);
 //add a new Feedback
 router.post("/addFeedback", feedbackMethods.addNewFeedback);
 
+//add a new order
+router.post("/addOrder", orderMethods.addOrder);
+
 //Retrieving feedbacks,Appointmnets
 // ==============================================================================================================================================================
 
@@ -252,6 +255,15 @@ router.put("/transporterStatus/:email/:status", transporterMethods.transporterSt
 // product status
 router.put("/productStatus/:id/:status", productMethods.productStatus);
 
+// product methods
+// ========================================================================================================================================================================
+
+// delete a product
+router.delete("/deleteProduct/:id", productMethods.deleteProduct);
+
+// updating a product details
+router.put("/updateProduct/:id", productMethods.updateProduct);
+
 //Cart methods
 // =================================================================================================================================================================================
 
@@ -334,5 +346,10 @@ router.delete("/deleteTransporter/:email", adminMethods.deleteTransporter);
 router.delete("/deleteConsumer/:email", adminMethods.deleteConsumer);
 
 router.delete("/deleteProduct/:email", adminMethods.deleteProduct);
+//order routes
+// =====================================================================================================================================================================================
+
+// adding a new order
+router.post("/addOrder/:userid", orderMethods.addOrder);
 
 module.exports = router;
