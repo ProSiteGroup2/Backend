@@ -14,6 +14,7 @@ const productMethods = require("../methods/productMethods");
 const appointmentMethods = require("../methods/appointmentMethods");
 const feedbackMethods = require("../methods/feedbackMethods");
 const carddetailsMethods = require("../methods/carddetailsMethods");
+const orderMethods = require("../methods/orderMethods");
 const adminMethods = require("../methods/adminMethods");
 
 const storage = multer.diskStorage({
