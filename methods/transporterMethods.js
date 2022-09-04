@@ -250,6 +250,16 @@ var functions = {
 			}
 		});
 	},
+
+	getTransporterNotify:function(req,res){
+		Transporter.findById(req.params.id,function(err,transporter){
+			if(err){
+				res.send({success:false,msg:"Coudn't find transporter"});
+			}else{
+				res.send({success:true,msg:"Found the transporter",transporter:transporter});
+			}
+		}).populate('notifications');
+	}
 };
 
 module.exports = functions;

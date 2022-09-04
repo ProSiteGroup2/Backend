@@ -224,6 +224,16 @@ var functions = {
 			}
 		});
 	},
+
+	getConsumerNotify:function(req,res){
+		Consumer.findById(req.params.id,function(err,consumer){
+			if(err){
+				res.send({success:false,msg:"Coudn't find consumer"});
+			}else{
+				res.send({success:true,msg:"Found the consumer",consumer:consumer});
+			}
+		}).populate('notifications');
+	}
 };
 
 module.exports = functions;

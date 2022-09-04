@@ -250,6 +250,16 @@ var functions = {
 			}
 		});
 	},
+
+	getHardwareNotify:function(req,res){
+		Hardware.findById(req.params.id,function(err,hardware){
+			if(err){
+				res.send({success:false,msg:"Coudn't find hardware"});
+			}else{
+				res.send({success:true,msg:"Found the hardware",hardware:hardware});
+			}
+		}).populate('notifications');
+	}
 };
 
 module.exports = functions;

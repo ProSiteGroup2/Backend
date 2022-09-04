@@ -253,6 +253,16 @@ var functions = {
 			}
 		});
 	},
+
+	getContractorNotify:function(req,res){
+		Contractor.findById(req.params.id,function(err,contractor){
+			if(err){
+				res.send({success:false,msg:"Coudn't find contractor"});
+			}else{
+				res.send({success:true,msg:"Found the contractor",contractor:contractor});
+			}
+		}).populate('notifications');
+	}
 };
 
 module.exports = functions;
