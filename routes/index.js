@@ -16,7 +16,6 @@ const feedbackMethods = require("../methods/feedbackMethods");
 const carddetailsMethods = require("../methods/carddetailsMethods");
 const orderMethods = require("../methods/orderMethods");
 const adminMethods = require("../methods/adminMethods");
-const orderMethods = require("../methods/orderMethods");
 const notificationMethods = require("../methods/notificationMethods");
 
 const storage = multer.diskStorage({
@@ -160,6 +159,8 @@ router.get("/getTransporters", transporterMethods.getTransporters);
 
 router.get("/getProducts", productMethods.getProducts);
 
+router.get("/getOrders", orderMethods.getOrders);
+
 //Change password of users
 // ====================================================================================================================================================
 router.put("/changeConsumerPw", consumerMethods.changeConsumerPw);
@@ -193,13 +194,13 @@ router.get("/getProducts", productMethods.getProducts);
 // ==============================================================================================================================================================
 
 //add an admin
-router.post("/addAdmin",adminMethods.addNewAdmin);
+router.post("/addAdmin", adminMethods.addNewAdmin);
 
 // authenticate admin
-router.post('/adminLogin',adminMethods.authenticateAdmin);
+router.post("/adminLogin", adminMethods.authenticateAdmin);
 
 // admin get info
-router.get('/getAdminInfo',adminMethods.getAdminInfo)
+router.get("/getAdminInfo", adminMethods.getAdminInfo);
 
 //Getting all the records in a table for admin
 // =========================================================================================================================================================
