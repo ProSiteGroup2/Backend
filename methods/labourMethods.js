@@ -311,7 +311,7 @@ var functions = {
 			}else{
 				res.send({success:true,msg:"Found the labour",labour:labour});
 			}
-		}).populate('notifications');
+		}).populate({path:'notifications',populate:{path:'product'}}).populate({path:'notifications',populate:{path:'consumer'}});
 	}
 };
 

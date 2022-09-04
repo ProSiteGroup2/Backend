@@ -257,7 +257,7 @@ var functions = {
 			}else{
 				res.send({success:true,msg:"Found the transporter",transporter:transporter});
 			}
-		}).populate('notifications');
+		}).populate({path:'notifications',populate:{path:'product'}}).populate({path:'notifications',populate:{path:'consumer'}});
 	}
 };
 

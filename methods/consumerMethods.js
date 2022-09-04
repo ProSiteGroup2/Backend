@@ -247,7 +247,7 @@ var functions = {
 			}else{
 				res.send({success:true,msg:"Found the consumer",consumer:consumer});
 			}
-		}).populate('notifications');
+		}).populate({path:'notifications',populate:{path:'product'}}).populate({path:'notifications',populate:{path:'labour'}}).populate({path:'notifications',populate:{path:'contractor'}}).populate({path:'notifications',populate:{path:'transporter'}});
 	}
 };
 
