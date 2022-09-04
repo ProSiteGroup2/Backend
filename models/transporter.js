@@ -53,7 +53,12 @@ const transporterSchema=new Schema({
         type:String,
         enum:["active","block"],
         default:"active"
-    }
+    },
+
+    notifications:[{
+        type: Schema.Types.ObjectId,
+        ref: 'notification'
+    }]
     
 },{timestamps:true});
 

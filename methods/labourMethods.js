@@ -303,6 +303,16 @@ var functions = {
 			}
 		});
 	},
+
+	getLabourNotify:function(req,res){
+		Labour.findById(req.params.id,function(err,labour){
+			if(err){
+				res.send({success:false,msg:"Coudn't find labour"});
+			}else{
+				res.send({success:true,msg:"Found the labour",labour:labour});
+			}
+		}).populate('notifications');
+	}
 };
 
 module.exports = functions;

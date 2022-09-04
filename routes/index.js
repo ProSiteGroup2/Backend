@@ -16,6 +16,8 @@ const feedbackMethods = require("../methods/feedbackMethods");
 const carddetailsMethods = require("../methods/carddetailsMethods");
 const orderMethods = require("../methods/orderMethods");
 const adminMethods = require("../methods/adminMethods");
+const orderMethods = require("../methods/orderMethods");
+const notificationMethods = require("../methods/notificationMethods");
 
 const storage = multer.diskStorage({
 	// destination: function (req, file, cb) {
@@ -352,5 +354,32 @@ router.delete("/deleteProduct/:email", adminMethods.deleteProduct);
 
 // adding a new order
 router.post("/addOrder/:userid", orderMethods.addOrder);
+
+// notification methods
+// ==============================================================================================================================================================================================
+
+router.post("/purchaseNotify/:id", notificationMethods.purchaseNotify);
+
+router.post("/hireNotify/:id", notificationMethods.hireNotify);
+
+router.put("/pushNotifytoBuyer/:id", notificationMethods.pushNotificationtoBuyer);
+
+router.put("/pushNotifytoSeller/:id", notificationMethods.pushNotificationtoSeller);
+
+router.put("/pushNotifytoWorker/:id", notificationMethods.pushNotificationtoWorker);
+
+router.put("/pushNotifytoConsumer/:id", notificationMethods.pushNotificationtoConsumer);
+
+router.get("/getConsumerNotify/:id", consumerMethods.getConsumerNotify);
+
+router.get("/getHardwareNotify/:id", hardwareMethods.getHardwareNotify);
+
+router.get("/getLabourNotify/:id", labourMethods.getLabourNotify);
+
+router.get("/getTransporterNotify/:id", transporterMethods.getTransporterNotify);
+
+router.get("/getContractorNotify/:id", contractorMethods.getContractorNotify);
+
+// =========================================================================================================================================================
 
 module.exports = router;
