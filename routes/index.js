@@ -189,6 +189,18 @@ router.put("/productImage/:id", upload.single("image"), productMethods.productIm
 
 router.get("/getProducts", productMethods.getProducts);
 
+// admin methods
+// ==============================================================================================================================================================
+
+//add an admin
+router.post("/addAdmin",adminMethods.addNewAdmin);
+
+// authenticate admin
+router.post('/adminLogin',adminMethods.authenticateAdmin);
+
+// admin get info
+router.get('/getAdminInfo',adminMethods.getAdminInfo)
+
 //Getting all the records in a table for admin
 // =========================================================================================================================================================
 

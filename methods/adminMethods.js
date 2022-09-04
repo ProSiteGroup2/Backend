@@ -18,37 +18,56 @@ const Transporter = require('../models/transporter');
 var functions={
 
     // add a new admin
-    addNewConsumer:function(req,res){
-        Admin.findOne({email:req.body.email},function(err,admin){
-            if(err) throw err;
-            if(admin){
-                res.send({success:false,msg:'Email already exists!'});
-            }else{
-                if(!req.body.username || !req.body.email || !req.body.contactNo || !req.body.address || !req.body.hometown|| !req.body.district|| !req.body.password){
-                    res.send({success:false,msg: 'Enter all fields'});
-                }
-                else{
-                    var newAdmin=Admin({
-                        username:req.body.username,
-                        email: req.body.email,
-                        contactNo: req.body.contactNo,
-                        address: req.body.address,
-                        hometown:req.body.hometown,
-                        district: req.body.district,
-                        password: req.body.password,
-                    });
-                    newAdmin.save(function(err,newAdmin){
-                        if(err){
-                            res.send({success:false,msg:'Failed to save'});
-                        }
-                        else{
-                            res.send({success:true,msg:'Successfully Saved'});
-                        }
-                    });
-                }
+    addNewAdmin:function(req,res){
+        var newAdmin = Admin({
+            username:req.body.username,
+            email:req.body.email,
+            password:req.body.password
+        });
+        newAdmin.save(function (err, newAdmin) {
+            if (err) {
+                res.send({ success: false, msg: "Failed to save" });
+            } else {
+                res.send({ success: true, msg: "Successfully Saved", admin: newAdmin });
             }
         });
     },
+
+    // authenticate admin (login)
+    authenticateAdmin:function(req,res){
+        Admin.findOne({ email: req.body.email }, function (err, admin) {
+			if (err) throw err;
+			if (!admin) {
+				res.status(403).send({ success: false, msg: "Authentication Failed, Admin not found" });
+			} else {
+				admin.comparePassword(req.body.password, function (err, isMatch) {
+					if (isMatch && !err) {
+						var token = jwt.encode(admin, config.secret);
+						res.send({ success: true, token: token });
+					} else {
+						return res.status(403).send({ success: false, msg: "Authentication failed, wrong password" });
+					}
+				});
+			}
+		});
+    },
+
+    // get admin info from the token
+    getAdminInfo:async (req,res)=>{
+        if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer") {
+			var token = req.headers.authorization.split(" ")[1];
+			var decodedtoken = jwt.decode(token, config.secret);
+			// console.lsog(decodedtoken);
+			req.user = await Admin.findById(decodedtoken._id);
+
+			console.log(req.user);
+			return res.send({ success: true, msg: "Hello " + decodedtoken.username, admin: req.user });
+		} else {
+			return res.send({ success: false, msg: "No Headers" });
+		}
+    },
+
+
     otpForgotPass: async(req,res) => {
         const account = await Admin.findOne({contactNo:req.body.contactNo});
         if(!account) return res.status(400).json({success:false, msg:"Admin not found!"});
