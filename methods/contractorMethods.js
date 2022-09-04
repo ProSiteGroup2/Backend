@@ -101,7 +101,7 @@ var functions = {
 			source: "ShoutDEMO",
 			destinations: [code_with_number],
 			content: {
-				sms: `yoor OTP is: ${OTP}`,
+				sms: `your OTP is: ${OTP}`,
 			},
 			transports: ["sms"],
 		};
