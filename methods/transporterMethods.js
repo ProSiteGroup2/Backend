@@ -10,7 +10,7 @@ const otpGenerator = require("otp-generator");
 const Otp = require("../models/otp");
 const bcrypt = require("bcrypt");
 const ShoutoutClient = require("shoutout-sdk");
-const Transporter = require("../models/transporter");
+
 
 var functions = {
 	// add a new transporter
