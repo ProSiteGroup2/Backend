@@ -298,6 +298,9 @@ router.put("/updateStock/:id", productMethods.productStockUpdate);
 // adding a new order
 router.post("/addOrder/:userid",orderMethods.addOrder);
 
+// get hardware orders
+router.get('/getHardwareOrders/:hardwareId',orderMethods.getHardwareOrders);
+
 // notification methods
 // ==============================================================================================================================================================================================
 

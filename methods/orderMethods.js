@@ -105,6 +105,17 @@ var functions={
         });
     },
 
+    getHardwareOrders:function(req,res){
+        Order.find({seller:req.params.hardwareId},function(err,orders){
+            if(err) throw err;
+            if(orders){
+                res.send({success:true,msg:"hardware orders found successfully",orders:orders});
+            }else{
+                res.send({success:false,msg:"hardware ordes not found"});
+            }
+        }).populate('item').populate('buyer_consumer').populate('buyer_labour').populate('buyer_contractor').populate('buyer_transporter');
+    }
+
 
 };
 
