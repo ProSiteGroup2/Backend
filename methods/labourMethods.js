@@ -199,6 +199,23 @@ var functions = {
 		}
 	},
 
+	//changeLaborPw
+	changeLabourPw: async (req, res) => {
+		if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer") {
+			var token = req.headers.authorization.split(" ")[1];
+			var decodedtoken = jwt.decode(token, config.secret);
+			var labour = await Labour.findById(decodedtoken._id);
+
+			if (!(await labour.comparePasswordChanging(req.body.password))) {
+				res.json({ success: false, err: "Password not match" });
+			} else {
+				labour.password = req.body.newPassword;
+				await labour.save();
+				res.json({ success: true, msg: "sucessfuly change password" });
+			}
+		}
+	},
+
 	//uploading the profile image of labour
 	labourProfile: async (req, res) => {
 		const data = await uploadToCloudinary(req.file.path, "images");

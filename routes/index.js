@@ -171,6 +171,8 @@ router.put("/changeContractorPw", contractorMethods.changeContractorPw);
 
 router.put("/changeTransporterPw", transporterMethods.changeTransporterPw);
 
+router.put("/changeLabourPw", labourMethods.changeLabourPw);
+
 //uploading images
 // ============================================================================================================================================
 
