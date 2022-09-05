@@ -301,6 +301,15 @@ router.post("/addOrder/:userid",orderMethods.addOrder);
 // get hardware orders
 router.get('/getHardwareOrders/:hardwareId',orderMethods.getHardwareOrders);
 
+router.get('/getConsumerOrders/:id',orderMethods.getConsumerOrders);
+
+router.get('/getLabourOrders/:id',orderMethods.getLabourOrders);
+
+router.get('/getContractorOrders/:id',orderMethods.getContractorOrders);
+
+router.get('/getTransporterOrders/:id',orderMethods.getTransporterOrders);
+
+
 // notification methods
 // ==============================================================================================================================================================================================
 

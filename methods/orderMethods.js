@@ -114,7 +114,51 @@ var functions={
                 res.send({success:false,msg:"hardware ordes not found"});
             }
         }).populate('item').populate('buyer_consumer').populate('buyer_labour').populate('buyer_contractor').populate('buyer_transporter');
-    }
+    },
+
+    getConsumerOrders:function(req,res){
+        Order.find({buyer_consumer:req.params.id},function(err,orders){
+            if(err) throw err;
+            if(orders){
+                res.send({success:true,msg:"consumer orders found",orders:orders});
+            }else{
+                res.send({success:false,msg:"consumer orders not found"});
+            }
+        }).populate('item').populate('seller');
+    },
+
+    getLabourOrders:function(req,res){
+        Order.find({buyer_labour:req.params.id},function(err,orders){
+            if(err) throw err;
+            if(orders){
+                res.send({success:true,msg:"labour orders found",orders:orders});
+            }else{
+                res.send({success:false,msg:"labour orders not found"});
+            }
+        }).populate('item').populate('seller');
+    },
+
+    getContractorOrders:function(req,res){
+        Order.find({buyer_contractor:req.params.id},function(err,orders){
+            if(err) throw err;
+            if(orders){
+                res.send({success:true,msg:"contractor orders found",orders:orders});
+            }else{
+                res.send({success:false,msg:"contractor orders not found"});
+            }
+        }).populate('item').populate('seller');
+    },
+
+    getTransporterOrders:function(req,res){
+        Order.find({buyer_transporter:req.params.id},function(err,orders){
+            if(err) throw err;
+            if(orders){
+                res.send({success:true,msg:"transporter orders found",orders:orders});
+            }else{
+                res.send({success:false,msg:"transporter orders not found"});
+            }
+        }).populate('item').populate('seller');
+    },
 
 
 };
