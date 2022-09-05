@@ -27,7 +27,7 @@ const CartSchema=new Schema({
 
     cartProducts:[{
         type: Schema.Types.ObjectId,
-        ref: 'cartProduct'
+        ref: 'cartproduct'
     }],
 
     totalPrice:Number
