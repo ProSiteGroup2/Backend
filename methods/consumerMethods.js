@@ -16,7 +16,15 @@ var functions = {
 			if (consumer) {
 				res.send({ success: false, msg: "Email already exists!" });
 			} else {
-				if (!req.body.username ||!req.body.email ||!req.body.contactNo ||!req.body.address ||!req.body.hometown ||!req.body.district ||!req.body.password) {
+				if (
+					!req.body.username ||
+					!req.body.email ||
+					!req.body.contactNo ||
+					!req.body.address ||
+					!req.body.hometown ||
+					!req.body.district ||
+					!req.body.password
+				) {
 					res.send({ success: false, msg: "Enter all fields" });
 				} else {
 					var newConsumer = Consumer({
@@ -39,7 +47,6 @@ var functions = {
 			}
 		});
 	},
-	
 	otpForgotPass: async (req, res) => {
 		const account = await Consumer.findOne({ contactNo: req.body.contactNo });
 		if (!account) return res.status(400).json({ success: false, msg: "Consumer not found!" });
@@ -57,7 +64,7 @@ var functions = {
 
 		//send otp using shoutout
 		var apikey =
-			"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIzYzhkYmFiMC0xYjQ4LTExZWQtYTQ4Yi04NzUxZmQ3YjQ1ZjUiLCJzdWIiOiJTSE9VVE9VVF9BUElfVVNFUiIsImlhdCI6MTY2MDQyMzI1OCwiZXhwIjoxOTc2MDQyNDU4LCJzY29wZXMiOnsiYWN0aXZpdGllcyI6WyJyZWFkIiwid3JpdGUiXSwibWVzc2FnZXMiOlsicmVhZCIsIndyaXRlIl0sImNvbnRhY3RzIjpbInJlYWQiLCJ3cml0ZSJdfSwic29fdXNlcl9pZCI6IjczMjMxIiwic29fdXNlcl9yb2xlIjoidXNlciIsInNvX3Byb2ZpbGUiOiJhbGwiLCJzb191c2VyX25hbWUiOiIiLCJzb19hcGlrZXkiOiJub25lIn0.5yaj6wxkxkjMTl3hkJq8aoSXX0FzKurGL640sBWx8_8";
+			"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmMTU0YTA3MC0yYTBkLTExZWQtYTIyZC0yMzNlNTJkNzg3MDYiLCJzdWIiOiJTSE9VVE9VVF9BUElfVVNFUiIsImlhdCI6MTY2MjA0NzQ4OSwiZXhwIjoxOTc3NjY2Njg5LCJzY29wZXMiOnsiYWN0aXZpdGllcyI6WyJyZWFkIiwid3JpdGUiXSwibWVzc2FnZXMiOlsicmVhZCIsIndyaXRlIl0sImNvbnRhY3RzIjpbInJlYWQiLCJ3cml0ZSJdfSwic29fdXNlcl9pZCI6IjczMzgxIiwic29fdXNlcl9yb2xlIjoidXNlciIsInNvX3Byb2ZpbGUiOiJhbGwiLCJzb191c2VyX25hbWUiOiIiLCJzb19hcGlrZXkiOiJub25lIn0.7ODAC-X1QFiFFKMpoe23iD-mpEPRkO6twmBsvQvgnOM";
 		var debug = true,
 			verifySSL = false;
 		var client = new ShoutoutClient(apikey, debug, verifySSL);
@@ -154,7 +161,15 @@ var functions = {
 			var decodedtoken = jwt.decode(token, config.secret);
 
 			//console.log("user");
-			if (!req.body.username ||!req.body.email ||!req.body.contactNo ||!req.body.address ||!req.body.hometown ||!req.body.district ||!req.body.password) {
+			if (
+				!req.body.username ||
+				!req.body.email ||
+				!req.body.contactNo ||
+				!req.body.address ||
+				!req.body.hometown ||
+				!req.body.district ||
+				!req.body.password
+			) {
 				var user = await Consumer.findByIdAndUpdate(decodedtoken._id, req.body, {
 					new: true,
 					runValidators: true,

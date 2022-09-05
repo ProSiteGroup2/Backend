@@ -14,9 +14,9 @@ const productMethods = require("../methods/productMethods");
 const appointmentMethods = require("../methods/appointmentMethods");
 const feedbackMethods = require("../methods/feedbackMethods");
 const carddetailsMethods = require("../methods/carddetailsMethods");
+const orderMethods = require("../methods/orderMethods");
 const adminMethods = require("../methods/adminMethods");
-const orderMethods=require('../methods/orderMethods');
-const notificationMethods=require('../methods/notificationMethods');
+const notificationMethods = require("../methods/notificationMethods");
 
 const storage = multer.diskStorage({
 	// destination: function (req, file, cb) {
@@ -70,6 +70,9 @@ router.post("/addAppointment", appointmentMethods.addNewAppointment);
 
 //add a new Feedback
 router.post("/addFeedback", feedbackMethods.addNewFeedback);
+
+//add a new order
+router.post("/addOrder", orderMethods.addOrder);
 
 //Retrieving feedbacks,Appointmnets
 // ==============================================================================================================================================================
@@ -140,6 +143,9 @@ router.put("/transporterProfile/:email", upload.single("profile"), transporterMe
 
 router.put("/updatetransporterinfo", transporterMethods.updateTransporterInfo);
 
+// uploading product image
+router.put("/productImage/:id", upload.single("image"), productMethods.productImage);
+
 //Getting all the records in a table
 // =========================================================================================================================================================
 
@@ -153,6 +159,8 @@ router.get("/getTransporters", transporterMethods.getTransporters);
 
 router.get("/getProducts", productMethods.getProducts);
 
+
+
 //Change password of users
 // ====================================================================================================================================================
 router.put("/changeConsumerPw", consumerMethods.changeConsumerPw);
@@ -162,6 +170,8 @@ router.put("/changeHardwarePw", hardwareMethods.changeHardwarePw);
 router.put("/changeContractorPw", contractorMethods.changeContractorPw);
 
 router.put("/changeTransporterPw", transporterMethods.changeTransporterPw);
+
+router.put("/changeLabourPw", labourMethods.changeLabourPw);
 
 //uploading images
 // ============================================================================================================================================
@@ -180,6 +190,19 @@ router.put("/transporterProfile/:email", upload.single("profile"), transporterMe
 // uploading product image
 router.put("/productImage/:id", upload.single("image"), productMethods.productImage);
 
+router.get("/getProducts", productMethods.getProducts);
+
+// admin methods
+// ==============================================================================================================================================================
+
+//add an admin
+router.post("/addAdmin", adminMethods.addNewAdmin);
+
+// authenticate admin
+router.post("/adminLogin", adminMethods.authenticateAdmin);
+
+// admin get info
+router.get("/getAdminInfo", adminMethods.getAdminInfo);
 
 //Getting all the records in a table for admin
 // =========================================================================================================================================================
@@ -192,7 +215,7 @@ router.get("/admin/getHardwares", adminMethods.getHardware);
 
 router.get("/admin/getTransporters", adminMethods.getTransporter);
 
-router.get("/getProducts", adminMethods.getProduct);
+router.get("/admin/getProducts", adminMethods.getProduct);
 
 router.get("/admin/getConsumers", adminMethods.getConsumer);
 
@@ -254,10 +277,10 @@ router.put("/productStatus/:id/:status", productMethods.productStatus);
 // ========================================================================================================================================================================
 
 // delete a product
-router.delete("/deleteProduct/:id",productMethods.deleteProduct);
+router.delete("/deleteProduct/:id", productMethods.deleteProduct);
 
 // updating a product details
-router.put("/updateProduct/:id",productMethods.updateProduct);
+router.put("/updateProduct/:id", productMethods.updateProduct);
 
 //Cart methods
 // =================================================================================================================================================================================
@@ -292,11 +315,64 @@ router.put("/updateCartPrice/:id", cartMethods.updateCartPrice);
 // product stock update
 router.put("/updateStock/:id", productMethods.productStockUpdate);
 
-//order methods
+// reset password
+//=============================================================================================================================================================
+
+router.post("/otpForgotPass", consumerMethods.otpForgotPass);
+
+router.post("/otpVerify", consumerMethods.otpVerify);
+
+router.post("/forgotPassword", consumerMethods.forgotPassword);
+
+router.post("/otpForgotPass", hardwareMethods.otpForgotPass);
+
+router.post("/otpVerify", hardwareMethods.otpVerify);
+
+router.post("/forgotPassword", hardwareMethods.forgotPassword);
+
+router.post("/otpForgotPass", contractorMethods.otpForgotPass);
+
+router.post("/otpVerify", contractorMethods.otpVerify);
+
+router.post("/forgotPassword", contractorMethods.forgotPassword);
+
+router.post("/otpForgotPass", labourMethods.otpForgotPass);
+
+router.post("/otpVerify", labourMethods.otpVerify);
+
+router.post("/forgotPassword", labourMethods.forgotPassword);
+
+router.post("/otpForgotPass", transporterMethods.otpForgotPass);
+
+router.post("/otpVerify", transporterMethods.otpVerify);
+
+router.post("/forgotPassword", transporterMethods.forgotPassword);
+
+// delete users
+//=============================================================================================================================================================
+
+router.delete("/deleteContractor/:email", adminMethods.deleteContractor);
+
+module.exports = router;
+
+router.delete("/deleteHardware/:email", adminMethods.deleteHardware);
+
+router.delete("/deleteLabour/:email", adminMethods.deleteLabour);
+
+router.delete("/deleteTransporter/:email", adminMethods.deleteTransporter);
+
+router.delete("/deleteConsumer/:email", adminMethods.deleteConsumer);
+
+router.delete("/deleteProduct/:email", adminMethods.deleteProduct);
+
+
+//order routes
 // =====================================================================================================================================================================================
 
+router.get("/getOrders", orderMethods.getOrders);
+
 // adding a new order
-router.post("/addOrder/:userid",orderMethods.addOrder);
+router.post("/addOrder/:userid", orderMethods.addOrder);
 
 // get hardware orders
 router.get('/getHardwareOrders/:hardwareId',orderMethods.getHardwareOrders);
@@ -313,27 +389,27 @@ router.get('/getTransporterOrders/:id',orderMethods.getTransporterOrders);
 // notification methods
 // ==============================================================================================================================================================================================
 
-router.post('/purchaseNotify/:id',notificationMethods.purchaseNotify);
+router.post("/purchaseNotify/:id", notificationMethods.purchaseNotify);
 
-router.post('/hireNotify/:id',notificationMethods.hireNotify);
+router.post("/hireNotify/:id", notificationMethods.hireNotify);
 
-router.put('/pushNotifytoBuyer/:id',notificationMethods.pushNotificationtoBuyer);
+router.put("/pushNotifytoBuyer/:id", notificationMethods.pushNotificationtoBuyer);
 
-router.put('/pushNotifytoSeller/:id',notificationMethods.pushNotificationtoSeller);
+router.put("/pushNotifytoSeller/:id", notificationMethods.pushNotificationtoSeller);
 
-router.put('/pushNotifytoWorker/:id',notificationMethods.pushNotificationtoWorker);
+router.put("/pushNotifytoWorker/:id", notificationMethods.pushNotificationtoWorker);
 
-router.put('/pushNotifytoConsumer/:id',notificationMethods.pushNotificationtoConsumer);
+router.put("/pushNotifytoConsumer/:id", notificationMethods.pushNotificationtoConsumer);
 
-router.get('/getConsumerNotify/:id',consumerMethods.getConsumerNotify);
+router.get("/getConsumerNotify/:id", consumerMethods.getConsumerNotify);
 
-router.get('/getHardwareNotify/:id',hardwareMethods.getHardwareNotify);
+router.get("/getHardwareNotify/:id", hardwareMethods.getHardwareNotify);
 
-router.get('/getLabourNotify/:id',labourMethods.getLabourNotify);
+router.get("/getLabourNotify/:id", labourMethods.getLabourNotify);
 
-router.get('/getTransporterNotify/:id',transporterMethods.getTransporterNotify);
+router.get("/getTransporterNotify/:id", transporterMethods.getTransporterNotify);
 
-router.get('/getContractorNotify/:id',contractorMethods.getContractorNotify);
+router.get("/getContractorNotify/:id", contractorMethods.getContractorNotify);
 
 // =========================================================================================================================================================
 

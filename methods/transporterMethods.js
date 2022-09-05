@@ -11,6 +11,7 @@ const Otp = require("../models/otp");
 const bcrypt = require("bcrypt");
 const ShoutoutClient = require("shoutout-sdk");
 
+
 var functions = {
 	// add a new transporter
 	addNewTransporter: function (req, res) {
@@ -199,13 +200,13 @@ var functions = {
 		if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer") {
 			var token = req.headers.authorization.split(" ")[1];
 			var decodedtoken = jwt.decode(token, config.secret);
-			var Transporter = await Transporter.findById(decodedtoken._id);
+			var transporter = await Transporter.findById(decodedtoken._id);
 
-			if (!(await Transporter.comparePasswordChanging(req.body.password))) {
+			if (!(await transporter.comparePasswordChanging(req.body.password))) {
 				res.json({ success: false, err: "Password not match" });
 			} else {
-				Transporter.password = req.body.newPassword;
-				await Transporter.save();
+				transporter.password = req.body.newPassword;
+				await transporter.save();
 				res.json({ success: true, msg: "sucessfuly change password" });
 			}
 		}
@@ -239,7 +240,6 @@ var functions = {
 			}
 		});
 	},
-	
 	transporterStatus: async (req, res) => {
 		Transporter.findOneAndUpdate({ email: req.params.email }, { status: req.params.status }, { new: true }, function (err, transporter) {
 			if (err) throw err;

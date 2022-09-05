@@ -199,6 +199,23 @@ var functions = {
 		}
 	},
 
+	//changeLaborPw
+	changeLabourPw: async (req, res) => {
+		if (req.headers.authorization && req.headers.authorization.split(" ")[0] === "Bearer") {
+			var token = req.headers.authorization.split(" ")[1];
+			var decodedtoken = jwt.decode(token, config.secret);
+			var labour = await Labour.findById(decodedtoken._id);
+
+			if (!(await labour.comparePasswordChanging(req.body.password))) {
+				res.json({ success: false, err: "Password not match" });
+			} else {
+				labour.password = req.body.newPassword;
+				await labour.save();
+				res.json({ success: true, msg: "sucessfuly change password" });
+			}
+		}
+	},
+
 	//uploading the profile image of labour
 	labourProfile: async (req, res) => {
 		const data = await uploadToCloudinary(req.file.path, "images");
@@ -229,7 +246,7 @@ var functions = {
 	},
 
 	getMason: function (req, res) {
-		Labour.find({ profession: "Mason",status:"active" }, function (err, masons) {
+		Labour.find({ profession: "Mason" }, function (err, masons) {
 			if (err) throw err;
 			if (masons) {
 				res.send({ success: true, msg: "Masons found", masons: masons });
@@ -240,7 +257,7 @@ var functions = {
 	},
 
 	getElectrician: function (req, res) {
-		Labour.find({ profession: "Electrician",status:"active" }, function (err, electricians) {
+		Labour.find({ profession: "Electrician" }, function (err, electricians) {
 			if (err) throw err;
 			if (electricians) {
 				res.send({ success: true, msg: "Electricians found", electricians: electricians });
@@ -251,7 +268,7 @@ var functions = {
 	},
 
 	getPlumber: function (req, res) {
-		Labour.find({ profession: "Plumber",status:"active" }, function (err, plumbers) {
+		Labour.find({ profession: "Plumber" }, function (err, plumbers) {
 			if (err) throw err;
 			if (plumbers) {
 				res.send({ success: true, msg: "Plumbers found", plumbers: plumbers });
@@ -262,7 +279,7 @@ var functions = {
 	},
 
 	getCarpenter: function (req, res) {
-		Labour.find({ profession: "Carpenter",status:"active" }, function (err, carpenters) {
+		Labour.find({ profession: "Carpenter" }, function (err, carpenters) {
 			if (err) throw err;
 			if (carpenters) {
 				res.send({ success: true, msg: "Carpenters found", carpenters: carpenters });
@@ -273,7 +290,7 @@ var functions = {
 	},
 
 	getArchitecturer: function (req, res) {
-		Labour.find({ profession: "Architecturer" ,status:"active"}, function (err, architecturers) {
+		Labour.find({ profession: "Architecturer" }, function (err, architecturers) {
 			if (err) throw err;
 			if (architecturers) {
 				res.send({ success: true, msg: "Architecturers found", architecturers: architecturers });
@@ -284,7 +301,7 @@ var functions = {
 	},
 
 	getPainter: function (req, res) {
-		Labour.find({ profession: "Painter" ,status:"active"}, function (err, painters) {
+		Labour.find({ profession: "Painter" }, function (err, painters) {
 			if (err) throw err;
 			if (painters) {
 				res.send({ success: true, msg: "Painters found", painters: painters });

@@ -101,7 +101,7 @@ var functions = {
 			source: "ShoutDEMO",
 			destinations: [code_with_number],
 			content: {
-				sms: `yoor OTP is: ${OTP}`,
+				sms: `your OTP is: ${OTP}`,
 			},
 			transports: ["sms"],
 		};
@@ -188,7 +188,7 @@ var functions = {
 					runValidators: true,
 				});
 
-				res.send({ success: true, data: user });
+				res.send({ success: true, data: contractor });
 			} else {
 				res.send({ success: false, msg: "missing fields" });
 			}
@@ -216,7 +216,7 @@ var functions = {
 
 	//get all the contractors
 	getContractors: function (req, res) {
-		Contractor.find({status:"active"}).exec(function (err, contractors) {
+		Contractor.find({ status: "active" }).exec(function (err, contractors) {
 			if (err) throw err;
 			if (contractors) {
 				res.send({ success: true, msg: "contractos found", contractors: contractors });

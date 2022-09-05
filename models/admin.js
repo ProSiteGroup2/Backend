@@ -18,22 +18,13 @@ const adminSchema=new Schema({
     password:{
         type:String,
     },
-
-    publicId: {
-        type: String,
-    },
-    
-    imageUrl: {
-        type: String,
-    },
-
    
 });
 
 
 //encrypt the password
 adminSchema.pre('save',function(next){
-    var consumer=this;
+    var admin=this;
     if(this.isModified('password')|| this.isNew){
         bcrypt.genSalt(10,function(err,salt){
             if(err){
