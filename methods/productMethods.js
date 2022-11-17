@@ -156,25 +156,25 @@ var functions = {
 		});
 	},
 
-	deleteProduct:function(req,res){
-		Product.findByIdAndDelete(req.params.id,function(err){
-			if(err){
-				res.send({success:false,msg:"product deletion failed"});
-			}else{
-				res.send({success:true,msg:"product deletion successful"});
-			}
-		})
-	},
-
-	updateProduct:function(req,res){
-		Product.findByIdAndUpdate(req.params.id,req.body,{new:true},function(err,product){
-			if(err){
-				res.send({success:false,msg:"product update failed"});
-			}else{
-				res.send({success:true,msg:"product update successful",product:product});
+	deleteProduct: function (req, res) {
+		Product.findByIdAndDelete(req.params.id, function (err) {
+			if (err) {
+				res.send({ success: false, msg: "product deletion failed" });
+			} else {
+				res.send({ success: true, msg: "product deletion successful" });
 			}
 		});
-	}
+	},
+
+	updateProduct: function (req, res) {
+		Product.findByIdAndUpdate(req.params.id, req.body, { new: true }, function (err, product) {
+			if (err) {
+				res.send({ success: false, msg: "product update failed" });
+			} else {
+				res.send({ success: true, msg: "product update successful", product: product });
+			}
+		});
+	},
 };
 
 module.exports = functions;
